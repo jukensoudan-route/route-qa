@@ -2,709 +2,726 @@
 <html lang="ja">
 
 <head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"
+  >
+
+  <title>ROUTE 受験Q&A</title>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    :root {
+      --blue: #267EE6;
+      --blue-dark: #1768C9;
+      --blue-light: #EDF5FF;
+      --blue-pale: #F7FBFF;
+      --bg: #F3F7FC;
+      --text: #172231;
+      --sub: #637083;
+      --border: #D7E3F1;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
 
-<meta charset="UTF-8">
+    body {
+      background: var(--bg);
+      color: var(--text);
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, maximum-scale=1"
->
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans JP",
+        sans-serif;
 
-<title>ROUTE 受験Q&A</title>
+      -webkit-font-smoothing: antialiased;
+    }
 
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    /* ========================================
+       ヘッダー
+    ======================================== */
 
-<style>
+    .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #267EE6,
+          #176ED2
+        );
 
-:root {
-  --blue:#267EE6;
-  --blue-dark:#1768C9;
-  --blue-light:#EDF5FF;
-  --bg:#F3F7FC;
-  --text:#172231;
-  --sub:#637083;
-  --border:#D7E3F1;
-  --white:#FFFFFF;
-}
+      color: #fff;
 
-* {
-  box-sizing:border-box;
-}
+      padding:
+        24px 18px 28px;
+    }
 
-html,
-body {
-  margin:0;
-  padding:0;
-  width:100%;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-body {
-  background:var(--bg);
-  color:var(--text);
+    .brand-logo {
+      width: 58px;
+      height: 58px;
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Noto Sans JP",
-    sans-serif;
+      border-radius: 16px;
 
-  -webkit-font-smoothing:
-    antialiased;
-}
+      background: #fff;
+      color: var(--blue);
 
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-/* =========================
-   ヘッダー
-========================= */
+      font-size: 30px;
+      font-weight: 900;
+    }
 
-.hero {
-  background:
-    linear-gradient(
-      135deg,
-      #267EE6,
-      #176ED2
-    );
+    .brand-title {
+      font-size: 31px;
+      font-weight: 900;
+    }
 
-  color:#fff;
+    .brand-sub {
+      margin-top: 3px;
 
-  padding:
-    24px 18px 28px;
-}
+      font-size: 18px;
+      font-weight: 600;
 
-.brand {
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
+      opacity: .95;
+    }
 
-.brand-logo {
-  width:58px;
-  height:58px;
+    .hero h1 {
+      margin: 24px 0 0;
 
-  border-radius:16px;
+      font-size: 42px;
+      line-height: 1.45;
 
-  background:#fff;
+      font-weight: 900;
+    }
 
-  color:var(--blue);
+    .hero p {
+      margin: 15px 0 0;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+      font-size: 24px;
+      line-height: 1.8;
 
-  font-size:30px;
-  font-weight:900;
-}
+      font-weight: 600;
+    }
 
-.brand-title {
-  font-size:31px;
-  font-weight:900;
-}
+    .bubble {
+      margin-top: 20px;
 
-.brand-sub {
-  margin-top:3px;
+      background: #fff;
+      color: var(--blue);
 
-  font-size:18px;
-  font-weight:600;
+      padding: 18px;
 
-  opacity:.95;
-}
+      border-radius: 18px;
 
-.hero h1 {
-  margin:24px 0 0;
+      font-size: 27px;
+      line-height: 1.75;
 
-  font-size:42px;
-  line-height:1.45;
+      font-weight: 900;
+    }
 
-  font-weight:900;
-}
+    /* ========================================
+       ページ
+    ======================================== */
 
-.hero p {
-  margin:15px 0 0;
+    .page {
+      padding:
+        10px 8px 130px;
+    }
 
-  font-size:24px;
-  line-height:1.8;
+    .card {
+      width: 100%;
 
-  font-weight:600;
-}
+      background: #fff;
 
-.bubble {
-  margin-top:20px;
+      border:
+        1px solid
+        var(--border);
 
-  background:#fff;
+      border-radius: 20px;
 
-  color:var(--blue);
+      padding:
+        24px 18px;
 
-  padding:18px;
+      margin-bottom: 14px;
+    }
 
-  border-radius:18px;
+    /* ========================================
+       LINE認証
+    ======================================== */
 
-  font-size:27px;
-  line-height:1.75;
+    .login-status {
+      display: flex;
+      align-items: center;
 
-  font-weight:900;
-}
+      gap: 12px;
 
+      padding: 15px;
 
-/* =========================
-   本体
-========================= */
+      border-radius: 16px;
 
-.page {
-  padding:
-    10px 8px 130px;
-}
+      background:
+        var(--blue-light);
 
-.card {
-  background:#fff;
+      margin-bottom: 22px;
+    }
 
-  border:
-    1px solid
-    var(--border);
+    .status-icon {
+      width: 46px;
+      height: 46px;
 
-  border-radius:20px;
+      flex-shrink: 0;
 
-  padding:
-    24px 18px;
+      border-radius: 50%;
 
-  margin-bottom:14px;
-}
+      background: #fff;
+      color: var(--blue);
 
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-/* =========================
-   LINE認証
-========================= */
+      font-weight: 900;
+    }
 
-.login-status {
-  display:flex;
+    .status-text {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.6;
+    }
 
-  align-items:center;
+    /* ========================================
+       利用回数
+    ======================================== */
 
-  gap:12px;
+    .usage-title {
+      font-size: 27px;
+      font-weight: 900;
 
-  padding:15px;
+      margin-bottom: 15px;
+    }
 
-  border-radius:16px;
+    .usage-grid {
+      display: grid;
 
-  background:
-    var(--blue-light);
+      grid-template-columns:
+        1fr 1fr;
 
-  margin-bottom:22px;
-}
+      gap: 10px;
+    }
 
-.status-icon {
-  width:46px;
-  height:46px;
+    .usage-box {
+      text-align: center;
 
-  border-radius:50%;
+      padding:
+        18px 10px;
 
-  background:#fff;
+      border-radius: 16px;
 
-  color:var(--blue);
+      background:
+        var(--blue-light);
+    }
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    .usage-label {
+      font-size: 20px;
+      color: var(--sub);
 
-  font-weight:900;
+      font-weight: 700;
+    }
 
-  flex-shrink:0;
-}
+    .usage-value {
+      margin-top: 3px;
 
-.status-text {
-  font-size:22px;
+      font-size: 39px;
 
-  font-weight:800;
+      color: var(--blue);
 
-  line-height:1.6;
-}
+      font-weight: 900;
+    }
 
+    .usage-note {
+      margin-top: 14px;
 
-/* =========================
-   利用状況
-========================= */
+      text-align: center;
 
-.usage-title {
-  font-size:27px;
+      color: var(--sub);
 
-  font-weight:900;
+      font-size: 20px;
+      line-height: 1.7;
 
-  margin-bottom:15px;
-}
+      font-weight: 650;
+    }
 
-.usage-grid {
-  display:grid;
+    /* ========================================
+       質問フォーム
+    ======================================== */
 
-  grid-template-columns:
-    1fr 1fr;
+    .form-title {
+      margin: 0;
 
-  gap:10px;
-}
+      font-size: 35px;
+      line-height: 1.45;
 
-.usage-box {
-  text-align:center;
+      font-weight: 900;
+    }
 
-  padding:18px 10px;
+    .form-desc {
+      margin: 12px 0 0;
 
-  border-radius:16px;
+      color: var(--sub);
 
-  background:
-    var(--blue-light);
-}
+      font-size: 23px;
+      line-height: 1.8;
 
-.usage-label {
-  font-size:20px;
+      font-weight: 600;
+    }
 
-  color:var(--sub);
+    .field {
+      margin-top: 30px;
+    }
 
-  font-weight:700;
-}
+    .field-label {
+      display: flex;
+      align-items: center;
 
-.usage-value {
-  margin-top:3px;
+      gap: 11px;
 
-  font-size:39px;
+      margin-bottom: 12px;
 
-  color:var(--blue);
+      font-size: 30px;
 
-  font-weight:900;
-}
+      font-weight: 900;
+    }
 
+    .num {
+      width: 46px;
+      height: 46px;
 
-/* =========================
-   フォーム
-========================= */
+      flex-shrink: 0;
 
-.form-title {
-  margin:0;
+      border-radius: 50%;
 
-  font-size:35px;
+      background:
+        var(--blue-light);
 
-  line-height:1.45;
+      color: var(--blue);
 
-  font-weight:900;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-.form-desc {
-  margin:12px 0 0;
+      font-size: 23px;
 
-  color:var(--sub);
+      font-weight: 900;
+    }
 
-  font-size:23px;
+    .icon {
+      width: 44px;
+      height: 44px;
 
-  line-height:1.8;
+      flex-shrink: 0;
 
-  font-weight:600;
-}
+      border-radius: 12px;
 
-.field {
-  margin-top:30px;
-}
+      background: #F7FBFF;
 
-.field-label {
-  display:flex;
+      border:
+        1px solid
+        #E1EBF7;
 
-  align-items:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  gap:11px;
+      font-size: 23px;
+    }
 
-  margin-bottom:12px;
+    select,
+    input,
+    textarea {
+      display: block;
 
-  font-size:30px;
+      width: 100%;
 
-  font-weight:900;
-}
+      border:
+        2px solid
+        var(--border);
 
-.num {
-  width:46px;
-  height:46px;
+      border-radius: 17px;
 
-  flex-shrink:0;
+      background: #fff;
+      color: var(--text);
 
-  border-radius:50%;
+      font-family: inherit;
 
-  background:
-    var(--blue-light);
+      font-size: 28px;
 
-  color:var(--blue);
+      font-weight: 700;
 
-  display:flex;
+      outline: none;
+    }
 
-  align-items:center;
+    select,
+    input {
+      min-height: 88px;
 
-  justify-content:center;
+      padding:
+        0 20px;
+    }
 
-  font-size:23px;
+    textarea {
+      min-height: 260px;
 
-  font-weight:900;
-}
+      padding: 20px;
 
-.icon {
-  width:44px;
-  height:44px;
+      line-height: 1.7;
 
-  flex-shrink:0;
+      resize: vertical;
+    }
 
-  border-radius:12px;
+    select:focus,
+    input:focus,
+    textarea:focus {
+      border-color: var(--blue);
 
-  background:#F7FBFF;
+      box-shadow:
+        0 0 0 4px
+        rgba(38,126,230,.10);
+    }
 
-  border:
-    1px solid
-    #E1EBF7;
+    ::placeholder {
+      color: #A1AAB8;
 
-  display:flex;
+      font-size: 25px;
+    }
 
-  align-items:center;
+    /* ========================================
+       利用ルール
+    ======================================== */
 
-  justify-content:center;
+    .rule {
+      margin-top: 28px;
 
-  font-size:23px;
-}
+      padding: 19px;
 
-select,
-input,
-textarea {
-  display:block;
+      border:
+        1px solid
+        #DFEAFA;
 
-  width:100%;
+      border-radius: 17px;
 
-  border:
-    2px solid
-    var(--border);
+      background:
+        var(--blue-pale);
+    }
 
-  border-radius:17px;
+    .rule-title {
+      color: var(--blue);
 
-  background:#fff;
+      font-size: 27px;
 
-  color:var(--text);
+      font-weight: 900;
+    }
 
-  font-family:inherit;
+    .rule ul {
+      margin:
+        10px 0 0;
 
-  font-size:28px;
+      padding-left: 28px;
 
-  font-weight:700;
+      color: #536273;
 
-  outline:none;
-}
+      font-size: 24px;
+      line-height: 2;
 
-select,
-input {
-  min-height:88px;
+      font-weight: 650;
+    }
 
-  padding:
-    0 20px;
-}
+    /* ========================================
+       固定送信ボタン
+    ======================================== */
 
-textarea {
-  min-height:260px;
+    .submit-wrap {
+      position: fixed;
 
-  padding:20px;
+      left: 0;
+      right: 0;
+      bottom: 0;
 
-  line-height:1.7;
+      z-index: 30;
 
-  resize:vertical;
-}
+      padding:
+        10px 8px
+        calc(
+          10px +
+          env(safe-area-inset-bottom)
+        );
 
-::placeholder {
-  color:#A1AAB8;
+      background:
+        rgba(244,248,252,.97);
 
-  font-size:25px;
-}
+      border-top:
+        1px solid
+        #DFE7F1;
+    }
 
+    .submit {
+      width: 100%;
 
-/* =========================
-   ルール
-========================= */
+      min-height: 88px;
 
-.rule {
-  margin-top:28px;
+      border: 0;
 
-  padding:19px;
+      border-radius: 18px;
 
-  border:
-    1px solid
-    #DFEAFA;
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue),
+          var(--blue-dark)
+        );
 
-  border-radius:17px;
+      color: #fff;
 
-  background:#F7FBFF;
-}
+      font-family: inherit;
 
-.rule-title {
-  color:var(--blue);
+      font-size: 29px;
 
-  font-size:27px;
+      font-weight: 900;
+    }
 
-  font-weight:900;
-}
+    .submit:disabled {
+      opacity: .45;
+    }
 
-.rule ul {
-  margin:10px 0 0;
+    /* ========================================
+       モーダル
+    ======================================== */
 
-  padding-left:28px;
+    .modal-bg {
+      display: none;
 
-  color:#536273;
+      position: fixed;
 
-  font-size:24px;
+      inset: 0;
 
-  line-height:2;
+      z-index: 100;
 
-  font-weight:650;
-}
+      align-items: center;
+      justify-content: center;
 
+      padding: 20px;
 
-/* =========================
-   送信
-========================= */
+      background:
+        rgba(15,23,42,.62);
+    }
 
-.submit-wrap {
-  position:fixed;
+    .modal-bg.show {
+      display: flex;
+    }
 
-  left:0;
-  right:0;
-  bottom:0;
+    .modal {
+      width: 100%;
 
-  z-index:30;
+      max-width: 650px;
 
-  padding:
-    10px 8px
-    calc(
-      10px +
-      env(safe-area-inset-bottom)
-    );
+      max-height: 90vh;
 
-  background:
-    rgba(244,248,252,.97);
+      overflow-y: auto;
 
-  border-top:
-    1px solid #DFE7F1;
-}
+      border-radius: 27px;
 
-.submit {
-  width:100%;
+      background: #fff;
 
-  min-height:88px;
+      padding:
+        28px 20px;
+    }
 
-  border:0;
+    .modal-icon {
+      width: 82px;
+      height: 82px;
 
-  border-radius:18px;
+      margin:
+        0 auto 18px;
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--blue),
-      var(--blue-dark)
-    );
+      border-radius: 50%;
 
-  color:#fff;
+      background:
+        var(--blue-light);
 
-  font-family:inherit;
+      color: var(--blue);
 
-  font-size:29px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  font-weight:900;
-}
+      font-size: 42px;
 
-.submit:disabled {
-  opacity:.45;
-}
+      font-weight: 900;
+    }
 
+    .modal-title {
+      text-align: center;
 
-/* =========================
-   モーダル
-========================= */
+      font-size: 34px;
 
-.modal-bg {
-  display:none;
+      font-weight: 900;
 
-  position:fixed;
+      line-height: 1.45;
+    }
 
-  inset:0;
+    .modal-text {
+      margin-top: 15px;
 
-  z-index:100;
+      color: var(--sub);
 
-  align-items:center;
+      text-align: center;
 
-  justify-content:center;
+      font-size: 24px;
 
-  padding:20px;
+      line-height: 1.8;
 
-  background:
-    rgba(15,23,42,.62);
-}
+      font-weight: 650;
+    }
 
-.modal-bg.show {
-  display:flex;
-}
+    .confirm-box {
+      margin-top: 20px;
 
-.modal {
-  width:100%;
+      padding: 18px;
 
-  max-width:650px;
+      border-radius: 16px;
 
-  max-height:90vh;
+      background: #F6FAFF;
 
-  overflow-y:auto;
+      font-size: 23px;
+      line-height: 1.8;
+    }
 
-  border-radius:27px;
+    .confirm-row {
+      margin-bottom: 15px;
+    }
 
-  background:#fff;
+    .confirm-row:last-child {
+      margin-bottom: 0;
+    }
 
-  padding:28px 20px;
-}
+    .confirm-label {
+      color: var(--blue);
 
-.modal-icon {
-  width:82px;
-  height:82px;
+      font-weight: 900;
+    }
 
-  margin:
-    0 auto 18px;
+    .modal-buttons {
+      display: grid;
 
-  border-radius:50%;
+      grid-template-columns:
+        1fr 1.2fr;
 
-  background:
-    var(--blue-light);
+      gap: 10px;
 
-  color:var(--blue);
+      margin-top: 24px;
+    }
 
-  display:flex;
+    .modal-button {
+      min-height: 74px;
 
-  align-items:center;
+      border-radius: 16px;
 
-  justify-content:center;
+      font-family: inherit;
 
-  font-size:42px;
+      font-size: 24px;
 
-  font-weight:900;
-}
+      font-weight: 900;
+    }
 
-.modal-title {
-  text-align:center;
+    .secondary {
+      background: #fff;
 
-  font-size:34px;
+      border:
+        2px solid
+        var(--border);
 
-  font-weight:900;
+      color: #475467;
+    }
 
-  line-height:1.45;
-}
+    .primary {
+      border: 0;
 
-.modal-text {
-  margin-top:15px;
+      background: var(--blue);
 
-  color:var(--sub);
+      color: #fff;
+    }
 
-  text-align:center;
+    .error-icon {
+      background: #FFF0F0;
+      color: #D92D20;
+    }
 
-  font-size:24px;
+    /* ========================================
+       送信中
+    ======================================== */
 
-  line-height:1.8;
+    .spinner {
+      width: 65px;
+      height: 65px;
 
-  font-weight:650;
-}
+      margin:
+        0 auto 20px;
 
-.confirm-box {
-  margin-top:20px;
+      border:
+        6px solid
+        #E5EDF7;
 
-  padding:18px;
+      border-top-color:
+        var(--blue);
 
-  border-radius:16px;
+      border-radius: 50%;
 
-  background:#F6FAFF;
+      animation:
+        spin .8s linear infinite;
+    }
 
-  font-size:23px;
+    @keyframes spin {
+      to {
+        transform:
+          rotate(360deg);
+      }
+    }
 
-  line-height:1.8;
-}
+    /* Apps Script送信用 */
 
-.confirm-label {
-  color:var(--blue);
+    iframe.backend-frame {
+      position: absolute;
 
-  font-weight:900;
-}
+      width: 1px;
+      height: 1px;
 
-.modal-buttons {
-  display:grid;
+      left: -9999px;
+      top: -9999px;
 
-  grid-template-columns:
-    1fr 1.2fr;
+      border: 0;
+    }
 
-  gap:10px;
-
-  margin-top:24px;
-}
-
-.modal-button {
-  min-height:74px;
-
-  border-radius:16px;
-
-  font-family:inherit;
-
-  font-size:24px;
-
-  font-weight:900;
-}
-
-.secondary {
-  background:#fff;
-
-  border:
-    2px solid
-    var(--border);
-
-  color:#475467;
-}
-
-.primary {
-  border:0;
-
-  background:var(--blue);
-
-  color:#fff;
-}
-
-.spinner {
-  width:65px;
-  height:65px;
-
-  margin:
-    0 auto 20px;
-
-  border:
-    6px solid
-    #E5EDF7;
-
-  border-top-color:
-    var(--blue);
-
-  border-radius:50%;
-
-  animation:
-    spin .8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform:
-      rotate(360deg);
-  }
-}
-
-iframe.backend-frame {
-  position:absolute;
-
-  width:1px;
-  height:1px;
-
-  left:-9999px;
-
-  top:-9999px;
-
-  border:0;
-}
-
-</style>
+  </style>
 
 </head>
 
@@ -712,1378 +729,1862 @@ iframe.backend-frame {
 <body>
 
 
-<header class="hero">
+  <!-- ========================================
+       ヘッダー
+  ======================================== -->
 
-  <div class="brand">
+  <header class="hero">
 
-    <div class="brand-logo">
-      R
-    </div>
+    <div class="brand">
 
-    <div>
-
-      <div class="brand-title">
-        ROUTE 受験Q&A
+      <div class="brand-logo">
+        R
       </div>
 
-      <div class="brand-sub">
-        兵庫県高校受験・進路相談
+      <div>
+
+        <div class="brand-title">
+          ROUTE 受験Q&A
+        </div>
+
+        <div class="brand-sub">
+          兵庫県高校受験・進路相談
+        </div>
+
       </div>
 
     </div>
+
+
+    <h1>
+      受験の不安を、<br>
+      ひとつずつ相談。
+    </h1>
+
+
+    <p>
+      志望校選びや合格可能性、学費、入試日程など、
+      気になったことをLINEから気軽にご相談いただけます。
+    </p>
+
+
+    <div class="bubble">
+
+      「この高校で大丈夫？」<br>
+
+      「今の成績で届く？」
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ========================================
+       本文
+  ======================================== -->
+
+  <main class="page">
+
+
+    <!-- LINE認証・利用回数 -->
+
+    <section class="card">
+
+      <div
+        class="login-status"
+        id="loginStatus"
+      >
+
+        <div class="status-icon">
+          …
+        </div>
+
+        <div class="status-text">
+          LINE認証を確認しています
+        </div>
+
+      </div>
+
+
+      <div class="usage-title">
+        今週の利用状況
+      </div>
+
+
+      <div class="usage-grid">
+
+        <div class="usage-box">
+
+          <div class="usage-label">
+            本日
+          </div>
+
+          <div
+            class="usage-value"
+            id="dayUsage"
+          >
+            - / 1
+          </div>
+
+        </div>
+
+
+        <div class="usage-box">
+
+          <div class="usage-label">
+            今週
+          </div>
+
+          <div
+            class="usage-value"
+            id="weekUsage"
+          >
+            - / 6
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="usage-note">
+        1回につき「高校1校 × 質問テーマ1つ」でご利用いただけます
+      </div>
+
+    </section>
+
+
+
+    <!-- 質問 -->
+
+    <section class="card">
+
+
+      <h2 class="form-title">
+        今日の質問を入力してください
+      </h2>
+
+
+      <p class="form-desc">
+        気になることを、できるだけ具体的にご入力ください。
+      </p>
+
+
+      <!-- 大項目 -->
+
+      <div class="field">
+
+        <div class="field-label">
+
+          <span class="num">
+            1
+          </span>
+
+          <span class="icon">
+            📂
+          </span>
+
+          <span>
+            相談したい内容
+          </span>
+
+        </div>
+
+
+        <select
+          id="category"
+          onchange="changeTheme(true)"
+        >
+
+          <option value="">
+            大項目を選択してください
+          </option>
+
+          <option value="school">
+            志望校・高校選び
+          </option>
+
+          <option value="score">
+            成績・合格可能性
+          </option>
+
+          <option value="exam">
+            入試制度・受験方法
+          </option>
+
+          <option value="qualification">
+            英検・資格・優遇
+          </option>
+
+          <option value="university">
+            大学進学・進路実績
+          </option>
+
+          <option value="cost">
+            学費・費用
+          </option>
+
+          <option value="schedule">
+            受験スケジュール・進路決定
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- 質問テーマ -->
+
+      <div class="field">
+
+        <div class="field-label">
+
+          <span class="num">
+            2
+          </span>
+
+          <span class="icon">
+            📝
+          </span>
+
+          <span>
+            質問テーマ
+          </span>
+
+        </div>
+
+
+        <select id="theme">
+
+          <option value="">
+            先に大項目を選択してください
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- 高校名 -->
+
+      <div class="field">
+
+        <div class="field-label">
+
+          <span class="num">
+            3
+          </span>
+
+          <span class="icon">
+            🏫
+          </span>
+
+          <span>
+            高校名
+          </span>
+
+        </div>
+
+
+        <input
+          id="school"
+          type="text"
+          placeholder="例：県立西宮高校"
+        >
+
+      </div>
+
+
+
+      <!-- 質問内容 -->
+
+      <div class="field">
+
+        <div class="field-label">
+
+          <span class="num">
+            4
+          </span>
+
+          <span class="icon">
+            💬
+          </span>
+
+          <span>
+            質問内容
+          </span>
+
+        </div>
+
+
+        <textarea
+          id="question"
+          placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"
+        ></textarea>
+
+      </div>
+
+
+
+      <!-- ルール -->
+
+      <div class="rule">
+
+        <div class="rule-title">
+          ご利用ルール
+        </div>
+
+        <ul>
+
+          <li>
+            1日1問まで
+          </li>
+
+          <li>
+            1週間6問まで
+          </li>
+
+          <li>
+            1回につき高校1校まで
+          </li>
+
+          <li>
+            1回につき質問テーマ1つまで
+          </li>
+
+          <li>
+            各教科の具体的な勉強方法や問題の解き方は対象外です
+          </li>
+
+        </ul>
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ========================================
+       固定ボタン
+  ======================================== -->
+
+  <div class="submit-wrap">
+
+    <button
+      class="submit"
+      id="submitBtn"
+      onclick="openConfirm()"
+      disabled
+    >
+
+      この内容で質問する
+
+    </button>
 
   </div>
 
 
-  <h1>
-    受験の不安を、<br>
-    ひとつずつ相談。
-  </h1>
 
-
-  <p>
-    志望校選びや合格可能性、学費、入試日程など、
-    気になったことをLINEから気軽にご相談いただけます。
-  </p>
-
-
-  <div class="bubble">
-
-    「この高校で大丈夫？」<br>
-
-    「今の成績で届く？」
-
-  </div>
-
-</header>
-
-
-
-<main class="page">
-
-
-<section class="card">
+  <!-- ========================================
+       確認モーダル
+  ======================================== -->
 
   <div
-    class="login-status"
-    id="loginStatus"
+    class="modal-bg"
+    id="confirmModal"
   >
 
-    <div class="status-icon">
-      …
-    </div>
+    <div class="modal">
 
-    <div class="status-text">
-      LINE認証を確認しています
+      <div class="modal-icon">
+        ✓
+      </div>
+
+      <div class="modal-title">
+        入力内容をご確認ください
+      </div>
+
+      <div class="modal-text">
+        送信すると、本日の1問としてカウントされます。
+      </div>
+
+
+      <div
+        class="confirm-box"
+        id="confirmBox"
+      ></div>
+
+
+      <div class="modal-buttons">
+
+        <button
+          class="modal-button secondary"
+          onclick="closeConfirm()"
+        >
+
+          修正する
+
+        </button>
+
+
+        <button
+          class="modal-button primary"
+          onclick="sendQuestion()"
+        >
+
+          質問を送信
+
+        </button>
+
+      </div>
+
     </div>
 
   </div>
 
 
-  <div class="usage-title">
-    今週の利用状況
-  </div>
 
+  <!-- ========================================
+       メッセージモーダル
+  ======================================== -->
 
-  <div class="usage-grid">
+  <div
+    class="modal-bg"
+    id="messageModal"
+  >
 
-    <div class="usage-box">
+    <div class="modal">
 
-      <div class="usage-label">
-        本日
+      <div
+        class="modal-icon"
+        id="messageIcon"
+      >
+        ✓
       </div>
 
       <div
-        class="usage-value"
-        id="dayUsage"
-      >
-        - / 1
-      </div>
-
-    </div>
-
-
-    <div class="usage-box">
-
-      <div class="usage-label">
-        今週
-      </div>
+        class="modal-title"
+        id="messageTitle"
+      ></div>
 
       <div
-        class="usage-value"
-        id="weekUsage"
+        class="modal-text"
+        id="messageText"
+      ></div>
+
+
+      <div
+        class="modal-buttons"
+        style="grid-template-columns:1fr;"
       >
-        - / 6
+
+        <button
+          class="modal-button primary"
+          onclick="closeMessage()"
+        >
+
+          閉じる
+
+        </button>
+
       </div>
 
     </div>
 
   </div>
 
-</section>
 
 
+  <!-- ========================================
+       送信中
+  ======================================== -->
 
-<section class="card">
-
-
-  <h2 class="form-title">
-    今日の質問を入力してください
-  </h2>
-
-
-  <p class="form-desc">
-    気になることを、できるだけ具体的にご入力ください。
-  </p>
-
-
-  <div class="field">
-
-    <div class="field-label">
-
-      <span class="num">
-        1
-      </span>
-
-      <span class="icon">
-        📂
-      </span>
-
-      相談したい内容
-
-    </div>
-
-
-    <select
-      id="category"
-      onchange="changeTheme()"
-    >
-
-      <option value="">
-        大項目を選択してください
-      </option>
-
-      <option value="school">
-        志望校・高校選び
-      </option>
-
-      <option value="score">
-        成績・合格可能性
-      </option>
-
-      <option value="exam">
-        入試制度・受験方法
-      </option>
-
-      <option value="qualification">
-        英検・資格・優遇
-      </option>
-
-      <option value="university">
-        大学進学・進路実績
-      </option>
-
-      <option value="cost">
-        学費・費用
-      </option>
-
-      <option value="schedule">
-        受験スケジュール・進路決定
-      </option>
-
-    </select>
-
-  </div>
-
-
-
-  <div class="field">
-
-    <div class="field-label">
-
-      <span class="num">
-        2
-      </span>
-
-      <span class="icon">
-        📝
-      </span>
-
-      質問テーマ
-
-    </div>
-
-
-    <select id="theme">
-
-      <option value="">
-        先に大項目を選択してください
-      </option>
-
-    </select>
-
-  </div>
-
-
-
-  <div class="field">
-
-    <div class="field-label">
-
-      <span class="num">
-        3
-      </span>
-
-      <span class="icon">
-        🏫
-      </span>
-
-      高校名
-
-    </div>
-
-
-    <input
-      id="school"
-      type="text"
-      placeholder="例：県立西宮高校"
-    >
-
-  </div>
-
-
-
-  <div class="field">
-
-    <div class="field-label">
-
-      <span class="num">
-        4
-      </span>
-
-      <span class="icon">
-        💬
-      </span>
-
-      質問内容
-
-    </div>
-
-
-    <textarea
-      id="question"
-      placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"
-    ></textarea>
-
-  </div>
-
-
-
-  <div class="rule">
-
-    <div class="rule-title">
-      ご利用ルール
-    </div>
-
-    <ul>
-
-      <li>
-        1日1問まで
-      </li>
-
-      <li>
-        1週間6問まで
-      </li>
-
-      <li>
-        1回につき高校1校まで
-      </li>
-
-      <li>
-        1回につき質問テーマ1つまで
-      </li>
-
-      <li>
-        各教科の具体的な勉強方法や問題の解き方は対象外です
-      </li>
-
-    </ul>
-
-  </div>
-
-
-</section>
-
-
-</main>
-
-
-
-<div class="submit-wrap">
-
-  <button
-    class="submit"
-    id="submitBtn"
-    onclick="openConfirm()"
-    disabled
+  <div
+    class="modal-bg"
+    id="loadingModal"
   >
 
-    この内容で質問する
+    <div class="modal">
 
-  </button>
+      <div class="spinner"></div>
 
-</div>
+      <div class="modal-title">
+        送信しています
+      </div>
 
-
-
-<!-- 確認 -->
-
-<div
-  class="modal-bg"
-  id="confirmModal"
->
-
-  <div class="modal">
-
-    <div class="modal-icon">
-      ✓
-    </div>
-
-    <div class="modal-title">
-      入力内容をご確認ください
-    </div>
-
-    <div class="modal-text">
-      送信すると、本日の1問としてカウントされます。
-    </div>
-
-    <div
-      class="confirm-box"
-      id="confirmBox"
-    ></div>
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="modal-button secondary"
-        onclick="closeConfirm()"
-      >
-        修正する
-      </button>
-
-      <button
-        class="modal-button primary"
-        onclick="sendQuestion()"
-      >
-        質問を送信
-      </button>
+      <div class="modal-text">
+        そのまま少々お待ちください。
+      </div>
 
     </div>
 
   </div>
 
-</div>
 
 
+  <!-- Apps Script通信用 -->
 
-<!-- メッセージ -->
+  <iframe
+    name="backendFrame"
+    class="backend-frame"
+  ></iframe>
 
-<div
-  class="modal-bg"
-  id="messageModal"
->
 
-  <div class="modal">
 
-    <div
-      class="modal-icon"
-      id="messageIcon"
-    >
-      ✓
-    </div>
+  <script>
 
-    <div
-      class="modal-title"
-      id="messageTitle"
-    ></div>
+    /* ========================================
+       Apps Script WebアプリURL
 
-    <div
-      class="modal-text"
-      id="messageText"
-    ></div>
+       現在設定している /exec URLを使用
+    ======================================== */
 
-    <div
-      class="modal-buttons"
-      style="grid-template-columns:1fr;"
-    >
+    const GAS_WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycbxxnQzcnauXFv9PoMNVG7xAc80vojRi1uo8YX3UAGB9vuowpWa9THewOJL65xdmLx_Q/exec";
 
-      <button
-        class="modal-button primary"
-        onclick="closeMessage()"
-      >
-        閉じる
-      </button>
 
-    </div>
+    /* ========================================
+       LIFF
+    ======================================== */
 
-  </div>
+    const LIFF_ID =
+      "2010636994-in5dBoXy";
 
-</div>
 
+    let lineProfile = null;
 
+    let lineIdToken = null;
 
-<!-- 送信中 -->
 
-<div
-  class="modal-bg"
-  id="loadingModal"
->
+    let usageData = {
 
-  <div class="modal">
+      dayCount: 0,
 
-    <div class="spinner"></div>
+      weekCount: 0,
 
-    <div class="modal-title">
-      送信しています
-    </div>
+      maxDay: 1,
 
-    <div class="modal-text">
-      そのまま少々お待ちください。
-    </div>
+      maxWeek: 6
 
-  </div>
+    };
 
-</div>
 
+    const pendingRequests = {};
 
 
-<!-- Apps Script応答用 -->
 
-<iframe
-  name="backendFrame"
-  class="backend-frame"
-></iframe>
+    /* ========================================
+       大項目 → 質問テーマ
+    ======================================== */
 
+    const themes = {
 
+      school: [
 
-<script>
+        "学校の特徴・強み",
 
-/* =========================================
-   必ず変更
-========================================= */
+        "コース・学科",
 
-const GAS_WEB_APP_URL =https://script.google.com/macros/s/AKfycbxxnQzcnauXFv9PoMNVG7xAc80vojRi1uo8YX3UAGB9vuowpWa9THewOJL65xdmLx_Q/exec
-  "ここにApps Scriptのexec URL";
+        "校風",
 
+        "部活動",
 
-/* =========================================
-   LIFF
-========================================= */
+        "通学・立地",
 
-const LIFF_ID =
-  "2010636994-in5dBoXy";
+        "学校設備",
 
+        "向いている生徒像"
 
-let lineProfile = null;
-let lineIdToken = null;
+      ],
 
-let usageData = {
-  dayCount:0,
-  weekCount:0,
-  maxDay:1,
-  maxWeek:6
-};
 
-let pendingRequests = {};
+      score: [
 
+        "内申点",
 
+        "実力テスト",
 
-/* =========================================
-   質問項目
-========================================= */
+        "定期テスト",
 
-const themes = {
+        "模試・偏差値",
 
-  school: [
-    "学校の特徴・強み",
-    "コース・学科",
-    "校風",
-    "部活動",
-    "通学・立地",
-    "学校設備",
-    "向いている生徒像"
-  ],
+        "合格ライン",
 
-  score: [
-    "内申点",
-    "実力テスト",
-    "定期テスト",
-    "模試・偏差値",
-    "合格ライン",
-    "当日点の目安"
-  ],
+        "当日点の目安"
 
-  exam: [
-    "一般入試",
-    "推薦入試",
-    "特色選抜",
-    "専願・併願",
-    "複数志願選抜",
-    "学区・出願資格"
-  ],
+      ],
 
-  qualification: [
-    "英検",
-    "漢検・数検",
-    "加点・得点換算",
-    "出願・推薦条件"
-  ],
 
-  university: [
-    "国公立大学",
-    "関関同立",
-    "産近甲龍",
-    "指定校推薦",
-    "内部進学",
-    "大学進学率"
-  ],
+      exam: [
 
-  cost: [
-    "授業料",
-    "入学金",
-    "初年度費用",
-    "制服・教材等",
-    "授業料無償化・就学支援金"
-  ],
+        "一般入試",
 
-  schedule: [
-    "出願日",
-    "入試日",
-    "合格発表",
-    "学校説明会・オープンスクール",
-    "進路希望調査・三者懇談",
-    "志望校決定時期"
-  ]
+        "推薦入試",
 
-};
+        "特色選抜",
 
+        "専願・併願",
 
+        "複数志願選抜",
 
-function changeTheme() {
+        "学区・出願資格"
 
-  const category =
-    document
-      .getElementById("category")
-      .value;
+      ],
 
 
-  const theme =
-    document
-      .getElementById("theme");
+      qualification: [
 
+        "英検",
 
-  theme.innerHTML = "";
+        "漢検・数検",
 
+        "加点・得点換算",
 
-  if (!category) {
+        "出願・推薦条件"
 
-    theme.innerHTML =
-      '<option value="">先に大項目を選択してください</option>';
+      ],
 
-    return;
 
-  }
+      university: [
 
+        "国公立大学",
 
-  theme.innerHTML =
-    '<option value="">質問テーマを選択してください</option>';
+        "関関同立",
 
+        "産近甲龍",
 
-  themes[category].forEach(
-    function(name) {
+        "指定校推薦",
 
-      const option =
+        "内部進学",
+
+        "大学進学率"
+
+      ],
+
+
+      cost: [
+
+        "授業料",
+
+        "入学金",
+
+        "初年度費用",
+
+        "制服・教材等",
+
+        "授業料無償化・就学支援金"
+
+      ],
+
+
+      schedule: [
+
+        "出願日",
+
+        "入試日",
+
+        "合格発表",
+
+        "学校説明会・オープンスクール",
+
+        "進路希望調査・三者懇談",
+
+        "志望校決定時期"
+
+      ]
+
+    };
+
+
+
+    /* ========================================
+       今回の重要修正部分
+    ======================================== */
+
+    function changeTheme(
+      resetSelection
+    ) {
+
+      const category =
+        document
+          .getElementById(
+            "category"
+          )
+          .value;
+
+
+      const theme =
+        document
+          .getElementById(
+            "theme"
+          );
+
+
+      const previousValue =
+        resetSelection
+          ? ""
+          : theme.value;
+
+
+      theme.innerHTML = "";
+
+
+      if (
+        !category ||
+        !themes[category]
+      ) {
+
+        theme.innerHTML =
+          '<option value="">先に大項目を選択してください</option>';
+
+        return;
+
+      }
+
+
+      const first =
         document.createElement(
           "option"
         );
 
-      option.value = name;
 
-      option.textContent = name;
+      first.value = "";
 
-      theme.appendChild(option);
-
-    }
-  );
-
-}
+      first.textContent =
+        "質問テーマを選択してください";
 
 
-
-/* =========================================
-   hidden form POST
-========================================= */
-
-function postToGas(data) {
-
-  return new Promise(
-    function(resolve, reject) {
-
-      if (
-        !GAS_WEB_APP_URL ||
-        GAS_WEB_APP_URL.indexOf(
-          "https://script.google.com/"
-        ) !== 0
-      ) {
-        reject(
-          new Error(
-            "Apps ScriptのWebアプリURLが設定されていません。"
-          )
-        );
-
-        return;
-      }
+      theme.appendChild(
+        first
+      );
 
 
-      const requestId =
-        "route_" +
-        Date.now() +
-        "_" +
-        Math.random()
-          .toString(36)
-          .slice(2);
+      themes[
+        category
+      ].forEach(
 
+        function(name) {
 
-      pendingRequests[
-        requestId
-      ] = {
-        resolve:resolve,
-        reject:reject
-      };
-
-
-      const form =
-        document.createElement(
-          "form"
-        );
-
-
-      form.method =
-        "POST";
-
-
-      form.action =
-        GAS_WEB_APP_URL;
-
-
-      form.target =
-        "backendFrame";
-
-
-      form.style.display =
-        "none";
-
-
-      const payload =
-        Object.assign(
-          {},
-          data,
-          {
-            requestId:
-              requestId
-          }
-        );
-
-
-      Object.keys(
-        payload
-      ).forEach(
-        function(key) {
-
-          const input =
+          const option =
             document.createElement(
-              "input"
+              "option"
             );
 
-          input.type =
-            "hidden";
 
-          input.name =
-            key;
+          option.value =
+            name;
 
-          input.value =
-            payload[key] == null
-              ? ""
-              : String(
-                  payload[key]
-                );
 
-          form.appendChild(
-            input
+          option.textContent =
+            name;
+
+
+          theme.appendChild(
+            option
           );
 
         }
+
       );
 
 
-      document.body.appendChild(
-        form
-      );
+      if (
+
+        previousValue
+
+        &&
+
+        themes[
+          category
+        ].includes(
+          previousValue
+        )
+
+      ) {
+
+        theme.value =
+          previousValue;
+
+      }
+
+    }
 
 
-      form.submit();
 
+    /* ========================================
+       Apps Script POST
+    ======================================== */
 
-      setTimeout(
-        function() {
+    function postToGas(
+      data
+    ) {
+
+      return new Promise(
+
+        function(
+          resolve,
+          reject
+        ) {
 
           if (
-            pendingRequests[
-              requestId
-            ]
+
+            !GAS_WEB_APP_URL
+
+            ||
+
+            GAS_WEB_APP_URL.indexOf(
+              "https://script.google.com/"
+            ) !== 0
+
           ) {
 
-            delete pendingRequests[
-              requestId
-            ];
-
             reject(
+
               new Error(
-                "サーバーからの応答がありませんでした。"
+                "Apps ScriptのWebアプリURLが設定されていません。"
               )
+
             );
+
+            return;
+
           }
 
-          form.remove();
 
-        },
-        20000
+          const requestId =
+
+            "route_" +
+
+            Date.now() +
+
+            "_" +
+
+            Math.random()
+              .toString(36)
+              .slice(2);
+
+
+          pendingRequests[
+            requestId
+          ] = {
+
+            resolve:
+              resolve,
+
+            reject:
+              reject
+
+          };
+
+
+          const form =
+            document.createElement(
+              "form"
+            );
+
+
+          form.method =
+            "POST";
+
+
+          form.action =
+            GAS_WEB_APP_URL;
+
+
+          form.target =
+            "backendFrame";
+
+
+          form.style.display =
+            "none";
+
+
+          const payload =
+            Object.assign(
+              {},
+              data,
+              {
+                requestId:
+                  requestId
+              }
+            );
+
+
+          Object.keys(
+            payload
+          ).forEach(
+
+            function(key) {
+
+              const input =
+                document.createElement(
+                  "input"
+                );
+
+
+              input.type =
+                "hidden";
+
+
+              input.name =
+                key;
+
+
+              input.value =
+
+                payload[key] == null
+
+                  ? ""
+
+                  : String(
+                      payload[key]
+                    );
+
+
+              form.appendChild(
+                input
+              );
+
+            }
+
+          );
+
+
+          document.body.appendChild(
+            form
+          );
+
+
+          form.submit();
+
+
+          setTimeout(
+
+            function() {
+
+              if (
+                pendingRequests[
+                  requestId
+                ]
+              ) {
+
+                delete pendingRequests[
+                  requestId
+                ];
+
+
+                reject(
+
+                  new Error(
+                    "サーバーからの応答がありませんでした。"
+                  )
+
+                );
+
+              }
+
+
+              if (
+                form.parentNode
+              ) {
+
+                form.remove();
+
+              }
+
+            },
+
+            20000
+
+          );
+
+        }
+
       );
 
     }
-  );
-
-}
 
 
 
-/* =========================================
-   Apps Script応答受信
-========================================= */
+    /* ========================================
+       Apps Scriptから受信
+    ======================================== */
 
-window.addEventListener(
-  "message",
-  function(event) {
+    window.addEventListener(
 
-    const allowed =
-      event.origin ===
-        "https://script.google.com"
-      ||
-      /\.googleusercontent\.com$/
-        .test(
-          new URL(
-            event.origin
-          ).hostname
-        );
+      "message",
+
+      function(event) {
+
+        const origin =
+          String(
+            event.origin ||
+            ""
+          );
 
 
-    if (!allowed) {
-      return;
-    }
+        const allowed =
+
+          origin ===
+            "https://script.google.com"
+
+          ||
+
+          origin.endsWith(
+            ".googleusercontent.com"
+          )
+
+          ||
+
+          origin.indexOf(
+            "https://script.googleusercontent.com"
+          ) === 0;
 
 
-    const message =
-      event.data;
+        if (!allowed) {
+
+          return;
+
+        }
 
 
-    if (
-      !message ||
-      message.source !==
-        "route-qa-gas"
+        const message =
+          event.data;
+
+
+        if (
+
+          !message
+
+          ||
+
+          message.source !==
+            "route-qa-gas"
+
+        ) {
+
+          return;
+
+        }
+
+
+        const data =
+          message.payload;
+
+
+        if (!data) {
+
+          return;
+
+        }
+
+
+        const pending =
+          pendingRequests[
+            data.requestId
+          ];
+
+
+        if (!pending) {
+
+          return;
+
+        }
+
+
+        delete pendingRequests[
+          data.requestId
+        ];
+
+
+        if (
+          data.ok
+        ) {
+
+          pending.resolve(
+            data.result
+          );
+
+        }
+
+        else {
+
+          pending.reject(
+
+            new Error(
+
+              data.message
+
+              ||
+
+              "処理に失敗しました。"
+
+            )
+
+          );
+
+        }
+
+      }
+
+    );
+
+
+
+    /* ========================================
+       利用回数表示
+    ======================================== */
+
+    function updateUsage(
+      result
     ) {
-      return;
-    }
 
+      usageData =
+        result;
 
-    const data =
-      message.payload;
 
-
-    if (!data) {
-      return;
-    }
-
-
-    const pending =
-      pendingRequests[
-        data.requestId
-      ];
-
-
-    if (!pending) {
-      return;
-    }
-
-
-    delete pendingRequests[
-      data.requestId
-    ];
-
-
-    if (data.ok) {
-
-      pending.resolve(
-        data.result
-      );
-
-    } else {
-
-      pending.reject(
-        new Error(
-          data.message ||
-          "処理に失敗しました。"
-        )
-      );
-
-    }
-
-  }
-);
-
-
-
-/* =========================================
-   利用状況
-========================================= */
-
-function updateUsage(
-  result
-) {
-
-  usageData =
-    result;
-
-
-  document
-    .getElementById(
-      "dayUsage"
-    )
-    .textContent =
-
-    result.dayCount +
-    " / " +
-    result.maxDay;
-
-
-  document
-    .getElementById(
-      "weekUsage"
-    )
-    .textContent =
-
-    result.weekCount +
-    " / " +
-    result.maxWeek;
-
-
-  const limitReached =
-
-    result.dayCount >=
-      result.maxDay
-
-    ||
-
-    result.weekCount >=
-      result.maxWeek;
-
-
-  document
-    .getElementById(
-      "submitBtn"
-    )
-    .disabled =
-    limitReached;
-
-}
-
-
-
-/* =========================================
-   確認画面
-========================================= */
-
-function openConfirm() {
-
-  const category =
-    document
-      .getElementById(
-        "category"
-      );
-
-
-  const theme =
-    document
-      .getElementById(
-        "theme"
-      );
-
-
-  const school =
-    document
-      .getElementById(
-        "school"
-      )
-      .value
-      .trim();
-
-
-  const question =
-    document
-      .getElementById(
-        "question"
-      )
-      .value
-      .trim();
-
-
-  if (!category.value) {
-
-    showMessage(
-      "ご確認ください",
-      "相談したい内容を選択してください。",
-      "!"
-    );
-
-    return;
-  }
-
-
-  if (!theme.value) {
-
-    showMessage(
-      "ご確認ください",
-      "質問テーマを選択してください。",
-      "!"
-    );
-
-    return;
-  }
-
-
-  if (!school) {
-
-    showMessage(
-      "ご確認ください",
-      "高校名を入力してください。",
-      "!"
-    );
-
-    return;
-  }
-
-
-  if (!question) {
-
-    showMessage(
-      "ご確認ください",
-      "質問内容を入力してください。",
-      "!"
-    );
-
-    return;
-  }
-
-
-  document
-    .getElementById(
-      "confirmBox"
-    )
-    .innerHTML =
-
-      '<span class="confirm-label">大項目：</span>' +
-      escapeHtml(
-        category.options[
-          category.selectedIndex
-        ].text
-      ) +
-
-      '<br><br>' +
-
-      '<span class="confirm-label">質問テーマ：</span>' +
-      escapeHtml(
-        theme.value
-      ) +
-
-      '<br><br>' +
-
-      '<span class="confirm-label">高校名：</span>' +
-      escapeHtml(
-        school
-      ) +
-
-      '<br><br>' +
-
-      '<span class="confirm-label">質問内容：</span><br>' +
-      escapeHtml(
-        question
-      );
-
-
-  document
-    .getElementById(
-      "confirmModal"
-    )
-    .classList
-    .add(
-      "show"
-    );
-
-}
-
-
-
-function closeConfirm() {
-
-  document
-    .getElementById(
-      "confirmModal"
-    )
-    .classList
-    .remove(
-      "show"
-    );
-
-}
-
-
-
-/* =========================================
-   質問送信
-========================================= */
-
-async function sendQuestion() {
-
-  closeConfirm();
-
-
-  document
-    .getElementById(
-      "loadingModal"
-    )
-    .classList
-    .add(
-      "show"
-    );
-
-
-  try {
-
-    const category =
       document
         .getElementById(
-          "category"
-        );
+          "dayUsage"
+        )
+        .textContent =
 
+        result.dayCount +
 
-    const result =
-      await postToGas({
+        " / " +
 
-        action:
-          "submit",
+        result.maxDay;
 
-        idToken:
-          lineIdToken,
 
-        category:
-          category.value,
+      document
+        .getElementById(
+          "weekUsage"
+        )
+        .textContent =
 
-        categoryLabel:
-          category.options[
-            category.selectedIndex
-          ].text,
+        result.weekCount +
 
-        theme:
-          document
-            .getElementById(
-              "theme"
-            )
-            .value,
+        " / " +
 
-        school:
-          document
-            .getElementById(
-              "school"
-            )
-            .value
-            .trim(),
+        result.maxWeek;
 
-        question:
-          document
-            .getElementById(
-              "question"
-            )
-            .value
-            .trim()
 
-      });
+      const limitReached =
 
+        result.dayCount >=
+          result.maxDay
 
-    document
-      .getElementById(
-        "loadingModal"
-      )
-      .classList
-      .remove(
-        "show"
-      );
+        ||
 
+        result.weekCount >=
+          result.maxWeek;
 
-    updateUsage(
-      result
-    );
 
+      document
+        .getElementById(
+          "submitBtn"
+        )
+        .disabled =
+        limitReached;
 
-    document
-      .getElementById(
-        "submitBtn"
-      )
-      .disabled =
-      true;
-
-
-    showMessage(
-      "質問を受け付けました",
-      "送信が完了しました。ROUTEで内容を確認します。",
-      "✓"
-    );
-
-
-  } catch(error) {
-
-
-    document
-      .getElementById(
-        "loadingModal"
-      )
-      .classList
-      .remove(
-        "show"
-      );
-
-
-    showMessage(
-      "送信できませんでした",
-      error.message ||
-      String(error),
-      "!"
-    );
-
-  }
-
-}
-
-
-
-/* =========================================
-   メッセージ
-========================================= */
-
-function showMessage(
-  title,
-  text,
-  icon
-) {
-
-  document
-    .getElementById(
-      "messageIcon"
-    )
-    .textContent =
-    icon || "✓";
-
-
-  document
-    .getElementById(
-      "messageTitle"
-    )
-    .textContent =
-    title;
-
-
-  document
-    .getElementById(
-      "messageText"
-    )
-    .textContent =
-    text;
-
-
-  document
-    .getElementById(
-      "messageModal"
-    )
-    .classList
-    .add(
-      "show"
-    );
-
-}
-
-
-
-function closeMessage() {
-
-  document
-    .getElementById(
-      "messageModal"
-    )
-    .classList
-    .remove(
-      "show"
-    );
-
-}
-
-
-
-/* =========================================
-   HTML安全化
-========================================= */
-
-function escapeHtml(
-  text
-) {
-
-  return String(text)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-
-/* =========================================
-   LINE認証
-========================================= */
-
-async function initializeLiff() {
-
-  try {
-
-    await liff.init({
-      liffId:
-        LIFF_ID
-    });
-
-
-    if (
-      !liff.isLoggedIn()
-    ) {
-
-      liff.login({
-        redirectUri:
-          window.location.href
-      });
-
-      return;
     }
 
 
-    lineProfile =
-      await liff.getProfile();
+
+    /* ========================================
+       確認画面
+    ======================================== */
+
+    function openConfirm() {
+
+      const category =
+        document
+          .getElementById(
+            "category"
+          );
 
 
-    lineIdToken =
-      liff.getIDToken();
+      const theme =
+        document
+          .getElementById(
+            "theme"
+          );
 
 
-    document
-      .getElementById(
-        "loginStatus"
+      const school =
+        document
+          .getElementById(
+            "school"
+          )
+          .value
+          .trim();
+
+
+      const question =
+        document
+          .getElementById(
+            "question"
+          )
+          .value
+          .trim();
+
+
+
+      if (
+        !category.value
+      ) {
+
+        showMessage(
+
+          "ご確認ください",
+
+          "相談したい内容を選択してください。",
+
+          "!"
+
+        );
+
+        return;
+
+      }
+
+
+
+      if (
+        !theme.value
+      ) {
+
+        showMessage(
+
+          "ご確認ください",
+
+          "質問テーマを選択してください。",
+
+          "!"
+
+        );
+
+        return;
+
+      }
+
+
+
+      if (
+        !school
+      ) {
+
+        showMessage(
+
+          "ご確認ください",
+
+          "高校名を入力してください。",
+
+          "!"
+
+        );
+
+        return;
+
+      }
+
+
+
+      if (
+        !question
+      ) {
+
+        showMessage(
+
+          "ご確認ください",
+
+          "質問内容を入力してください。",
+
+          "!"
+
+        );
+
+        return;
+
+      }
+
+
+      const categoryText =
+
+        category.options[
+          category.selectedIndex
+        ].text;
+
+
+      document
+        .getElementById(
+          "confirmBox"
+        )
+        .innerHTML =
+
+        '<div class="confirm-row">' +
+
+          '<span class="confirm-label">' +
+          '大項目：' +
+          '</span>' +
+
+          escapeHtml(
+            categoryText
+          ) +
+
+        '</div>' +
+
+
+        '<div class="confirm-row">' +
+
+          '<span class="confirm-label">' +
+          '質問テーマ：' +
+          '</span>' +
+
+          escapeHtml(
+            theme.value
+          ) +
+
+        '</div>' +
+
+
+        '<div class="confirm-row">' +
+
+          '<span class="confirm-label">' +
+          '高校名：' +
+          '</span>' +
+
+          escapeHtml(
+            school
+          ) +
+
+        '</div>' +
+
+
+        '<div class="confirm-row">' +
+
+          '<span class="confirm-label">' +
+          '質問内容：' +
+          '</span><br>' +
+
+          escapeHtml(
+            question
+          ) +
+
+        '</div>';
+
+
+      document
+        .getElementById(
+          "confirmModal"
+        )
+        .classList
+        .add(
+          "show"
+        );
+
+    }
+
+
+
+    function closeConfirm() {
+
+      document
+        .getElementById(
+          "confirmModal"
+        )
+        .classList
+        .remove(
+          "show"
+        );
+
+    }
+
+
+
+    /* ========================================
+       質問送信
+    ======================================== */
+
+    async function sendQuestion() {
+
+      closeConfirm();
+
+
+      document
+        .getElementById(
+          "loadingModal"
+        )
+        .classList
+        .add(
+          "show"
+        );
+
+
+      try {
+
+        const category =
+          document
+            .getElementById(
+              "category"
+            );
+
+
+        const result =
+          await postToGas({
+
+            action:
+              "submit",
+
+            idToken:
+              lineIdToken,
+
+            category:
+              category.value,
+
+            categoryLabel:
+              category.options[
+                category.selectedIndex
+              ].text,
+
+            theme:
+              document
+                .getElementById(
+                  "theme"
+                )
+                .value,
+
+            school:
+              document
+                .getElementById(
+                  "school"
+                )
+                .value
+                .trim(),
+
+            question:
+              document
+                .getElementById(
+                  "question"
+                )
+                .value
+                .trim()
+
+          });
+
+
+        document
+          .getElementById(
+            "loadingModal"
+          )
+          .classList
+          .remove(
+            "show"
+          );
+
+
+        updateUsage(
+          result
+        );
+
+
+        document
+          .getElementById(
+            "submitBtn"
+          )
+          .disabled =
+          true;
+
+
+        showMessage(
+
+          "質問を受け付けました",
+
+          "送信が完了しました。ROUTEで内容を確認します。",
+
+          "✓"
+
+        );
+
+      }
+
+      catch(error) {
+
+        document
+          .getElementById(
+            "loadingModal"
+          )
+          .classList
+          .remove(
+            "show"
+          );
+
+
+        showMessage(
+
+          "送信できませんでした",
+
+          error.message
+          ||
+          String(error),
+
+          "!"
+
+        );
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       メッセージ
+    ======================================== */
+
+    function showMessage(
+      title,
+      text,
+      icon
+    ) {
+
+      const iconElement =
+        document
+          .getElementById(
+            "messageIcon"
+          );
+
+
+      iconElement.textContent =
+        icon || "✓";
+
+
+      if (
+        icon === "!"
+      ) {
+
+        iconElement.classList.add(
+          "error-icon"
+        );
+
+      }
+
+      else {
+
+        iconElement.classList.remove(
+          "error-icon"
+        );
+
+      }
+
+
+      document
+        .getElementById(
+          "messageTitle"
+        )
+        .textContent =
+        title;
+
+
+      document
+        .getElementById(
+          "messageText"
+        )
+        .textContent =
+        text;
+
+
+      document
+        .getElementById(
+          "messageModal"
+        )
+        .classList
+        .add(
+          "show"
+        );
+
+    }
+
+
+
+    function closeMessage() {
+
+      document
+        .getElementById(
+          "messageModal"
+        )
+        .classList
+        .remove(
+          "show"
+        );
+
+    }
+
+
+
+    /* ========================================
+       HTML安全化
+    ======================================== */
+
+    function escapeHtml(
+      text
+    ) {
+
+      return String(
+        text
       )
-      .innerHTML =
 
-      '<div class="status-icon">✓</div>' +
+      .replace(
+        /&/g,
+        "&amp;"
+      )
 
-      '<div class="status-text">' +
+      .replace(
+        /</g,
+        "&lt;"
+      )
 
-      'LINE認証済み　' +
+      .replace(
+        />/g,
+        "&gt;"
+      )
 
-      escapeHtml(
-        lineProfile.displayName ||
-        ""
-      ) +
+      .replace(
+        /"/g,
+        "&quot;"
+      )
 
-      '</div>';
+      .replace(
+        /'/g,
+        "&#039;"
+      );
 
-
-    const usage =
-      await postToGas({
-
-        action:
-          "usage",
-
-        idToken:
-          lineIdToken
-
-      });
+    }
 
 
-    updateUsage(
-      usage
+
+    /* ========================================
+       LINE認証
+    ======================================== */
+
+    async function initializeLiff() {
+
+      try {
+
+        await liff.init({
+
+          liffId:
+            LIFF_ID
+
+        });
+
+
+        if (
+          !liff.isLoggedIn()
+        ) {
+
+          liff.login({
+
+            redirectUri:
+              window.location.href
+
+          });
+
+          return;
+
+        }
+
+
+        lineProfile =
+          await liff.getProfile();
+
+
+        lineIdToken =
+          liff.getIDToken();
+
+
+        if (
+          !lineIdToken
+        ) {
+
+          throw new Error(
+            "LINE認証情報を取得できませんでした。"
+          );
+
+        }
+
+
+        document
+          .getElementById(
+            "loginStatus"
+          )
+          .innerHTML =
+
+          '<div class="status-icon">✓</div>' +
+
+          '<div class="status-text">' +
+
+          'LINE認証済み　' +
+
+          escapeHtml(
+
+            lineProfile.displayName
+            ||
+            ""
+
+          ) +
+
+          '</div>';
+
+
+        const usage =
+          await postToGas({
+
+            action:
+              "usage",
+
+            idToken:
+              lineIdToken
+
+          });
+
+
+        updateUsage(
+          usage
+        );
+
+      }
+
+      catch(error) {
+
+        console.error(
+          error
+        );
+
+
+        document
+          .getElementById(
+            "loginStatus"
+          )
+          .innerHTML =
+
+          '<div class="status-icon">!</div>' +
+
+          '<div class="status-text">' +
+
+          '接続を確認できませんでした' +
+
+          '</div>';
+
+
+        showMessage(
+
+          "接続エラー",
+
+          error.message
+          ||
+          String(error),
+
+          "!"
+
+        );
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       初期化
+
+       大項目がブラウザによって復元されても
+       質問テーマを必ず生成
+    ======================================== */
+
+    function initializePage() {
+
+      changeTheme(
+        false
+      );
+
+
+      initializeLiff();
+
+    }
+
+
+
+    window.addEventListener(
+
+      "load",
+
+      initializePage
+
     );
 
 
-  } catch(error) {
+    /*
+      iPhone・Safari・LINE内ブラウザで
+      ページ復帰した場合にも再生成
+    */
 
-    console.error(
-      error
+    window.addEventListener(
+
+      "pageshow",
+
+      function() {
+
+        changeTheme(
+          false
+        );
+
+      }
+
     );
 
 
-    showMessage(
-      "接続エラー",
-      error.message ||
-      String(error),
-      "!"
+    /*
+      ブラウザがフォーム値を遅れて復元する場合への対策
+    */
+
+    setTimeout(
+
+      function() {
+
+        changeTheme(
+          false
+        );
+
+      },
+
+      500
+
     );
 
-  }
 
-}
+    setTimeout(
 
+      function() {
 
+        changeTheme(
+          false
+        );
 
-window.addEventListener(
-  "load",
-  initializeLiff
-);
+      },
 
-</script>
+      1500
+
+    );
+
+  </script>
 
 
 </body>
