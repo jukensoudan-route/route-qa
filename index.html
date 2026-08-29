@@ -1,597 +1,1126 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1"
-  >
+<meta charset="UTF-8">
 
-  <title>ROUTE 受験Q&A</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1"
+>
 
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<title>ROUTE 受験Q&A</title>
 
-  <style>
-    :root {
-      --blue:#267EE6;
-      --blue-dark:#1768C9;
-      --blue-light:#EDF5FF;
-      --bg:#F3F7FC;
-      --text:#172231;
-      --sub:#637083;
-      --border:#D7E3F1;
-      --white:#FFFFFF;
-    }
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
-    * {
-      box-sizing:border-box;
-    }
+<style>
 
-    html,
-    body {
-      margin:0;
-      padding:0;
-      width:100%;
-    }
+:root {
+  --blue:#267EE6;
+  --blue-dark:#1768C9;
+  --blue-light:#EDF5FF;
+  --bg:#F3F7FC;
+  --text:#172231;
+  --sub:#637083;
+  --border:#D7E3F1;
+  --white:#FFFFFF;
+}
 
-    body {
-      background:var(--bg);
-      color:var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Noto Sans JP",
-        sans-serif;
-      -webkit-font-smoothing:antialiased;
-    }
+* {
+  box-sizing:border-box;
+}
 
-    .hero {
-      background:
-        linear-gradient(
-          135deg,
-          #267EE6,
-          #176ED2
-        );
+html,
+body {
+  margin:0;
+  padding:0;
+  width:100%;
+}
 
-      color:#fff;
-      padding:24px 18px 28px;
-    }
+body {
+  background:var(--bg);
+  color:var(--text);
 
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
 
-    .brand-logo {
-      width:58px;
-      height:58px;
-      border-radius:16px;
-      background:#fff;
-      color:var(--blue);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:30px;
-      font-weight:900;
-    }
+  -webkit-font-smoothing:
+    antialiased;
+}
 
-    .brand-title {
-      font-size:31px;
-      font-weight:900;
-    }
 
-    .brand-sub {
-      margin-top:3px;
-      font-size:18px;
-      font-weight:600;
-      opacity:.95;
-    }
+/* =========================
+   ヘッダー
+========================= */
 
-    .hero h1 {
-      margin:24px 0 0;
-      font-size:42px;
-      line-height:1.45;
-      font-weight:900;
-    }
+.hero {
+  background:
+    linear-gradient(
+      135deg,
+      #267EE6,
+      #176ED2
+    );
 
-    .hero p {
-      margin:15px 0 0;
-      font-size:24px;
-      line-height:1.8;
-      font-weight:600;
-    }
+  color:#fff;
 
-    .bubble {
-      margin-top:20px;
-      background:#fff;
-      color:var(--blue);
-      padding:18px;
-      border-radius:18px;
-      font-size:27px;
-      line-height:1.75;
-      font-weight:900;
-    }
+  padding:
+    24px 18px 28px;
+}
 
-    .page {
-      padding:10px 8px 130px;
-    }
+.brand {
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
 
-    .card {
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:24px 18px;
-      margin-bottom:14px;
-    }
+.brand-logo {
+  width:58px;
+  height:58px;
 
-    .login-status {
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:15px;
-      border-radius:16px;
-      background:var(--blue-light);
-      margin-bottom:22px;
-    }
+  border-radius:16px;
 
-    .status-icon {
-      width:46px;
-      height:46px;
-      border-radius:50%;
-      background:#fff;
-      color:var(--blue);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      flex-shrink:0;
-    }
+  background:#fff;
 
-    .status-text {
-      font-size:22px;
-      font-weight:800;
-      line-height:1.6;
-    }
+  color:var(--blue);
 
-    .form-title {
-      margin:0;
-      font-size:35px;
-      line-height:1.45;
-      font-weight:900;
-    }
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
-    .form-desc {
-      margin:12px 0 0;
-      color:var(--sub);
-      font-size:23px;
-      line-height:1.8;
-      font-weight:600;
-    }
+  font-size:30px;
+  font-weight:900;
+}
 
-    .field {
-      margin-top:30px;
-    }
+.brand-title {
+  font-size:31px;
+  font-weight:900;
+}
 
-    .field-label {
-      display:flex;
-      align-items:center;
-      gap:11px;
-      margin-bottom:12px;
-      font-size:30px;
-      font-weight:900;
-    }
+.brand-sub {
+  margin-top:3px;
 
-    .num {
-      width:46px;
-      height:46px;
-      flex-shrink:0;
-      border-radius:50%;
-      background:var(--blue-light);
-      color:var(--blue);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:23px;
-      font-weight:900;
-    }
+  font-size:18px;
+  font-weight:600;
 
-    .icon {
-      width:44px;
-      height:44px;
-      flex-shrink:0;
-      border-radius:12px;
-      background:#F7FBFF;
-      border:1px solid #E1EBF7;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:23px;
-    }
+  opacity:.95;
+}
 
-    select,
-    input,
-    textarea {
-      display:block;
-      width:100%;
-      border:2px solid var(--border);
-      border-radius:17px;
-      background:#fff;
-      color:var(--text);
-      font-family:inherit;
-      font-size:28px;
-      font-weight:700;
-      outline:none;
-    }
+.hero h1 {
+  margin:24px 0 0;
 
-    select,
-    input {
-      min-height:88px;
-      padding:0 20px;
-    }
+  font-size:42px;
+  line-height:1.45;
 
-    textarea {
-      min-height:260px;
-      padding:20px;
-      line-height:1.7;
-      resize:vertical;
-    }
+  font-weight:900;
+}
 
-    ::placeholder {
-      color:#A1AAB8;
-      font-size:25px;
-    }
+.hero p {
+  margin:15px 0 0;
 
-    .rule {
-      margin-top:28px;
-      padding:19px;
-      border:1px solid #DFEAFA;
-      border-radius:17px;
-      background:#F7FBFF;
-    }
+  font-size:24px;
+  line-height:1.8;
 
-    .rule-title {
-      color:var(--blue);
-      font-size:27px;
-      font-weight:900;
-    }
+  font-weight:600;
+}
 
-    .rule ul {
-      margin:10px 0 0;
-      padding-left:28px;
-      color:#536273;
-      font-size:24px;
-      line-height:2;
-      font-weight:650;
-    }
+.bubble {
+  margin-top:20px;
 
-    .submit-wrap {
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      z-index:30;
-      padding:
-        10px 8px
-        calc(10px + env(safe-area-inset-bottom));
+  background:#fff;
 
-      background:rgba(244,248,252,.97);
-      border-top:1px solid #DFE7F1;
-    }
+  color:var(--blue);
 
-    .submit {
-      width:100%;
-      min-height:88px;
-      border:0;
-      border-radius:18px;
-      background:
-        linear-gradient(
-          135deg,
-          var(--blue),
-          var(--blue-dark)
-        );
-      color:#fff;
-      font-family:inherit;
-      font-size:29px;
-      font-weight:900;
-    }
+  padding:18px;
 
-    .submit:disabled {
-      opacity:.45;
-    }
+  border-radius:18px;
 
-    .modal-bg {
-      display:none;
-      position:fixed;
-      inset:0;
-      z-index:100;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:rgba(15,23,42,.62);
-    }
+  font-size:27px;
+  line-height:1.75;
 
-    .modal-bg.show {
-      display:flex;
-    }
+  font-weight:900;
+}
 
-    .modal {
-      width:100%;
-      max-width:650px;
-      border-radius:27px;
-      background:#fff;
-      padding:28px 20px;
-    }
 
-    .modal-icon {
-      width:82px;
-      height:82px;
-      margin:0 auto 18px;
-      border-radius:50%;
-      background:var(--blue-light);
-      color:var(--blue);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:42px;
-      font-weight:900;
-    }
+/* =========================
+   本体
+========================= */
 
-    .modal-title {
-      text-align:center;
-      font-size:34px;
-      font-weight:900;
-      line-height:1.45;
-    }
+.page {
+  padding:
+    10px 8px 130px;
+}
 
-    .modal-text {
-      margin-top:15px;
-      color:var(--sub);
-      text-align:center;
-      font-size:24px;
-      line-height:1.8;
-      font-weight:650;
-    }
+.card {
+  background:#fff;
 
-    .modal-button {
-      display:block;
-      width:100%;
-      min-height:74px;
-      margin-top:24px;
-      border:0;
-      border-radius:16px;
-      background:var(--blue);
-      color:#fff;
-      font-size:25px;
-      font-weight:900;
-    }
-  </style>
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:20px;
+
+  padding:
+    24px 18px;
+
+  margin-bottom:14px;
+}
+
+
+/* =========================
+   LINE認証
+========================= */
+
+.login-status {
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  background:
+    var(--blue-light);
+
+  margin-bottom:22px;
+}
+
+.status-icon {
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  color:var(--blue);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:900;
+
+  flex-shrink:0;
+}
+
+.status-text {
+  font-size:22px;
+
+  font-weight:800;
+
+  line-height:1.6;
+}
+
+
+/* =========================
+   利用状況
+========================= */
+
+.usage-title {
+  font-size:27px;
+
+  font-weight:900;
+
+  margin-bottom:15px;
+}
+
+.usage-grid {
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+}
+
+.usage-box {
+  text-align:center;
+
+  padding:18px 10px;
+
+  border-radius:16px;
+
+  background:
+    var(--blue-light);
+}
+
+.usage-label {
+  font-size:20px;
+
+  color:var(--sub);
+
+  font-weight:700;
+}
+
+.usage-value {
+  margin-top:3px;
+
+  font-size:39px;
+
+  color:var(--blue);
+
+  font-weight:900;
+}
+
+
+/* =========================
+   フォーム
+========================= */
+
+.form-title {
+  margin:0;
+
+  font-size:35px;
+
+  line-height:1.45;
+
+  font-weight:900;
+}
+
+.form-desc {
+  margin:12px 0 0;
+
+  color:var(--sub);
+
+  font-size:23px;
+
+  line-height:1.8;
+
+  font-weight:600;
+}
+
+.field {
+  margin-top:30px;
+}
+
+.field-label {
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+  margin-bottom:12px;
+
+  font-size:30px;
+
+  font-weight:900;
+}
+
+.num {
+  width:46px;
+  height:46px;
+
+  flex-shrink:0;
+
+  border-radius:50%;
+
+  background:
+    var(--blue-light);
+
+  color:var(--blue);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:23px;
+
+  font-weight:900;
+}
+
+.icon {
+  width:44px;
+  height:44px;
+
+  flex-shrink:0;
+
+  border-radius:12px;
+
+  background:#F7FBFF;
+
+  border:
+    1px solid
+    #E1EBF7;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:23px;
+}
+
+select,
+input,
+textarea {
+  display:block;
+
+  width:100%;
+
+  border:
+    2px solid
+    var(--border);
+
+  border-radius:17px;
+
+  background:#fff;
+
+  color:var(--text);
+
+  font-family:inherit;
+
+  font-size:28px;
+
+  font-weight:700;
+
+  outline:none;
+}
+
+select,
+input {
+  min-height:88px;
+
+  padding:
+    0 20px;
+}
+
+textarea {
+  min-height:260px;
+
+  padding:20px;
+
+  line-height:1.7;
+
+  resize:vertical;
+}
+
+::placeholder {
+  color:#A1AAB8;
+
+  font-size:25px;
+}
+
+
+/* =========================
+   ルール
+========================= */
+
+.rule {
+  margin-top:28px;
+
+  padding:19px;
+
+  border:
+    1px solid
+    #DFEAFA;
+
+  border-radius:17px;
+
+  background:#F7FBFF;
+}
+
+.rule-title {
+  color:var(--blue);
+
+  font-size:27px;
+
+  font-weight:900;
+}
+
+.rule ul {
+  margin:10px 0 0;
+
+  padding-left:28px;
+
+  color:#536273;
+
+  font-size:24px;
+
+  line-height:2;
+
+  font-weight:650;
+}
+
+
+/* =========================
+   送信
+========================= */
+
+.submit-wrap {
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:30;
+
+  padding:
+    10px 8px
+    calc(
+      10px +
+      env(safe-area-inset-bottom)
+    );
+
+  background:
+    rgba(244,248,252,.97);
+
+  border-top:
+    1px solid #DFE7F1;
+}
+
+.submit {
+  width:100%;
+
+  min-height:88px;
+
+  border:0;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--blue-dark)
+    );
+
+  color:#fff;
+
+  font-family:inherit;
+
+  font-size:29px;
+
+  font-weight:900;
+}
+
+.submit:disabled {
+  opacity:.45;
+}
+
+
+/* =========================
+   モーダル
+========================= */
+
+.modal-bg {
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(15,23,42,.62);
+}
+
+.modal-bg.show {
+  display:flex;
+}
+
+.modal {
+  width:100%;
+
+  max-width:650px;
+
+  max-height:90vh;
+
+  overflow-y:auto;
+
+  border-radius:27px;
+
+  background:#fff;
+
+  padding:28px 20px;
+}
+
+.modal-icon {
+  width:82px;
+  height:82px;
+
+  margin:
+    0 auto 18px;
+
+  border-radius:50%;
+
+  background:
+    var(--blue-light);
+
+  color:var(--blue);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:42px;
+
+  font-weight:900;
+}
+
+.modal-title {
+  text-align:center;
+
+  font-size:34px;
+
+  font-weight:900;
+
+  line-height:1.45;
+}
+
+.modal-text {
+  margin-top:15px;
+
+  color:var(--sub);
+
+  text-align:center;
+
+  font-size:24px;
+
+  line-height:1.8;
+
+  font-weight:650;
+}
+
+.confirm-box {
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  background:#F6FAFF;
+
+  font-size:23px;
+
+  line-height:1.8;
+}
+
+.confirm-label {
+  color:var(--blue);
+
+  font-weight:900;
+}
+
+.modal-buttons {
+  display:grid;
+
+  grid-template-columns:
+    1fr 1.2fr;
+
+  gap:10px;
+
+  margin-top:24px;
+}
+
+.modal-button {
+  min-height:74px;
+
+  border-radius:16px;
+
+  font-family:inherit;
+
+  font-size:24px;
+
+  font-weight:900;
+}
+
+.secondary {
+  background:#fff;
+
+  border:
+    2px solid
+    var(--border);
+
+  color:#475467;
+}
+
+.primary {
+  border:0;
+
+  background:var(--blue);
+
+  color:#fff;
+}
+
+.spinner {
+  width:65px;
+  height:65px;
+
+  margin:
+    0 auto 20px;
+
+  border:
+    6px solid
+    #E5EDF7;
+
+  border-top-color:
+    var(--blue);
+
+  border-radius:50%;
+
+  animation:
+    spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+iframe.backend-frame {
+  position:absolute;
+
+  width:1px;
+  height:1px;
+
+  left:-9999px;
+
+  top:-9999px;
+
+  border:0;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <header class="hero">
 
-    <div class="brand">
-      <div class="brand-logo">R</div>
+<header class="hero">
 
-      <div>
-        <div class="brand-title">
-          ROUTE 受験Q&A
-        </div>
+  <div class="brand">
 
-        <div class="brand-sub">
-          兵庫県高校受験・進路相談
-        </div>
-      </div>
+    <div class="brand-logo">
+      R
     </div>
 
-    <h1>
-      受験の不安を、<br>
-      ひとつずつ相談。
-    </h1>
+    <div>
 
-    <p>
-      志望校選びや合格可能性、学費、入試日程など、
-      気になったことをLINEから気軽にご相談いただけます。
-    </p>
+      <div class="brand-title">
+        ROUTE 受験Q&A
+      </div>
 
-    <div class="bubble">
-      「この高校で大丈夫？」<br>
-      「今の成績で届く？」
+      <div class="brand-sub">
+        兵庫県高校受験・進路相談
+      </div>
+
     </div>
-
-  </header>
-
-
-  <main class="page">
-
-    <section class="card">
-
-      <div
-        class="login-status"
-        id="loginStatus"
-      >
-        <div class="status-icon">
-          …
-        </div>
-
-        <div class="status-text">
-          LINE認証を確認しています
-        </div>
-      </div>
-
-
-      <h2 class="form-title">
-        今日の質問を入力してください
-      </h2>
-
-      <p class="form-desc">
-        気になることを、できるだけ具体的にご入力ください。
-      </p>
-
-
-      <div class="field">
-
-        <div class="field-label">
-          <span class="num">1</span>
-          <span class="icon">📂</span>
-          相談したい内容
-        </div>
-
-        <select
-          id="category"
-          onchange="changeTheme()"
-        >
-          <option value="">
-            大項目を選択してください
-          </option>
-
-          <option value="school">
-            志望校・高校選び
-          </option>
-
-          <option value="score">
-            成績・合格可能性
-          </option>
-
-          <option value="exam">
-            入試制度・受験方法
-          </option>
-
-          <option value="qualification">
-            英検・資格・優遇
-          </option>
-
-          <option value="university">
-            大学進学・進路実績
-          </option>
-
-          <option value="cost">
-            学費・費用
-          </option>
-
-          <option value="schedule">
-            受験スケジュール・進路決定
-          </option>
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <div class="field-label">
-          <span class="num">2</span>
-          <span class="icon">📝</span>
-          質問テーマ
-        </div>
-
-        <select id="theme">
-          <option value="">
-            先に大項目を選択してください
-          </option>
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <div class="field-label">
-          <span class="num">3</span>
-          <span class="icon">🏫</span>
-          高校名
-        </div>
-
-        <input
-          id="school"
-          type="text"
-          placeholder="例：県立西宮高校"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <div class="field-label">
-          <span class="num">4</span>
-          <span class="icon">💬</span>
-          質問内容
-        </div>
-
-        <textarea
-          id="question"
-          placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"
-        ></textarea>
-
-      </div>
-
-
-      <div class="rule">
-
-        <div class="rule-title">
-          ご利用ルール
-        </div>
-
-        <ul>
-          <li>1日1問まで</li>
-          <li>1週間6問まで</li>
-          <li>1回につき高校1校まで</li>
-          <li>1回につき質問テーマ1つまで</li>
-          <li>各教科の具体的な勉強方法や問題の解き方は対象外です</li>
-        </ul>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <div class="submit-wrap">
-
-    <button
-      class="submit"
-      id="submitBtn"
-      onclick="checkForm()"
-      disabled
-    >
-      この内容で質問する
-    </button>
 
   </div>
 
 
+  <h1>
+    受験の不安を、<br>
+    ひとつずつ相談。
+  </h1>
+
+
+  <p>
+    志望校選びや合格可能性、学費、入試日程など、
+    気になったことをLINEから気軽にご相談いただけます。
+  </p>
+
+
+  <div class="bubble">
+
+    「この高校で大丈夫？」<br>
+
+    「今の成績で届く？」
+
+  </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+<section class="card">
+
   <div
-    class="modal-bg"
-    id="modal"
+    class="login-status"
+    id="loginStatus"
   >
 
-    <div class="modal">
+    <div class="status-icon">
+      …
+    </div>
 
-      <div class="modal-icon">
-        ✓
+    <div class="status-text">
+      LINE認証を確認しています
+    </div>
+
+  </div>
+
+
+  <div class="usage-title">
+    今週の利用状況
+  </div>
+
+
+  <div class="usage-grid">
+
+    <div class="usage-box">
+
+      <div class="usage-label">
+        本日
       </div>
 
       <div
-        class="modal-title"
-        id="modalTitle"
+        class="usage-value"
+        id="dayUsage"
       >
-        LINE認証
+        - / 1
+      </div>
+
+    </div>
+
+
+    <div class="usage-box">
+
+      <div class="usage-label">
+        今週
       </div>
 
       <div
-        class="modal-text"
-        id="modalText"
-      ></div>
+        class="usage-value"
+        id="weekUsage"
+      >
+        - / 6
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section class="card">
+
+
+  <h2 class="form-title">
+    今日の質問を入力してください
+  </h2>
+
+
+  <p class="form-desc">
+    気になることを、できるだけ具体的にご入力ください。
+  </p>
+
+
+  <div class="field">
+
+    <div class="field-label">
+
+      <span class="num">
+        1
+      </span>
+
+      <span class="icon">
+        📂
+      </span>
+
+      相談したい内容
+
+    </div>
+
+
+    <select
+      id="category"
+      onchange="changeTheme()"
+    >
+
+      <option value="">
+        大項目を選択してください
+      </option>
+
+      <option value="school">
+        志望校・高校選び
+      </option>
+
+      <option value="score">
+        成績・合格可能性
+      </option>
+
+      <option value="exam">
+        入試制度・受験方法
+      </option>
+
+      <option value="qualification">
+        英検・資格・優遇
+      </option>
+
+      <option value="university">
+        大学進学・進路実績
+      </option>
+
+      <option value="cost">
+        学費・費用
+      </option>
+
+      <option value="schedule">
+        受験スケジュール・進路決定
+      </option>
+
+    </select>
+
+  </div>
+
+
+
+  <div class="field">
+
+    <div class="field-label">
+
+      <span class="num">
+        2
+      </span>
+
+      <span class="icon">
+        📝
+      </span>
+
+      質問テーマ
+
+    </div>
+
+
+    <select id="theme">
+
+      <option value="">
+        先に大項目を選択してください
+      </option>
+
+    </select>
+
+  </div>
+
+
+
+  <div class="field">
+
+    <div class="field-label">
+
+      <span class="num">
+        3
+      </span>
+
+      <span class="icon">
+        🏫
+      </span>
+
+      高校名
+
+    </div>
+
+
+    <input
+      id="school"
+      type="text"
+      placeholder="例：県立西宮高校"
+    >
+
+  </div>
+
+
+
+  <div class="field">
+
+    <div class="field-label">
+
+      <span class="num">
+        4
+      </span>
+
+      <span class="icon">
+        💬
+      </span>
+
+      質問内容
+
+    </div>
+
+
+    <textarea
+      id="question"
+      placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"
+    ></textarea>
+
+  </div>
+
+
+
+  <div class="rule">
+
+    <div class="rule-title">
+      ご利用ルール
+    </div>
+
+    <ul>
+
+      <li>
+        1日1問まで
+      </li>
+
+      <li>
+        1週間6問まで
+      </li>
+
+      <li>
+        1回につき高校1校まで
+      </li>
+
+      <li>
+        1回につき質問テーマ1つまで
+      </li>
+
+      <li>
+        各教科の具体的な勉強方法や問題の解き方は対象外です
+      </li>
+
+    </ul>
+
+  </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<div class="submit-wrap">
+
+  <button
+    class="submit"
+    id="submitBtn"
+    onclick="openConfirm()"
+    disabled
+  >
+
+    この内容で質問する
+
+  </button>
+
+</div>
+
+
+
+<!-- 確認 -->
+
+<div
+  class="modal-bg"
+  id="confirmModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-icon">
+      ✓
+    </div>
+
+    <div class="modal-title">
+      入力内容をご確認ください
+    </div>
+
+    <div class="modal-text">
+      送信すると、本日の1問としてカウントされます。
+    </div>
+
+    <div
+      class="confirm-box"
+      id="confirmBox"
+    ></div>
+
+
+    <div class="modal-buttons">
 
       <button
-        class="modal-button"
-        onclick="closeModal()"
+        class="modal-button secondary"
+        onclick="closeConfirm()"
+      >
+        修正する
+      </button>
+
+      <button
+        class="modal-button primary"
+        onclick="sendQuestion()"
+      >
+        質問を送信
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- メッセージ -->
+
+<div
+  class="modal-bg"
+  id="messageModal"
+>
+
+  <div class="modal">
+
+    <div
+      class="modal-icon"
+      id="messageIcon"
+    >
+      ✓
+    </div>
+
+    <div
+      class="modal-title"
+      id="messageTitle"
+    ></div>
+
+    <div
+      class="modal-text"
+      id="messageText"
+    ></div>
+
+    <div
+      class="modal-buttons"
+      style="grid-template-columns:1fr;"
+    >
+
+      <button
+        class="modal-button primary"
+        onclick="closeMessage()"
       >
         閉じる
       </button>
@@ -600,313 +1129,963 @@
 
   </div>
 
-
-  <script>
-
-    /*
-      ROUTE受験Q&AのLIFF ID
-    */
-    const LIFF_ID =
-      "2010636994-in5dBoXy";
+</div>
 
 
-    const themes = {
 
-      school: [
-        "学校の特徴・強み",
-        "コース・学科",
-        "校風",
-        "部活動",
-        "通学・立地",
-        "学校設備",
-        "向いている生徒像"
-      ],
+<!-- 送信中 -->
 
-      score: [
-        "内申点",
-        "実力テスト",
-        "定期テスト",
-        "模試・偏差値",
-        "合格ライン",
-        "当日点の目安"
-      ],
+<div
+  class="modal-bg"
+  id="loadingModal"
+>
 
-      exam: [
-        "一般入試",
-        "推薦入試",
-        "特色選抜",
-        "専願・併願",
-        "複数志願選抜",
-        "学区・出願資格"
-      ],
+  <div class="modal">
 
-      qualification: [
-        "英検",
-        "漢検・数検",
-        "加点・得点換算",
-        "出願・推薦条件"
-      ],
+    <div class="spinner"></div>
 
-      university: [
-        "国公立大学",
-        "関関同立",
-        "産近甲龍",
-        "指定校推薦",
-        "内部進学",
-        "大学進学率"
-      ],
+    <div class="modal-title">
+      送信しています
+    </div>
 
-      cost: [
-        "授業料",
-        "入学金",
-        "初年度費用",
-        "制服・教材等",
-        "授業料無償化・就学支援金"
-      ],
+    <div class="modal-text">
+      そのまま少々お待ちください。
+    </div>
 
-      schedule: [
-        "出願日",
-        "入試日",
-        "合格発表",
-        "学校説明会・オープンスクール",
-        "進路希望調査・三者懇談",
-        "志望校決定時期"
-      ]
+  </div>
 
-    };
+</div>
 
 
-    let lineProfile = null;
-    let lineIdToken = null;
+
+<!-- Apps Script応答用 -->
+
+<iframe
+  name="backendFrame"
+  class="backend-frame"
+></iframe>
 
 
-    function changeTheme() {
 
-      const category =
-        document.getElementById("category").value;
+<script>
 
-      const theme =
-        document.getElementById("theme");
+/* =========================================
+   必ず変更
+========================================= */
 
-      theme.innerHTML = "";
+const GAS_WEB_APP_URL =https://script.google.com/macros/s/AKfycbxxnQzcnauXFv9PoMNVG7xAc80vojRi1uo8YX3UAGB9vuowpWa9THewOJL65xdmLx_Q/exec
+  "ここにApps Scriptのexec URL";
 
 
-      if (!category) {
+/* =========================================
+   LIFF
+========================================= */
 
-        theme.innerHTML =
-          '<option value="">先に大項目を選択してください</option>';
+const LIFF_ID =
+  "2010636994-in5dBoXy";
+
+
+let lineProfile = null;
+let lineIdToken = null;
+
+let usageData = {
+  dayCount:0,
+  weekCount:0,
+  maxDay:1,
+  maxWeek:6
+};
+
+let pendingRequests = {};
+
+
+
+/* =========================================
+   質問項目
+========================================= */
+
+const themes = {
+
+  school: [
+    "学校の特徴・強み",
+    "コース・学科",
+    "校風",
+    "部活動",
+    "通学・立地",
+    "学校設備",
+    "向いている生徒像"
+  ],
+
+  score: [
+    "内申点",
+    "実力テスト",
+    "定期テスト",
+    "模試・偏差値",
+    "合格ライン",
+    "当日点の目安"
+  ],
+
+  exam: [
+    "一般入試",
+    "推薦入試",
+    "特色選抜",
+    "専願・併願",
+    "複数志願選抜",
+    "学区・出願資格"
+  ],
+
+  qualification: [
+    "英検",
+    "漢検・数検",
+    "加点・得点換算",
+    "出願・推薦条件"
+  ],
+
+  university: [
+    "国公立大学",
+    "関関同立",
+    "産近甲龍",
+    "指定校推薦",
+    "内部進学",
+    "大学進学率"
+  ],
+
+  cost: [
+    "授業料",
+    "入学金",
+    "初年度費用",
+    "制服・教材等",
+    "授業料無償化・就学支援金"
+  ],
+
+  schedule: [
+    "出願日",
+    "入試日",
+    "合格発表",
+    "学校説明会・オープンスクール",
+    "進路希望調査・三者懇談",
+    "志望校決定時期"
+  ]
+
+};
+
+
+
+function changeTheme() {
+
+  const category =
+    document
+      .getElementById("category")
+      .value;
+
+
+  const theme =
+    document
+      .getElementById("theme");
+
+
+  theme.innerHTML = "";
+
+
+  if (!category) {
+
+    theme.innerHTML =
+      '<option value="">先に大項目を選択してください</option>';
+
+    return;
+
+  }
+
+
+  theme.innerHTML =
+    '<option value="">質問テーマを選択してください</option>';
+
+
+  themes[category].forEach(
+    function(name) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value = name;
+
+      option.textContent = name;
+
+      theme.appendChild(option);
+
+    }
+  );
+
+}
+
+
+
+/* =========================================
+   hidden form POST
+========================================= */
+
+function postToGas(data) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      if (
+        !GAS_WEB_APP_URL ||
+        GAS_WEB_APP_URL.indexOf(
+          "https://script.google.com/"
+        ) !== 0
+      ) {
+        reject(
+          new Error(
+            "Apps ScriptのWebアプリURLが設定されていません。"
+          )
+        );
 
         return;
-
       }
 
 
-      theme.innerHTML =
-        '<option value="">質問テーマを選択してください</option>';
+      const requestId =
+        "route_" +
+        Date.now() +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2);
 
 
-      themes[category].forEach(
-        function(name) {
+      pendingRequests[
+        requestId
+      ] = {
+        resolve:resolve,
+        reject:reject
+      };
 
-          const option =
-            document.createElement("option");
 
-          option.value = name;
-          option.textContent = name;
+      const form =
+        document.createElement(
+          "form"
+        );
 
-          theme.appendChild(option);
+
+      form.method =
+        "POST";
+
+
+      form.action =
+        GAS_WEB_APP_URL;
+
+
+      form.target =
+        "backendFrame";
+
+
+      form.style.display =
+        "none";
+
+
+      const payload =
+        Object.assign(
+          {},
+          data,
+          {
+            requestId:
+              requestId
+          }
+        );
+
+
+      Object.keys(
+        payload
+      ).forEach(
+        function(key) {
+
+          const input =
+            document.createElement(
+              "input"
+            );
+
+          input.type =
+            "hidden";
+
+          input.name =
+            key;
+
+          input.value =
+            payload[key] == null
+              ? ""
+              : String(
+                  payload[key]
+                );
+
+          form.appendChild(
+            input
+          );
 
         }
       );
 
+
+      document.body.appendChild(
+        form
+      );
+
+
+      form.submit();
+
+
+      setTimeout(
+        function() {
+
+          if (
+            pendingRequests[
+              requestId
+            ]
+          ) {
+
+            delete pendingRequests[
+              requestId
+            ];
+
+            reject(
+              new Error(
+                "サーバーからの応答がありませんでした。"
+              )
+            );
+          }
+
+          form.remove();
+
+        },
+        20000
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =========================================
+   Apps Script応答受信
+========================================= */
+
+window.addEventListener(
+  "message",
+  function(event) {
+
+    const allowed =
+      event.origin ===
+        "https://script.google.com"
+      ||
+      /\.googleusercontent\.com$/
+        .test(
+          new URL(
+            event.origin
+          ).hostname
+        );
+
+
+    if (!allowed) {
+      return;
     }
 
 
-    function setStatus(
-      icon,
-      text
+    const message =
+      event.data;
+
+
+    if (
+      !message ||
+      message.source !==
+        "route-qa-gas"
     ) {
-
-      document.getElementById("loginStatus").innerHTML =
-        '<div class="status-icon">' +
-        icon +
-        '</div>' +
-
-        '<div class="status-text">' +
-        text +
-        '</div>';
-
+      return;
     }
 
 
-    function showModal(
-      title,
-      text
-    ) {
+    const data =
+      message.payload;
 
-      document.getElementById("modalTitle")
-        .textContent = title;
 
-      document.getElementById("modalText")
-        .textContent = text;
-
-      document.getElementById("modal")
-        .classList.add("show");
-
+    if (!data) {
+      return;
     }
 
 
-    function closeModal() {
+    const pending =
+      pendingRequests[
+        data.requestId
+      ];
 
-      document.getElementById("modal")
-        .classList.remove("show");
 
+    if (!pending) {
+      return;
     }
 
 
-    function checkForm() {
-
-      const category =
-        document.getElementById("category").value;
-
-      const theme =
-        document.getElementById("theme").value;
-
-      const school =
-        document.getElementById("school")
-          .value.trim();
-
-      const question =
-        document.getElementById("question")
-          .value.trim();
+    delete pendingRequests[
+      data.requestId
+    ];
 
 
-      if (!category) {
+    if (data.ok) {
 
-        showModal(
-          "ご確認ください",
-          "相談したい内容を選択してください。"
-        );
+      pending.resolve(
+        data.result
+      );
 
-        return;
+    } else {
 
-      }
-
-
-      if (!theme) {
-
-        showModal(
-          "ご確認ください",
-          "質問テーマを選択してください。"
-        );
-
-        return;
-
-      }
-
-
-      if (!school) {
-
-        showModal(
-          "ご確認ください",
-          "高校名を入力してください。"
-        );
-
-        return;
-
-      }
-
-
-      if (!question) {
-
-        showModal(
-          "ご確認ください",
-          "質問内容を入力してください。"
-        );
-
-        return;
-
-      }
-
-
-      showModal(
-        "入力内容を確認しました",
-        "画面表示とLINE認証は正常です。次の工程でスプレッドシートへの送信を接続します。"
+      pending.reject(
+        new Error(
+          data.message ||
+          "処理に失敗しました。"
+        )
       );
 
     }
 
-
-    async function initializeLiff() {
-
-      try {
-
-        await liff.init({
-          liffId: LIFF_ID
-        });
+  }
+);
 
 
-        if (!liff.isLoggedIn()) {
 
-          liff.login({
-            redirectUri:
-              window.location.href
-          });
+/* =========================================
+   利用状況
+========================================= */
 
-          return;
+function updateUsage(
+  result
+) {
 
-        }
-
-
-        lineProfile =
-          await liff.getProfile();
+  usageData =
+    result;
 
 
-        lineIdToken =
-          liff.getIDToken();
+  document
+    .getElementById(
+      "dayUsage"
+    )
+    .textContent =
+
+    result.dayCount +
+    " / " +
+    result.maxDay;
 
 
-        setStatus(
-          "✓",
-          "LINE認証済み　" +
-          (lineProfile.displayName || "")
-        );
+  document
+    .getElementById(
+      "weekUsage"
+    )
+    .textContent =
+
+    result.weekCount +
+    " / " +
+    result.maxWeek;
 
 
-        document.getElementById("submitBtn")
-          .disabled = false;
+  const limitReached =
+
+    result.dayCount >=
+      result.maxDay
+
+    ||
+
+    result.weekCount >=
+      result.maxWeek;
 
 
-      }
+  document
+    .getElementById(
+      "submitBtn"
+    )
+    .disabled =
+    limitReached;
 
-      catch(error) {
-
-        console.error(error);
-
-
-        setStatus(
-          "!",
-          "LINE認証を確認できませんでした"
-        );
+}
 
 
-        showModal(
-          "LINE認証エラー",
-          error.message ||
-          "LINE認証中にエラーが発生しました。"
-        );
 
-      }
+/* =========================================
+   確認画面
+========================================= */
 
-    }
+function openConfirm() {
+
+  const category =
+    document
+      .getElementById(
+        "category"
+      );
 
 
-    window.addEventListener(
-      "load",
-      initializeLiff
+  const theme =
+    document
+      .getElementById(
+        "theme"
+      );
+
+
+  const school =
+    document
+      .getElementById(
+        "school"
+      )
+      .value
+      .trim();
+
+
+  const question =
+    document
+      .getElementById(
+        "question"
+      )
+      .value
+      .trim();
+
+
+  if (!category.value) {
+
+    showMessage(
+      "ご確認ください",
+      "相談したい内容を選択してください。",
+      "!"
     );
 
-  </script>
+    return;
+  }
+
+
+  if (!theme.value) {
+
+    showMessage(
+      "ご確認ください",
+      "質問テーマを選択してください。",
+      "!"
+    );
+
+    return;
+  }
+
+
+  if (!school) {
+
+    showMessage(
+      "ご確認ください",
+      "高校名を入力してください。",
+      "!"
+    );
+
+    return;
+  }
+
+
+  if (!question) {
+
+    showMessage(
+      "ご確認ください",
+      "質問内容を入力してください。",
+      "!"
+    );
+
+    return;
+  }
+
+
+  document
+    .getElementById(
+      "confirmBox"
+    )
+    .innerHTML =
+
+      '<span class="confirm-label">大項目：</span>' +
+      escapeHtml(
+        category.options[
+          category.selectedIndex
+        ].text
+      ) +
+
+      '<br><br>' +
+
+      '<span class="confirm-label">質問テーマ：</span>' +
+      escapeHtml(
+        theme.value
+      ) +
+
+      '<br><br>' +
+
+      '<span class="confirm-label">高校名：</span>' +
+      escapeHtml(
+        school
+      ) +
+
+      '<br><br>' +
+
+      '<span class="confirm-label">質問内容：</span><br>' +
+      escapeHtml(
+        question
+      );
+
+
+  document
+    .getElementById(
+      "confirmModal"
+    )
+    .classList
+    .add(
+      "show"
+    );
+
+}
+
+
+
+function closeConfirm() {
+
+  document
+    .getElementById(
+      "confirmModal"
+    )
+    .classList
+    .remove(
+      "show"
+    );
+
+}
+
+
+
+/* =========================================
+   質問送信
+========================================= */
+
+async function sendQuestion() {
+
+  closeConfirm();
+
+
+  document
+    .getElementById(
+      "loadingModal"
+    )
+    .classList
+    .add(
+      "show"
+    );
+
+
+  try {
+
+    const category =
+      document
+        .getElementById(
+          "category"
+        );
+
+
+    const result =
+      await postToGas({
+
+        action:
+          "submit",
+
+        idToken:
+          lineIdToken,
+
+        category:
+          category.value,
+
+        categoryLabel:
+          category.options[
+            category.selectedIndex
+          ].text,
+
+        theme:
+          document
+            .getElementById(
+              "theme"
+            )
+            .value,
+
+        school:
+          document
+            .getElementById(
+              "school"
+            )
+            .value
+            .trim(),
+
+        question:
+          document
+            .getElementById(
+              "question"
+            )
+            .value
+            .trim()
+
+      });
+
+
+    document
+      .getElementById(
+        "loadingModal"
+      )
+      .classList
+      .remove(
+        "show"
+      );
+
+
+    updateUsage(
+      result
+    );
+
+
+    document
+      .getElementById(
+        "submitBtn"
+      )
+      .disabled =
+      true;
+
+
+    showMessage(
+      "質問を受け付けました",
+      "送信が完了しました。ROUTEで内容を確認します。",
+      "✓"
+    );
+
+
+  } catch(error) {
+
+
+    document
+      .getElementById(
+        "loadingModal"
+      )
+      .classList
+      .remove(
+        "show"
+      );
+
+
+    showMessage(
+      "送信できませんでした",
+      error.message ||
+      String(error),
+      "!"
+    );
+
+  }
+
+}
+
+
+
+/* =========================================
+   メッセージ
+========================================= */
+
+function showMessage(
+  title,
+  text,
+  icon
+) {
+
+  document
+    .getElementById(
+      "messageIcon"
+    )
+    .textContent =
+    icon || "✓";
+
+
+  document
+    .getElementById(
+      "messageTitle"
+    )
+    .textContent =
+    title;
+
+
+  document
+    .getElementById(
+      "messageText"
+    )
+    .textContent =
+    text;
+
+
+  document
+    .getElementById(
+      "messageModal"
+    )
+    .classList
+    .add(
+      "show"
+    );
+
+}
+
+
+
+function closeMessage() {
+
+  document
+    .getElementById(
+      "messageModal"
+    )
+    .classList
+    .remove(
+      "show"
+    );
+
+}
+
+
+
+/* =========================================
+   HTML安全化
+========================================= */
+
+function escapeHtml(
+  text
+) {
+
+  return String(text)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+
+/* =========================================
+   LINE認証
+========================================= */
+
+async function initializeLiff() {
+
+  try {
+
+    await liff.init({
+      liffId:
+        LIFF_ID
+    });
+
+
+    if (
+      !liff.isLoggedIn()
+    ) {
+
+      liff.login({
+        redirectUri:
+          window.location.href
+      });
+
+      return;
+    }
+
+
+    lineProfile =
+      await liff.getProfile();
+
+
+    lineIdToken =
+      liff.getIDToken();
+
+
+    document
+      .getElementById(
+        "loginStatus"
+      )
+      .innerHTML =
+
+      '<div class="status-icon">✓</div>' +
+
+      '<div class="status-text">' +
+
+      'LINE認証済み　' +
+
+      escapeHtml(
+        lineProfile.displayName ||
+        ""
+      ) +
+
+      '</div>';
+
+
+    const usage =
+      await postToGas({
+
+        action:
+          "usage",
+
+        idToken:
+          lineIdToken
+
+      });
+
+
+    updateUsage(
+      usage
+    );
+
+
+  } catch(error) {
+
+    console.error(
+      error
+    );
+
+
+    showMessage(
+      "接続エラー",
+      error.message ||
+      String(error),
+      "!"
+    );
+
+  }
+
+}
+
+
+
+window.addEventListener(
+  "load",
+  initializeLiff
+);
+
+</script>
+
 
 </body>
+
 </html>
