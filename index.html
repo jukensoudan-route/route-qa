@@ -2,6 +2,7 @@
 <html lang="ja">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -14,32 +15,33 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
   <style>
+
     :root {
-      --blue: #267EE6;
-      --blue-dark: #1768C9;
-      --blue-light: #EDF5FF;
-      --blue-pale: #F7FBFF;
-      --bg: #F3F7FC;
-      --text: #172231;
-      --sub: #637083;
-      --border: #D7E3F1;
-      --white: #FFFFFF;
+      --blue:#267EE6;
+      --blue-dark:#1768C9;
+      --blue-light:#EDF5FF;
+      --blue-pale:#F7FBFF;
+      --bg:#F3F7FC;
+      --text:#172231;
+      --sub:#637083;
+      --border:#D7E3F1;
+      --white:#FFFFFF;
     }
 
     * {
-      box-sizing: border-box;
+      box-sizing:border-box;
     }
 
     html,
     body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
+      margin:0;
+      padding:0;
+      width:100%;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background:var(--bg);
+      color:var(--text);
 
       font-family:
         -apple-system,
@@ -48,14 +50,16 @@
         "Noto Sans JP",
         sans-serif;
 
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* ========================================
+
+    /* ==============================
        ヘッダー
-    ======================================== */
+    ============================== */
 
     .hero {
+
       background:
         linear-gradient(
           135deg,
@@ -63,411 +67,513 @@
           #176ED2
         );
 
-      color: #fff;
+      color:#fff;
 
       padding:
         24px 18px 28px;
     }
 
+
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:14px;
     }
+
 
     .brand-logo {
-      width: 58px;
-      height: 58px;
 
-      border-radius: 16px;
+      width:58px;
+      height:58px;
 
-      background: #fff;
-      color: var(--blue);
+      border-radius:16px;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background:#fff;
 
-      font-size: 30px;
-      font-weight: 900;
+      color:var(--blue);
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      font-size:30px;
+
+      font-weight:900;
     }
+
 
     .brand-title {
-      font-size: 31px;
-      font-weight: 900;
+
+      font-size:31px;
+
+      font-weight:900;
     }
+
 
     .brand-sub {
-      margin-top: 3px;
 
-      font-size: 18px;
-      font-weight: 600;
+      margin-top:3px;
 
-      opacity: .95;
+      font-size:18px;
+
+      font-weight:600;
+
+      opacity:.95;
     }
+
 
     .hero h1 {
-      margin: 24px 0 0;
 
-      font-size: 42px;
-      line-height: 1.45;
+      margin:
+        24px 0 0;
 
-      font-weight: 900;
+      font-size:42px;
+
+      line-height:1.45;
+
+      font-weight:900;
     }
+
 
     .hero p {
-      margin: 15px 0 0;
 
-      font-size: 24px;
-      line-height: 1.8;
+      margin:
+        15px 0 0;
 
-      font-weight: 600;
+      font-size:24px;
+
+      line-height:1.8;
+
+      font-weight:600;
     }
+
 
     .bubble {
-      margin-top: 20px;
 
-      background: #fff;
-      color: var(--blue);
+      margin-top:20px;
 
-      padding: 18px;
+      background:#fff;
 
-      border-radius: 18px;
+      color:var(--blue);
 
-      font-size: 27px;
-      line-height: 1.75;
+      padding:18px;
 
-      font-weight: 900;
+      border-radius:18px;
+
+      font-size:27px;
+
+      line-height:1.75;
+
+      font-weight:900;
     }
 
-    /* ========================================
-       ページ
-    ======================================== */
+
+    /* ==============================
+       本文
+    ============================== */
 
     .page {
+
       padding:
         10px 8px 130px;
     }
 
-    .card {
-      width: 100%;
 
-      background: #fff;
+    .card {
+
+      width:100%;
+
+      background:#fff;
 
       border:
         1px solid
         var(--border);
 
-      border-radius: 20px;
+      border-radius:20px;
 
       padding:
         24px 18px;
 
-      margin-bottom: 14px;
+      margin-bottom:14px;
     }
 
-    /* ========================================
+
+    /* ==============================
        LINE認証
-    ======================================== */
+    ============================== */
 
     .login-status {
-      display: flex;
-      align-items: center;
 
-      gap: 12px;
+      display:flex;
 
-      padding: 15px;
+      align-items:center;
 
-      border-radius: 16px;
+      gap:12px;
+
+      padding:15px;
+
+      border-radius:16px;
 
       background:
         var(--blue-light);
 
-      margin-bottom: 22px;
+      margin-bottom:22px;
     }
+
 
     .status-icon {
-      width: 46px;
-      height: 46px;
 
-      flex-shrink: 0;
+      width:46px;
+      height:46px;
 
-      border-radius: 50%;
+      flex-shrink:0;
 
-      background: #fff;
-      color: var(--blue);
+      border-radius:50%;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background:#fff;
 
-      font-weight: 900;
+      color:var(--blue);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      font-size:23px;
+
+      font-weight:900;
     }
+
 
     .status-text {
-      font-size: 22px;
-      font-weight: 800;
-      line-height: 1.6;
+
+      font-size:22px;
+
+      font-weight:800;
+
+      line-height:1.6;
     }
 
-    /* ========================================
-       利用回数
-    ======================================== */
+
+    /* ==============================
+       利用状況
+    ============================== */
 
     .usage-title {
-      font-size: 27px;
-      font-weight: 900;
 
-      margin-bottom: 15px;
+      font-size:27px;
+
+      font-weight:900;
+
+      margin-bottom:15px;
     }
 
+
     .usage-grid {
-      display: grid;
+
+      display:grid;
 
       grid-template-columns:
         1fr 1fr;
 
-      gap: 10px;
+      gap:10px;
     }
 
+
     .usage-box {
-      text-align: center;
+
+      text-align:center;
 
       padding:
         18px 10px;
 
-      border-radius: 16px;
+      border-radius:16px;
 
       background:
         var(--blue-light);
     }
+
 
     .usage-label {
-      font-size: 20px;
-      color: var(--sub);
 
-      font-weight: 700;
+      font-size:20px;
+
+      color:var(--sub);
+
+      font-weight:700;
     }
+
 
     .usage-value {
-      margin-top: 3px;
 
-      font-size: 39px;
+      margin-top:3px;
 
-      color: var(--blue);
+      font-size:39px;
 
-      font-weight: 900;
+      color:var(--blue);
+
+      font-weight:900;
     }
+
 
     .usage-note {
-      margin-top: 14px;
 
-      text-align: center;
+      margin-top:14px;
 
-      color: var(--sub);
+      text-align:center;
 
-      font-size: 20px;
-      line-height: 1.7;
+      color:var(--sub);
 
-      font-weight: 650;
+      font-size:20px;
+
+      line-height:1.7;
+
+      font-weight:650;
     }
 
-    /* ========================================
+
+    /* ==============================
        質問フォーム
-    ======================================== */
+    ============================== */
 
     .form-title {
-      margin: 0;
 
-      font-size: 35px;
-      line-height: 1.45;
+      margin:0;
 
-      font-weight: 900;
+      font-size:35px;
+
+      line-height:1.45;
+
+      font-weight:900;
     }
+
 
     .form-desc {
-      margin: 12px 0 0;
 
-      color: var(--sub);
+      margin:
+        12px 0 0;
 
-      font-size: 23px;
-      line-height: 1.8;
+      color:var(--sub);
 
-      font-weight: 600;
+      font-size:23px;
+
+      line-height:1.8;
+
+      font-weight:600;
     }
+
 
     .field {
-      margin-top: 30px;
+
+      margin-top:30px;
     }
+
 
     .field-label {
-      display: flex;
-      align-items: center;
 
-      gap: 11px;
+      display:flex;
 
-      margin-bottom: 12px;
+      align-items:center;
 
-      font-size: 30px;
+      gap:11px;
 
-      font-weight: 900;
+      margin-bottom:12px;
+
+      font-size:30px;
+
+      font-weight:900;
     }
 
+
     .num {
-      width: 46px;
-      height: 46px;
 
-      flex-shrink: 0;
+      width:46px;
+      height:46px;
 
-      border-radius: 50%;
+      flex-shrink:0;
+
+      border-radius:50%;
 
       background:
         var(--blue-light);
 
-      color: var(--blue);
+      color:var(--blue);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:flex;
 
-      font-size: 23px;
+      align-items:center;
 
-      font-weight: 900;
+      justify-content:center;
+
+      font-size:23px;
+
+      font-weight:900;
     }
 
+
     .icon {
-      width: 44px;
-      height: 44px;
 
-      flex-shrink: 0;
+      width:44px;
+      height:44px;
 
-      border-radius: 12px;
+      flex-shrink:0;
 
-      background: #F7FBFF;
+      border-radius:12px;
+
+      background:#F7FBFF;
 
       border:
         1px solid
         #E1EBF7;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:flex;
 
-      font-size: 23px;
+      align-items:center;
+
+      justify-content:center;
+
+      font-size:23px;
     }
+
 
     select,
     input,
     textarea {
-      display: block;
 
-      width: 100%;
+      display:block;
+
+      width:100%;
 
       border:
         2px solid
         var(--border);
 
-      border-radius: 17px;
+      border-radius:17px;
 
-      background: #fff;
-      color: var(--text);
+      background:#fff;
 
-      font-family: inherit;
+      color:var(--text);
 
-      font-size: 28px;
+      font-family:inherit;
 
-      font-weight: 700;
+      font-size:28px;
 
-      outline: none;
+      font-weight:700;
+
+      outline:none;
     }
+
 
     select,
     input {
-      min-height: 88px;
+
+      min-height:88px;
 
       padding:
         0 20px;
     }
 
+
     textarea {
-      min-height: 260px;
 
-      padding: 20px;
+      min-height:260px;
 
-      line-height: 1.7;
+      padding:20px;
 
-      resize: vertical;
+      line-height:1.7;
+
+      resize:vertical;
     }
+
 
     select:focus,
     input:focus,
     textarea:focus {
-      border-color: var(--blue);
+
+      border-color:
+        var(--blue);
 
       box-shadow:
         0 0 0 4px
         rgba(38,126,230,.10);
     }
 
-    ::placeholder {
-      color: #A1AAB8;
 
-      font-size: 25px;
+    ::placeholder {
+
+      color:#A1AAB8;
+
+      font-size:25px;
     }
 
-    /* ========================================
+
+    /* ==============================
        利用ルール
-    ======================================== */
+    ============================== */
 
     .rule {
-      margin-top: 28px;
 
-      padding: 19px;
+      margin-top:28px;
+
+      padding:19px;
 
       border:
         1px solid
         #DFEAFA;
 
-      border-radius: 17px;
+      border-radius:17px;
 
       background:
         var(--blue-pale);
     }
 
+
     .rule-title {
-      color: var(--blue);
 
-      font-size: 27px;
+      color:var(--blue);
 
-      font-weight: 900;
+      font-size:27px;
+
+      font-weight:900;
     }
 
+
     .rule ul {
+
       margin:
         10px 0 0;
 
-      padding-left: 28px;
+      padding-left:28px;
 
-      color: #536273;
+      color:#536273;
 
-      font-size: 24px;
-      line-height: 2;
+      font-size:24px;
 
-      font-weight: 650;
+      line-height:2;
+
+      font-weight:650;
     }
 
-    /* ========================================
-       固定送信ボタン
-    ======================================== */
+
+    /* ==============================
+       送信ボタン
+    ============================== */
 
     .submit-wrap {
-      position: fixed;
 
-      left: 0;
-      right: 0;
-      bottom: 0;
+      position:fixed;
 
-      z-index: 30;
+      left:0;
+      right:0;
+      bottom:0;
+
+      z-index:30;
 
       padding:
         10px 8px
@@ -484,14 +590,16 @@
         #DFE7F1;
     }
 
+
     .submit {
-      width: 100%;
 
-      min-height: 88px;
+      width:100%;
 
-      border: 0;
+      min-height:88px;
 
-      border-radius: 18px;
+      border:0;
+
+      border-radius:18px;
 
       background:
         linear-gradient(
@@ -500,189 +608,229 @@
           var(--blue-dark)
         );
 
-      color: #fff;
+      color:#fff;
 
-      font-family: inherit;
+      font-family:inherit;
 
-      font-size: 29px;
+      font-size:29px;
 
-      font-weight: 900;
+      font-weight:900;
     }
+
 
     .submit:disabled {
-      opacity: .45;
+
+      opacity:.45;
     }
 
-    /* ========================================
+
+    /* ==============================
        モーダル
-    ======================================== */
+    ============================== */
 
     .modal-bg {
-      display: none;
 
-      position: fixed;
+      display:none;
 
-      inset: 0;
+      position:fixed;
 
-      z-index: 100;
+      inset:0;
 
-      align-items: center;
-      justify-content: center;
+      z-index:100;
 
-      padding: 20px;
+      align-items:center;
+
+      justify-content:center;
+
+      padding:20px;
 
       background:
         rgba(15,23,42,.62);
     }
 
+
     .modal-bg.show {
-      display: flex;
+
+      display:flex;
     }
 
+
     .modal {
-      width: 100%;
 
-      max-width: 650px;
+      width:100%;
 
-      max-height: 90vh;
+      max-width:650px;
 
-      overflow-y: auto;
+      max-height:90vh;
 
-      border-radius: 27px;
+      overflow-y:auto;
 
-      background: #fff;
+      border-radius:27px;
+
+      background:#fff;
 
       padding:
         28px 20px;
     }
 
+
     .modal-icon {
-      width: 82px;
-      height: 82px;
+
+      width:82px;
+      height:82px;
 
       margin:
         0 auto 18px;
 
-      border-radius: 50%;
+      border-radius:50%;
 
       background:
         var(--blue-light);
 
-      color: var(--blue);
+      color:var(--blue);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:flex;
 
-      font-size: 42px;
+      align-items:center;
 
-      font-weight: 900;
+      justify-content:center;
+
+      font-size:42px;
+
+      font-weight:900;
     }
+
+
+    .error-icon {
+
+      background:#FFF0F0;
+
+      color:#D92D20;
+    }
+
 
     .modal-title {
-      text-align: center;
 
-      font-size: 34px;
+      text-align:center;
 
-      font-weight: 900;
+      font-size:34px;
 
-      line-height: 1.45;
+      font-weight:900;
+
+      line-height:1.45;
     }
+
 
     .modal-text {
-      margin-top: 15px;
 
-      color: var(--sub);
+      margin-top:15px;
 
-      text-align: center;
+      color:var(--sub);
 
-      font-size: 24px;
+      text-align:center;
 
-      line-height: 1.8;
+      font-size:24px;
 
-      font-weight: 650;
+      line-height:1.8;
+
+      font-weight:650;
     }
+
 
     .confirm-box {
-      margin-top: 20px;
 
-      padding: 18px;
+      margin-top:20px;
 
-      border-radius: 16px;
+      padding:18px;
 
-      background: #F6FAFF;
+      border-radius:16px;
 
-      font-size: 23px;
-      line-height: 1.8;
+      background:#F6FAFF;
+
+      font-size:23px;
+
+      line-height:1.8;
     }
+
 
     .confirm-row {
-      margin-bottom: 15px;
+
+      margin-bottom:15px;
     }
+
 
     .confirm-row:last-child {
-      margin-bottom: 0;
+
+      margin-bottom:0;
     }
+
 
     .confirm-label {
-      color: var(--blue);
 
-      font-weight: 900;
+      color:var(--blue);
+
+      font-weight:900;
     }
 
+
     .modal-buttons {
-      display: grid;
+
+      display:grid;
 
       grid-template-columns:
         1fr 1.2fr;
 
-      gap: 10px;
+      gap:10px;
 
-      margin-top: 24px;
+      margin-top:24px;
     }
+
 
     .modal-button {
-      min-height: 74px;
 
-      border-radius: 16px;
+      min-height:74px;
 
-      font-family: inherit;
+      border-radius:16px;
 
-      font-size: 24px;
+      font-family:inherit;
 
-      font-weight: 900;
+      font-size:24px;
+
+      font-weight:900;
     }
 
+
     .secondary {
-      background: #fff;
+
+      background:#fff;
 
       border:
         2px solid
         var(--border);
 
-      color: #475467;
+      color:#475467;
     }
+
 
     .primary {
-      border: 0;
 
-      background: var(--blue);
+      border:0;
 
-      color: #fff;
+      background:
+        var(--blue);
+
+      color:#fff;
     }
 
-    .error-icon {
-      background: #FFF0F0;
-      color: #D92D20;
-    }
 
-    /* ========================================
+    /* ==============================
        送信中
-    ======================================== */
+    ============================== */
 
     .spinner {
-      width: 65px;
-      height: 65px;
+
+      width:65px;
+      height:65px;
 
       margin:
         0 auto 20px;
@@ -694,31 +842,36 @@
       border-top-color:
         var(--blue);
 
-      border-radius: 50%;
+      border-radius:50%;
 
       animation:
         spin .8s linear infinite;
     }
 
+
     @keyframes spin {
+
       to {
+
         transform:
           rotate(360deg);
+
       }
+
     }
 
-    /* Apps Script送信用 */
 
     iframe.backend-frame {
-      position: absolute;
 
-      width: 1px;
-      height: 1px;
+      position:absolute;
 
-      left: -9999px;
-      top: -9999px;
+      width:1px;
+      height:1px;
 
-      border: 0;
+      left:-9999px;
+      top:-9999px;
+
+      border:0;
     }
 
   </style>
@@ -729,42 +882,61 @@
 <body>
 
 
-  <!-- ========================================
+  <!-- ==============================
        ヘッダー
-  ======================================== -->
+  ============================== -->
 
   <header class="hero">
 
+
     <div class="brand">
 
+
       <div class="brand-logo">
+
         R
+
       </div>
+
 
       <div>
 
+
         <div class="brand-title">
+
           ROUTE 受験Q&A
+
         </div>
+
 
         <div class="brand-sub">
+
           兵庫県高校受験・進路相談
+
         </div>
 
+
       </div>
+
 
     </div>
 
 
     <h1>
+
       受験の不安を、<br>
+
       ひとつずつ相談。
+
     </h1>
 
 
     <p>
+
       志望校選びや合格可能性、学費、入試日程など、
+
       気になったことをLINEから気軽にご相談いただけます。
+
     </p>
 
 
@@ -776,118 +948,164 @@
 
     </div>
 
+
   </header>
 
 
 
-  <!-- ========================================
+  <!-- ==============================
        本文
-  ======================================== -->
+  ============================== -->
 
   <main class="page">
 
 
-    <!-- LINE認証・利用回数 -->
+    <!-- LINE認証・利用状況 -->
 
     <section class="card">
+
 
       <div
         class="login-status"
         id="loginStatus"
       >
 
+
         <div class="status-icon">
+
           …
+
         </div>
 
+
         <div class="status-text">
+
           LINE認証を確認しています
+
         </div>
+
 
       </div>
 
 
       <div class="usage-title">
+
         今週の利用状況
+
       </div>
 
 
       <div class="usage-grid">
 
+
         <div class="usage-box">
 
+
           <div class="usage-label">
+
             本日
+
           </div>
+
 
           <div
             class="usage-value"
             id="dayUsage"
           >
+
             - / 1
+
           </div>
+
 
         </div>
 
 
         <div class="usage-box">
 
+
           <div class="usage-label">
+
             今週
+
           </div>
+
 
           <div
             class="usage-value"
             id="weekUsage"
           >
+
             - / 6
+
           </div>
 
+
         </div>
+
 
       </div>
 
 
       <div class="usage-note">
+
         1回につき「高校1校 × 質問テーマ1つ」でご利用いただけます
+
       </div>
+
 
     </section>
 
 
 
-    <!-- 質問 -->
+    <!-- 質問フォーム -->
 
     <section class="card">
 
 
       <h2 class="form-title">
+
         今日の質問を入力してください
+
       </h2>
 
 
       <p class="form-desc">
+
         気になることを、できるだけ具体的にご入力ください。
+
       </p>
+
 
 
       <!-- 大項目 -->
 
       <div class="field">
 
+
         <div class="field-label">
 
+
           <span class="num">
+
             1
+
           </span>
+
 
           <span class="icon">
+
             📂
+
           </span>
 
+
           <span>
+
             相談したい内容
+
           </span>
+
 
         </div>
 
@@ -897,39 +1115,65 @@
           onchange="changeTheme(true)"
         >
 
+
           <option value="">
+
             大項目を選択してください
+
           </option>
+
 
           <option value="school">
+
             志望校・高校選び
+
           </option>
+
 
           <option value="score">
+
             成績・合格可能性
+
           </option>
+
 
           <option value="exam">
+
             入試制度・受験方法
+
           </option>
+
 
           <option value="qualification">
+
             英検・資格・優遇
+
           </option>
+
 
           <option value="university">
+
             大学進学・進路実績
+
           </option>
+
 
           <option value="cost">
+
             学費・費用
+
           </option>
+
 
           <option value="schedule">
+
             受験スケジュール・進路決定
+
           </option>
 
+
         </select>
+
 
       </div>
 
@@ -939,30 +1183,46 @@
 
       <div class="field">
 
+
         <div class="field-label">
 
+
           <span class="num">
+
             2
+
           </span>
+
 
           <span class="icon">
+
             📝
+
           </span>
 
+
           <span>
+
             質問テーマ
+
           </span>
+
 
         </div>
 
 
         <select id="theme">
 
+
           <option value="">
+
             先に大項目を選択してください
+
           </option>
 
+
         </select>
+
 
       </div>
 
@@ -972,19 +1232,30 @@
 
       <div class="field">
 
+
         <div class="field-label">
 
+
           <span class="num">
+
             3
+
           </span>
+
 
           <span class="icon">
+
             🏫
+
           </span>
 
+
           <span>
+
             高校名
+
           </span>
+
 
         </div>
 
@@ -995,6 +1266,7 @@
           placeholder="例：県立西宮高校"
         >
 
+
       </div>
 
 
@@ -1003,19 +1275,30 @@
 
       <div class="field">
 
+
         <div class="field-label">
 
+
           <span class="num">
+
             4
+
           </span>
+
 
           <span class="icon">
+
             💬
+
           </span>
 
+
           <span>
+
             質問内容
+
           </span>
+
 
         </div>
 
@@ -1025,41 +1308,63 @@
           placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"
         ></textarea>
 
+
       </div>
 
 
 
-      <!-- ルール -->
+      <!-- 利用ルール -->
 
       <div class="rule">
 
+
         <div class="rule-title">
+
           ご利用ルール
+
         </div>
+
 
         <ul>
 
+
           <li>
+
             1日1問まで
+
           </li>
 
+
           <li>
+
             1週間6問まで
+
           </li>
 
+
           <li>
+
             1回につき高校1校まで
+
           </li>
 
+
           <li>
+
             1回につき質問テーマ1つまで
+
           </li>
 
+
           <li>
+
             各教科の具体的な勉強方法や問題の解き方は対象外です
+
           </li>
+
 
         </ul>
+
 
       </div>
 
@@ -1071,47 +1376,59 @@
 
 
 
-  <!-- ========================================
+  <!-- ==============================
        固定ボタン
-  ======================================== -->
+  ============================== -->
 
   <div class="submit-wrap">
 
-<button
-  class="submit"
-  id="submitBtn"
-  onclick="openConfirm()"
->
+
+    <button
+      class="submit"
+      id="submitBtn"
+      onclick="openConfirm()"
+    >
 
       この内容で質問する
 
     </button>
 
+
   </div>
 
 
 
-  <!-- ========================================
+  <!-- ==============================
        確認モーダル
-  ======================================== -->
+  ============================== -->
 
   <div
     class="modal-bg"
     id="confirmModal"
   >
 
+
     <div class="modal">
 
+
       <div class="modal-icon">
+
         ✓
+
       </div>
+
 
       <div class="modal-title">
+
         入力内容をご確認ください
+
       </div>
 
+
       <div class="modal-text">
+
         送信すると、本日の1問としてカウントされます。
+
       </div>
 
 
@@ -1122,6 +1439,7 @@
 
 
       <div class="modal-buttons">
+
 
         <button
           class="modal-button secondary"
@@ -1135,6 +1453,7 @@
 
         <button
           class="modal-button primary"
+          id="confirmSendBtn"
           onclick="sendQuestion()"
         >
 
@@ -1142,36 +1461,45 @@
 
         </button>
 
+
       </div>
 
+
     </div>
+
 
   </div>
 
 
 
-  <!-- ========================================
+  <!-- ==============================
        メッセージモーダル
-  ======================================== -->
+  ============================== -->
 
   <div
     class="modal-bg"
     id="messageModal"
   >
 
+
     <div class="modal">
+
 
       <div
         class="modal-icon"
         id="messageIcon"
       >
+
         ✓
+
       </div>
+
 
       <div
         class="modal-title"
         id="messageTitle"
       ></div>
+
 
       <div
         class="modal-text"
@@ -1184,6 +1512,7 @@
         style="grid-template-columns:1fr;"
       >
 
+
         <button
           class="modal-button primary"
           onclick="closeMessage()"
@@ -1193,42 +1522,55 @@
 
         </button>
 
+
       </div>
 
+
     </div>
+
 
   </div>
 
 
 
-  <!-- ========================================
+  <!-- ==============================
        送信中
-  ======================================== -->
+  ============================== -->
 
   <div
     class="modal-bg"
     id="loadingModal"
   >
 
+
     <div class="modal">
+
 
       <div class="spinner"></div>
 
+
       <div class="modal-title">
+
         送信しています
+
       </div>
+
 
       <div class="modal-text">
+
         そのまま少々お待ちください。
+
       </div>
 
+
     </div>
+
 
   </div>
 
 
 
-  <!-- Apps Script通信用 -->
+  <!-- Apps Script応答受信用 -->
 
   <iframe
     name="backendFrame"
@@ -1239,10 +1581,9 @@
 
   <script>
 
-    /* ========================================
-       Apps Script WebアプリURL
 
-       現在設定している /exec URLを使用
+    /* ========================================
+       Apps Script Webアプリ
     ======================================== */
 
     const GAS_WEB_APP_URL =
@@ -1257,33 +1598,42 @@
       "2010636994-in5dBoXy";
 
 
-    let lineProfile = null;
+    let lineProfile =
+      null;
 
-    let lineIdToken = null;
+
+    let lineIdToken =
+      null;
 
 
     let usageData = {
 
-      dayCount: 0,
+      dayCount:0,
 
-      weekCount: 0,
+      weekCount:0,
 
-      maxDay: 1,
+      maxDay:1,
 
-      maxWeek: 6
+      maxWeek:6
 
     };
 
 
-    const pendingRequests = {};
+    const pendingRequests =
+      {};
+
+
+    let isSending =
+      false;
 
 
 
     /* ========================================
-       大項目 → 質問テーマ
+       質問テーマ
     ======================================== */
 
     const themes = {
+
 
       school: [
 
@@ -1399,19 +1749,22 @@
 
       ]
 
+
     };
 
 
 
     /* ========================================
-       今回の重要修正部分
+       大項目 → テーマ
     ======================================== */
 
     function changeTheme(
       resetSelection
     ) {
 
+
       const category =
+
         document
           .getElementById(
             "category"
@@ -1420,6 +1773,7 @@
 
 
       const theme =
+
         document
           .getElementById(
             "theme"
@@ -1427,21 +1781,39 @@
 
 
       const previousValue =
+
         resetSelection
+
           ? ""
+
           : theme.value;
 
 
-      theme.innerHTML = "";
+      theme.innerHTML =
+        "";
 
 
       if (
-        !category ||
-        !themes[category]
+
+        !category
+
+        ||
+
+        !themes[
+          category
+        ]
+
       ) {
 
+
         theme.innerHTML =
-          '<option value="">先に大項目を選択してください</option>';
+
+          '<option value="">' +
+
+          '先に大項目を選択してください' +
+
+          '</option>';
+
 
         return;
 
@@ -1449,14 +1821,18 @@
 
 
       const first =
+
         document.createElement(
           "option"
         );
 
 
-      first.value = "";
+      first.value =
+        "";
+
 
       first.textContent =
+
         "質問テーマを選択してください";
 
 
@@ -1469,9 +1845,13 @@
         category
       ].forEach(
 
-        function(name) {
+        function(
+          name
+        ) {
+
 
           const option =
+
             document.createElement(
               "option"
             );
@@ -1488,6 +1868,7 @@
           theme.appendChild(
             option
           );
+
 
         }
 
@@ -1508,22 +1889,26 @@
 
       ) {
 
+
         theme.value =
           previousValue;
 
+
       }
+
 
     }
 
 
 
     /* ========================================
-       Apps Script POST
+       Apps ScriptへPOST
     ======================================== */
 
     function postToGas(
       data
     ) {
+
 
       return new Promise(
 
@@ -1531,30 +1916,6 @@
           resolve,
           reject
         ) {
-
-          if (
-
-            !GAS_WEB_APP_URL
-
-            ||
-
-            GAS_WEB_APP_URL.indexOf(
-              "https://script.google.com/"
-            ) !== 0
-
-          ) {
-
-            reject(
-
-              new Error(
-                "Apps ScriptのWebアプリURLが設定されていません。"
-              )
-
-            );
-
-            return;
-
-          }
 
 
           const requestId =
@@ -1584,6 +1945,7 @@
 
 
           const form =
+
             document.createElement(
               "form"
             );
@@ -1606,13 +1968,20 @@
 
 
           const payload =
+
             Object.assign(
+
               {},
+
               data,
+
               {
+
                 requestId:
                   requestId
+
               }
+
             );
 
 
@@ -1620,9 +1989,13 @@
             payload
           ).forEach(
 
-            function(key) {
+            function(
+              key
+            ) {
+
 
               const input =
+
                 document.createElement(
                   "input"
                 );
@@ -1638,18 +2011,23 @@
 
               input.value =
 
-                payload[key] == null
+                payload[
+                  key
+                ] == null
 
                   ? ""
 
                   : String(
-                      payload[key]
+                      payload[
+                        key
+                      ]
                     );
 
 
               form.appendChild(
                 input
               );
+
 
             }
 
@@ -1668,11 +2046,15 @@
 
             function() {
 
+
               if (
+
                 pendingRequests[
                   requestId
                 ]
+
               ) {
+
 
                 delete pendingRequests[
                   requestId
@@ -1687,6 +2069,7 @@
 
                 );
 
+
               }
 
 
@@ -1698,60 +2081,37 @@
 
               }
 
+
             },
 
             20000
 
           );
 
+
         }
 
       );
+
 
     }
 
 
 
     /* ========================================
-       Apps Scriptから受信
+       Apps Scriptからの返答を受信
+
+       origin制限は一旦外して
+       sourceとrequestIdで判定
     ======================================== */
 
     window.addEventListener(
 
       "message",
 
-      function(event) {
-
-        const origin =
-          String(
-            event.origin ||
-            ""
-          );
-
-
-        const allowed =
-
-          origin ===
-            "https://script.google.com"
-
-          ||
-
-          origin.endsWith(
-            ".googleusercontent.com"
-          )
-
-          ||
-
-          origin.indexOf(
-            "https://script.googleusercontent.com"
-          ) === 0;
-
-
-        if (!allowed) {
-
-          return;
-
-        }
+      function(
+        event
+      ) {
 
 
         const message =
@@ -1769,7 +2129,9 @@
 
         ) {
 
+
           return;
+
 
         }
 
@@ -1778,22 +2140,37 @@
           message.payload;
 
 
-        if (!data) {
+        if (
+
+          !data
+
+          ||
+
+          !data.requestId
+
+        ) {
+
 
           return;
+
 
         }
 
 
         const pending =
+
           pendingRequests[
             data.requestId
           ];
 
 
-        if (!pending) {
+        if (
+          !pending
+        ) {
+
 
           return;
+
 
         }
 
@@ -1807,13 +2184,16 @@
           data.ok
         ) {
 
+
           pending.resolve(
             data.result
           );
 
+
         }
 
         else {
+
 
           pending.reject(
 
@@ -1829,7 +2209,9 @@
 
           );
 
+
         }
+
 
       }
 
@@ -1838,12 +2220,22 @@
 
 
     /* ========================================
-       利用回数表示
+       利用回数
     ======================================== */
 
     function updateUsage(
       result
     ) {
+
+
+      if (
+        !result
+      ) {
+
+        return;
+
+      }
+
 
       usageData =
         result;
@@ -1855,11 +2247,19 @@
         )
         .textContent =
 
-        result.dayCount +
+        Number(
+          result.dayCount || 0
+        )
 
-        " / " +
+        +
 
-        result.maxDay;
+        " / "
+
+        +
+
+        Number(
+          result.maxDay || 1
+        );
 
 
       document
@@ -1868,22 +2268,44 @@
         )
         .textContent =
 
-        result.weekCount +
+        Number(
+          result.weekCount || 0
+        )
 
-        " / " +
+        +
 
-        result.maxWeek;
+        " / "
+
+        +
+
+        Number(
+          result.maxWeek || 6
+        );
 
 
       const limitReached =
 
-        result.dayCount >=
-          result.maxDay
+        Number(
+          result.dayCount || 0
+        )
+
+        >=
+
+        Number(
+          result.maxDay || 1
+        )
 
         ||
 
-        result.weekCount >=
-          result.maxWeek;
+        Number(
+          result.weekCount || 0
+        )
+
+        >=
+
+        Number(
+          result.maxWeek || 6
+        );
 
 
       document
@@ -1891,19 +2313,23 @@
           "submitBtn"
         )
         .disabled =
+
         limitReached;
+
 
     }
 
 
 
     /* ========================================
-       確認画面
+       入力確認
     ======================================== */
 
     function openConfirm() {
 
+
       const category =
+
         document
           .getElementById(
             "category"
@@ -1911,6 +2337,7 @@
 
 
       const theme =
+
         document
           .getElementById(
             "theme"
@@ -1918,6 +2345,7 @@
 
 
       const school =
+
         document
           .getElementById(
             "school"
@@ -1927,6 +2355,7 @@
 
 
       const question =
+
         document
           .getElementById(
             "question"
@@ -1935,10 +2364,10 @@
           .trim();
 
 
-
       if (
         !category.value
       ) {
+
 
         showMessage(
 
@@ -1950,15 +2379,17 @@
 
         );
 
+
         return;
 
-      }
 
+      }
 
 
       if (
         !theme.value
       ) {
+
 
         showMessage(
 
@@ -1970,15 +2401,17 @@
 
         );
 
+
         return;
 
-      }
 
+      }
 
 
       if (
         !school
       ) {
+
 
         showMessage(
 
@@ -1990,15 +2423,17 @@
 
         );
 
+
         return;
 
-      }
 
+      }
 
 
       if (
         !question
       ) {
+
 
         showMessage(
 
@@ -2010,7 +2445,9 @@
 
         );
 
+
         return;
+
 
       }
 
@@ -2028,10 +2465,13 @@
         )
         .innerHTML =
 
+
         '<div class="confirm-row">' +
 
           '<span class="confirm-label">' +
+
           '大項目：' +
+
           '</span>' +
 
           escapeHtml(
@@ -2044,7 +2484,9 @@
         '<div class="confirm-row">' +
 
           '<span class="confirm-label">' +
+
           '質問テーマ：' +
+
           '</span>' +
 
           escapeHtml(
@@ -2057,7 +2499,9 @@
         '<div class="confirm-row">' +
 
           '<span class="confirm-label">' +
+
           '高校名：' +
+
           '</span>' +
 
           escapeHtml(
@@ -2070,7 +2514,9 @@
         '<div class="confirm-row">' +
 
           '<span class="confirm-label">' +
+
           '質問内容：' +
+
           '</span><br>' +
 
           escapeHtml(
@@ -2089,11 +2535,13 @@
           "show"
         );
 
+
     }
 
 
 
     function closeConfirm() {
+
 
       document
         .getElementById(
@@ -2104,6 +2552,7 @@
           "show"
         );
 
+
     }
 
 
@@ -2113,6 +2562,28 @@
     ======================================== */
 
     async function sendQuestion() {
+
+
+      if (
+        isSending
+      ) {
+
+        return;
+
+      }
+
+
+      isSending =
+        true;
+
+
+      document
+        .getElementById(
+          "confirmSendBtn"
+        )
+        .disabled =
+        true;
+
 
       closeConfirm();
 
@@ -2129,7 +2600,22 @@
 
       try {
 
+
+        if (
+          !lineIdToken
+        ) {
+
+
+          throw new Error(
+            "LINE認証情報を確認できません。LINEから開き直してください。"
+          );
+
+
+        }
+
+
         const category =
+
           document
             .getElementById(
               "category"
@@ -2137,30 +2623,40 @@
 
 
         const result =
+
           await postToGas({
+
 
             action:
               "submit",
 
+
             idToken:
               lineIdToken,
+
 
             category:
               category.value,
 
+
             categoryLabel:
+
               category.options[
                 category.selectedIndex
               ].text,
 
+
             theme:
+
               document
                 .getElementById(
                   "theme"
                 )
                 .value,
 
+
             school:
+
               document
                 .getElementById(
                   "school"
@@ -2168,13 +2664,16 @@
                 .value
                 .trim(),
 
+
             question:
+
               document
                 .getElementById(
                   "question"
                 )
                 .value
                 .trim()
+
 
           });
 
@@ -2194,14 +2693,6 @@
         );
 
 
-        document
-          .getElementById(
-            "submitBtn"
-          )
-          .disabled =
-          true;
-
-
         showMessage(
 
           "質問を受け付けました",
@@ -2212,9 +2703,13 @@
 
         );
 
+
       }
 
-      catch(error) {
+      catch(
+        error
+      ) {
+
 
         document
           .getElementById(
@@ -2232,13 +2727,34 @@
 
           error.message
           ||
-          String(error),
+          String(
+            error
+          ),
 
           "!"
 
         );
 
+
       }
+
+      finally {
+
+
+        isSending =
+          false;
+
+
+        document
+          .getElementById(
+            "confirmSendBtn"
+          )
+          .disabled =
+          false;
+
+
+      }
+
 
     }
 
@@ -2254,7 +2770,9 @@
       icon
     ) {
 
+
       const iconElement =
+
         document
           .getElementById(
             "messageIcon"
@@ -2269,17 +2787,25 @@
         icon === "!"
       ) {
 
-        iconElement.classList.add(
-          "error-icon"
-        );
+
+        iconElement
+          .classList
+          .add(
+            "error-icon"
+          );
+
 
       }
 
       else {
 
-        iconElement.classList.remove(
-          "error-icon"
-        );
+
+        iconElement
+          .classList
+          .remove(
+            "error-icon"
+          );
+
 
       }
 
@@ -2309,11 +2835,13 @@
           "show"
         );
 
+
     }
 
 
 
     function closeMessage() {
+
 
       document
         .getElementById(
@@ -2323,6 +2851,7 @@
         .remove(
           "show"
         );
+
 
     }
 
@@ -2336,34 +2865,41 @@
       text
     ) {
 
+
       return String(
         text
       )
+
 
       .replace(
         /&/g,
         "&amp;"
       )
 
+
       .replace(
         /</g,
         "&lt;"
       )
+
 
       .replace(
         />/g,
         "&gt;"
       )
 
+
       .replace(
         /"/g,
         "&quot;"
       )
 
+
       .replace(
         /'/g,
         "&#039;"
       );
+
 
     }
 
@@ -2375,7 +2911,9 @@
 
     async function initializeLiff() {
 
+
       try {
+
 
         await liff.init({
 
@@ -2389,6 +2927,7 @@
           !liff.isLoggedIn()
         ) {
 
+
           liff.login({
 
             redirectUri:
@@ -2396,16 +2935,20 @@
 
           });
 
+
           return;
+
 
         }
 
 
         lineProfile =
+
           await liff.getProfile();
 
 
         lineIdToken =
+
           liff.getIDToken();
 
 
@@ -2413,9 +2956,11 @@
           !lineIdToken
         ) {
 
+
           throw new Error(
             "LINE認証情報を取得できませんでした。"
           );
+
 
         }
 
@@ -2426,7 +2971,13 @@
           )
           .innerHTML =
 
-          '<div class="status-icon">✓</div>' +
+
+          '<div class="status-icon">' +
+
+          '✓' +
+
+          '</div>' +
+
 
           '<div class="status-text">' +
 
@@ -2444,13 +2995,17 @@
 
 
         const usage =
+
           await postToGas({
+
 
             action:
               "usage",
 
+
             idToken:
               lineIdToken
+
 
           });
 
@@ -2459,9 +3014,13 @@
           usage
         );
 
+
       }
 
-      catch(error) {
+      catch(
+        error
+      ) {
+
 
         console.error(
           error
@@ -2474,7 +3033,13 @@
           )
           .innerHTML =
 
-          '<div class="status-icon">!</div>' +
+
+          '<div class="status-icon">' +
+
+          '!' +
+
+          '</div>' +
+
 
           '<div class="status-text">' +
 
@@ -2489,13 +3054,17 @@
 
           error.message
           ||
-          String(error),
+          String(
+            error
+          ),
 
           "!"
 
         );
 
+
       }
+
 
     }
 
@@ -2503,12 +3072,10 @@
 
     /* ========================================
        初期化
-
-       大項目がブラウザによって復元されても
-       質問テーマを必ず生成
     ======================================== */
 
     function initializePage() {
+
 
       changeTheme(
         false
@@ -2516,6 +3083,7 @@
 
 
       initializeLiff();
+
 
     }
 
@@ -2530,10 +3098,6 @@
     );
 
 
-    /*
-      iPhone・Safari・LINE内ブラウザで
-      ページ復帰した場合にも再生成
-    */
 
     window.addEventListener(
 
@@ -2541,26 +3105,27 @@
 
       function() {
 
+
         changeTheme(
           false
         );
+
 
       }
 
     );
 
 
-    /*
-      ブラウザがフォーム値を遅れて復元する場合への対策
-    */
 
     setTimeout(
 
       function() {
 
+
         changeTheme(
           false
         );
+
 
       },
 
@@ -2569,19 +3134,23 @@
     );
 
 
+
     setTimeout(
 
       function() {
 
+
         changeTheme(
           false
         );
+
 
       },
 
       1500
 
     );
+
 
   </script>
 
