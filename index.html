@@ -202,7 +202,133 @@
       margin-bottom:14px;
     }
 
+/* ========================================
+   Stripe決済から戻った時の確認
+======================================== */
 
+function getStripeReturnParams() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  let stripe =
+    params.get("stripe");
+
+  let sessionId =
+    params.get("session_id");
+
+
+  // LIFF URL経由の場合
+  if (!stripe) {
+
+    const liffState =
+      params.get("liff.state");
+
+    if (liffState) {
+
+      const decoded =
+        decodeURIComponent(liffState);
+
+      const stateParams =
+        new URLSearchParams(
+          decoded.startsWith("?")
+            ? decoded.substring(1)
+            : decoded
+        );
+
+      stripe =
+        stateParams.get("stripe");
+
+      sessionId =
+        stateParams.get("session_id");
+    }
+  }
+
+
+  return {
+    stripe: stripe,
+    sessionId: sessionId
+  };
+}
+
+
+async function confirmStripeReturnIfNeeded() {
+
+  const payment =
+    getStripeReturnParams();
+
+
+  if (
+    payment.stripe === "cancel"
+  ) {
+
+    history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+    showMessage(
+      "決済をキャンセルしました",
+      "質問回数は追加されていません。",
+      "!"
+    );
+
+    return;
+  }
+
+
+  if (
+    payment.stripe !== "success"
+    ||
+    !payment.sessionId
+  ) {
+
+    return;
+  }
+
+
+  const result =
+    await postToGas({
+
+      action:
+        "confirmCheckout",
+
+      idToken:
+        lineIdToken,
+
+      sessionId:
+        payment.sessionId
+
+    });
+
+
+  history.replaceState(
+    {},
+    document.title,
+    window.location.pathname
+  );
+
+
+  showMessage(
+
+    "決済が完了しました",
+
+    "質問回数を追加しました。現在の残り回数は "
+      +
+      Number(
+        result.remainingCount || 0
+      )
+      +
+      "回です。",
+
+    "✓"
+
+  );
+
+}
     /* ==============================
        LINE認証
     ============================== */
@@ -1330,21 +1456,21 @@
 
           <li>
 
-            1日1問まで
+            無料お試しはお一人様1回限り
 
           </li>
 
 
           <li>
 
-            1週間6問まで
+            質問1回につき残り回数を1回使用します
 
           </li>
 
 
           <li>
 
-            1回につき高校1校まで
+            1回の質問につき1校まで
 
           </li>
 
@@ -1427,7 +1553,7 @@
 
       <div class="modal-text">
 
-        送信すると、本日の1問としてカウントされます。
+        送信すると、残り質問回数を1回使用します。
 
       </div>
 
@@ -2993,7 +3119,7 @@
 
         }
 
-
+        await confirmStripeReturnIfNeeded();
         document
           .getElementById(
             "loginStatus"
