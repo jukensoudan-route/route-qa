@@ -2223,101 +2223,78 @@
        利用回数
     ======================================== */
 
-    function updateUsage(
-      result
-    ) {
+   <div class="usage-title">
+  Q&A利用状況
+</div>
 
+<div class="usage-grid">
 
-      if (
-        !result
-      ) {
+  <div class="usage-box">
+    <div class="usage-label">
+      利用プラン
+    </div>
 
-        return;
+    <div
+      class="usage-value"
+      id="planUsage"
+      style="font-size:24px;"
+    >
+      -
+    </div>
+  </div>
 
-      }
+  <div class="usage-box">
+    <div class="usage-label">
+      残り質問回数
+    </div>
 
+    <div
+      class="usage-value"
+      id="remainingUsage"
+    >
+      -
+    </div>
+  </div>
 
-      usageData =
-        result;
+</div>
 
+<div class="usage-note">
+  1回の質問送信につき、残り回数を1回使用します
+</div>
 
-      document
-        .getElementById(
-          "dayUsage"
-        )
-        .textContent =
+<div
+  id="ticketArea"
+  style="display:none; margin-top:22px;"
+>
 
-        Number(
-          result.dayCount || 0
-        )
+  <div
+    style="
+      font-size:25px;
+      font-weight:900;
+      margin-bottom:12px;
+    "
+  >
+    質問回数を追加する
+  </div>
 
-        +
+  <button
+    type="button"
+    class="submit"
+    style="margin-bottom:12px;"
+    onclick="buyTicket('ticket5')"
+  >
+    5回券　1,000円
+  </button>
 
-        " / "
+  <button
+    type="button"
+    class="submit"
+    onclick="buyTicket('ticket20')"
+  >
+    20回券　3,000円
+  </button>
 
-        +
-
-        Number(
-          result.maxDay || 1
-        );
-
-
-      document
-        .getElementById(
-          "weekUsage"
-        )
-        .textContent =
-
-        Number(
-          result.weekCount || 0
-        )
-
-        +
-
-        " / "
-
-        +
-
-        Number(
-          result.maxWeek || 6
-        );
-
-
-      const limitReached =
-
-        Number(
-          result.dayCount || 0
-        )
-
-        >=
-
-        Number(
-          result.maxDay || 1
-        )
-
-        ||
-
-        Number(
-          result.weekCount || 0
-        )
-
-        >=
-
-        Number(
-          result.maxWeek || 6
-        );
-
-
-      document
-        .getElementById(
-          "submitBtn"
-        )
-        .disabled =
-
-        limitReached;
-
-
-    }
+</div>
 
 
 
