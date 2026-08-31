@@ -2302,6 +2302,58 @@
        入力確認
     ======================================== */
 
+    async function buyTicket(ticketCode) {
+
+  try {
+
+    if (!lineIdToken) {
+      throw new Error(
+        "LINE認証情報を取得できませんでした。"
+      );
+    }
+
+    const result =
+      await postToGas({
+
+        action:
+          "createCheckout",
+
+        idToken:
+          lineIdToken,
+
+        ticketCode:
+          ticketCode
+
+      });
+
+
+    if (
+      !result ||
+      !result.checkoutUrl
+    ) {
+
+      throw new Error(
+        "決済画面を開けませんでした。"
+      );
+    }
+
+
+    window.location.href =
+      result.checkoutUrl;
+
+  }
+
+  catch(error) {
+
+    showMessage(
+      "決済画面を開けませんでした",
+      error.message || String(error),
+      "!"
+    );
+
+  }
+
+}
     function openConfirm() {
 
 
