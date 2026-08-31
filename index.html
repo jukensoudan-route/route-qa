@@ -740,13 +740,18 @@
         document.body.appendChild(form);
         form.submit();
 
+const timeoutMs =
+  data.action === "submit"
+    ? 90000
+    : 30000;
+        
         setTimeout(function() {
           if (pendingRequests[requestId]) {
             delete pendingRequests[requestId];
             reject(new Error("サーバーからの応答がありませんでした。"));
           }
           if (form.parentNode) form.remove();
-        }, 25000);
+        }, timeoutMs);
       });
     }
 
