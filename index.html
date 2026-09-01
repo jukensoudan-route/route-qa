@@ -832,8 +832,12 @@ const timeoutMs =
       if (isSending) return;
       isSending = true;
       document.getElementById("confirmSendBtn").disabled = true;
-      closeConfirm();
-      setLoading(true,"質問を送信しています","そのまま少々お待ちください。");
+closeConfirm();
+setLoading(
+  true,
+  "質問を受け付けています",
+  "ご質問内容の登録処理を行っています。\n20〜30秒ほどかかる場合があります。そのままお待ちください。"
+);
 
       try {
         if (!lineAccessToken) throw new Error("LINE認証情報を確認できません。LINEから開き直してください。");
