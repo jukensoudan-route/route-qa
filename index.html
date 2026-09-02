@@ -96,6 +96,17 @@
       border-color:var(--blue); box-shadow:0 0 0 4px rgba(38,126,230,.10);
     }
     ::placeholder { color:#A1AAB8; font-size:22px; }
+
+    .question-mode-wrap { margin:10px 0 14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .question-mode-btn { flex:1 1 180px; border:1px solid #CFE1F8; background:#fff; color:#267EE6; border-radius:12px; padding:12px 14px; font-size:16px; font-weight:800; cursor:pointer; }
+    .question-mode-btn.active { background:#267EE6; color:#fff; border-color:#267EE6; }
+    .question-select-panel { margin-top:10px; padding:14px; border:1px solid #D8E7FB; border-radius:14px; background:#F8FBFF; }
+    .question-select-title { color:#267EE6; font-size:16px; font-weight:900; margin-bottom:10px; }
+    .question-option-list { display:grid; grid-template-columns:1fr; gap:8px; }
+    .question-option-btn { text-align:left; width:100%; border:1px solid #D7E5F8; background:#fff; color:#344054; border-radius:11px; padding:11px 12px; font-size:15px; line-height:1.5; font-weight:700; cursor:pointer; }
+    .question-option-btn.selected { border-color:#267EE6; background:#EEF5FF; color:#1768C9; }
+    .question-option-help,.manual-question-note { margin-top:9px; color:#667085; font-size:14px; line-height:1.55; }
+
     .question-guide {
       margin-top:13px;
       padding:16px;
@@ -337,28 +348,38 @@
 
       <div class="field">
         <div class="field-label"><span class="num">4</span><span class="icon">💬</span><span>質問内容</span></div>
-        <textarea id="question" placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"></textarea>
+
+        <div class="question-mode-wrap">
+          <button type="button" id="questionModeSelect" class="question-mode-btn active" onclick="setQuestionInputMode('select')">選択項目から質問する</button>
+          <button type="button" id="questionModeManual" class="question-mode-btn" onclick="setQuestionInputMode('manual')">手書きで質問する</button>
+        </div>
+
+        <div id="questionSelectPanel" class="question-select-panel">
+          <div class="question-select-title">聞きたい内容を選んでください</div>
+          <div id="questionOptionList" class="question-option-list">
+            <div class="question-option-help">先に「相談したい内容」と「質問テーマ」を選ぶと、質問候補が表示されます。</div>
+          </div>
+          <div class="question-option-help">選んだ質問は下の入力欄に自動で入ります。必要なら文章を少し修正できます。</div>
+        </div>
+
+        <div id="manualQuestionNote" class="manual-question-note" style="display:none;">聞きたいことを1つに絞って、自由に入力してください。</div>
+
+        <textarea id="question" placeholder="質問候補を選ぶか、手書きで質問を入力してください。"></textarea>
 
         <div class="question-guide">
           <div class="question-guide-title">質問は1回につき1つまでです</div>
           <div>複数の内容をまとめて質問することはできません。同じテーマについて、理由・内訳・条件などを詳しく聞くことは可能です。</div>
-
           <div class="question-guide-example">
             <span class="question-guide-ok">○ 受付できる例</span><br>
             ・A高校では英検はどのように扱われますか？<br>
             ・B高校では授業料以外で初年度いくらかかりますか？内訳も教えてください。<br>
-            ・内申160点ですが、C高校の合格可能性はどの程度ですか？
+            ・C高校の推薦入試の出願条件を教えてください。
           </div>
-
           <div class="question-guide-example">
             <span class="question-guide-ng">× 複数質問になる例</span><br>
             ・A高校の英検優遇と必要な内申点を教えてください。<br>
             ・B高校の学費と大学進学実績を教えてください。<br>
-            ・C高校に届きますか？難しい場合は第2志望校も教えてください。
-          </div>
-
-          <div class="question-guide-example">
-            複数の内容がある場合は、最も知りたいことを1つに絞り、その他は次のQ&Aでご質問ください。
+            ・C高校の校風と部活動の実績を教えてください。
           </div>
         </div>
       </div>
@@ -484,6 +505,144 @@
     let validatedQuestionToken = "";
     let validatedQuestionSignature = "";
     const pendingRequests = {};
+
+
+    const questionTemplates = {
+      school:{
+        "学校の特徴・強み":["{school}の特徴や強みを教えてください。"],
+        "コース・学科":["{school}にはどのようなコース・学科がありますか？"],
+        "校風・学校生活":["{school}の校風や学校生活の特徴を教えてください。"],
+        "部活動":["{school}の部活動の特徴を教えてください。","{school}の部活動の最近の実績を教えてください。","{district}で希望する競技の強豪校を教えてください。"],
+        "通学・立地":["{school}への通学や立地について教えてください。"],
+        "学校設備":["{school}の学校設備について教えてください。"],
+        "学校行事":["{school}の主な学校行事を教えてください。"],
+        "制服・学校生活費":["{school}の制服や学校生活で必要になる費用を教えてください。"],
+        "学校同士の客観比較":["A高校とB高校の特徴を客観的に比較してください。"]
+      },
+      score:{
+        "内申点":["兵庫県公立高校入試の内申点の仕組みを教えてください。","{school}の受験で内申点はどのように扱われますか？"],
+        "実力テスト":["高校受験で実力テストはどのように見られますか？"],
+        "定期テスト":["高校受験で定期テストの結果はどのように関係しますか？"],
+        "模試・偏差値":["{school}の偏差値や模試での目安を教えてください。"],
+        "合格ライン":["{school}の合格ラインの目安を教えてください。"],
+        "当日点の目安":["{school}の入試当日点の目安を教えてください。"],
+        "内申点と当日点の仕組み":["兵庫県公立高校入試の内申点と当日点の計算方法を教えてください。"],
+        "加点・減点の仕組み":["兵庫県高校入試の加点・減点の仕組みを教えてください。"]
+      },
+      exam:{
+        "一般入試":["{school}の一般入試について教えてください。"],
+        "推薦入試":["{school}の推薦入試について教えてください。"],
+        "特色選抜":["{school}の特色選抜について教えてください。"],
+        "専願・併願":["{school}の専願・併願の扱いを教えてください。"],
+        "複数志願選抜":["兵庫県公立高校の複数志願選抜について教えてください。"],
+        "学区・出願資格":["{school}の学区と出願資格を教えてください。"],
+        "試験科目・配点":["{school}の試験科目と配点を教えてください。"],
+        "面接":["{school}の入試で面接はありますか？"],
+        "作文・小論文":["{school}の入試で作文・小論文はありますか？"],
+        "私立高校の入試方式":["{school}の入試方式を教えてください。"]
+      },
+      qualification:{
+        "英検":["{school}では英検はどのように扱われますか？"],
+        "漢検・数検":["{school}では漢検・数検はどのように扱われますか？"],
+        "加点":["{school}の入試で資格による加点はありますか？"],
+        "得点換算":["{school}の入試で資格による得点換算はありますか？"],
+        "試験免除":["{school}の入試で資格による試験免除はありますか？"],
+        "出願条件":["{school}の出願条件を教えてください。"],
+        "推薦条件":["{school}の推薦条件を教えてください。"],
+        "資格の活用方法":["{school}の入試で資格をどのように活用できますか？"]
+      },
+      university:{
+        "国公立大学":["{school}の国公立大学への進学実績を教えてください。"],
+        "関関同立":["{school}の関関同立への進学実績を教えてください。"],
+        "産近甲龍":["{school}の産近甲龍への進学実績を教えてください。"],
+        "その他大学の進学実績":["{school}の大学進学実績を教えてください。"],
+        "指定校推薦":["{school}の指定校推薦について教えてください。"],
+        "内部進学":["{school}の内部進学制度について教えてください。"],
+        "大学進学率":["{school}の大学進学率を教えてください。"],
+        "大学合格実績":["{school}の最新の大学合格実績を教えてください。"],
+        "進路指導":["{school}の進路指導の特徴を教えてください。"],
+        "大学附属・系列校":["{school}の大学附属・系列校としての特徴を教えてください。"]
+      },
+      cost:{
+        "授業料":["{school}の授業料はいくらですか？"],
+        "入学金":["{school}の入学金はいくらですか？"],
+        "初年度費用":["{school}の初年度に必要な費用を教えてください。"],
+        "授業料以外の諸経費":["{school}で授業料以外に必要な諸経費を教えてください。"],
+        "制服・教材費":["{school}の制服・教材費を教えてください。"],
+        "ICT端末":["{school}のICT端末に必要な費用を教えてください。"],
+        "修学旅行・行事費":["{school}の修学旅行・行事費について教えてください。"],
+        "部活動費":["{school}の部活動に必要な費用について教えてください。"],
+        "授業料無償化・就学支援金":["{school}で利用できる授業料無償化・就学支援金について教えてください。"],
+        "公立・私立の費用比較":["公立高校と私立高校の費用を比較してください。"]
+      },
+      schedule:{
+        "出願日":["{school}の出願日はいつですか？"],
+        "入試日":["{school}の入試日はいつですか？"],
+        "合格発表":["{school}の合格発表日はいつですか？"],
+        "学校説明会":["{school}の今後の学校説明会の日程を教えてください。","{district}で今後学校説明会がある高校を教えてください。"],
+        "オープンスクール":["{school}の今後のオープンスクールの日程を教えてください。","{district}で今後オープンスクール・学校見学がある高校を教えてください。"],
+        "進路希望調査":["中学校の進路希望調査はいつ頃行われますか？"],
+        "三者懇談":["高校受験の三者懇談はいつ頃行われますか？"],
+        "私立受験校を決める時期":["私立高校の受験校はいつ頃決めますか？"],
+        "公立受験校を決める時期":["公立高校の受験校はいつ頃決めますか？"],
+        "志望校変更の時期":["志望校はいつ頃まで変更できますか？"]
+      }
+    };
+
+    function setQuestionInputMode(mode) {
+      const selectMode = mode === 'select';
+      document.getElementById('questionModeSelect').classList.toggle('active', selectMode);
+      document.getElementById('questionModeManual').classList.toggle('active', !selectMode);
+      document.getElementById('questionSelectPanel').style.display = selectMode ? 'block' : 'none';
+      document.getElementById('manualQuestionNote').style.display = selectMode ? 'none' : 'block';
+      if (selectMode) renderQuestionOptions();
+      else document.getElementById('question').focus();
+    }
+
+    function getQuestionTemplateContext() {
+      const district = document.getElementById('district');
+      const school = document.getElementById('school');
+      return {
+        district: district.value ? district.options[district.selectedIndex].text : '選択した学区',
+        school: school.value || '選択した高校'
+      };
+    }
+
+    function buildQuestionFromTemplate(template) {
+      const context = getQuestionTemplateContext();
+      return String(template || '').replace(/\{school\}/g, context.school).replace(/\{district\}/g, context.district);
+    }
+
+    function chooseQuestionTemplate(button, template) {
+      document.querySelectorAll('.question-option-btn').forEach(function(el) { el.classList.remove('selected'); });
+      if (button) button.classList.add('selected');
+      document.getElementById('question').value = buildQuestionFromTemplate(template);
+      clearApprovedValidation_();
+    }
+
+    function renderQuestionOptions() {
+      const category = document.getElementById('category').value;
+      const theme = document.getElementById('theme').value;
+      const list = document.getElementById('questionOptionList');
+      if (!category || !theme) {
+        list.innerHTML = '<div class="question-option-help">先に「相談したい内容」と「質問テーマ」を選ぶと、質問候補が表示されます。</div>';
+        return;
+      }
+      const templates = (questionTemplates[category] && questionTemplates[category][theme]) || [];
+      if (!templates.length) {
+        list.innerHTML = '<div class="question-option-help">このテーマは手書きで質問を入力してください。</div>';
+        return;
+      }
+      list.innerHTML = '';
+      templates.forEach(function(template) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'question-option-btn';
+        btn.textContent = buildQuestionFromTemplate(template);
+        btn.addEventListener('click', function() { chooseQuestionTemplate(btn, template); });
+        list.appendChild(btn);
+      });
+    }
 
     const schoolOptions = {
       district1: [
@@ -1596,6 +1755,14 @@
         showMessage("接続エラー",error.message || String(error),"!");
       }
     }
+
+
+    document.addEventListener("change", function(event) {
+      const id = event && event.target && event.target.id;
+      if (id === "category" || id === "theme" || id === "district" || id === "school") {
+        renderQuestionOptions();
+      }
+    });
 
     window.addEventListener("load", function() {
       changeTheme(false);
