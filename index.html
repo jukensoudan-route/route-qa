@@ -7,8 +7,9 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     #loadingText {
-  white-space: pre-line;
-}
+      white-space: pre-line;
+    }
+
     :root {
       --blue:#267EE6; --blue-dark:#1768C9; --blue-light:#EDF5FF;
       --blue-pale:#F7FBFF; --bg:#F3F7FC; --text:#172231;
@@ -246,17 +247,6 @@
           <span class="num">3</span>
           <span class="icon">🏫</span>
           <span>高校を選択（任意）</span>
-                  <div
-          style="
-            margin-top:10px;
-            color:#637083;
-            font-size:17px;
-            line-height:1.6;
-            font-weight:650;
-          "
-        >
-          ※必要がなければ未選択も可能。
-        </div>
         </div>
 
         <select id="district" onchange="changeDistrict()">
@@ -266,7 +256,7 @@
           <option value="district3">第3学区</option>
           <option value="district4">第4学区</option>
           <option value="district5">第5学区</option>
-          <option value="private">私立</option>
+          <option value="private">私学</option>
         </select>
 
         <button
@@ -292,7 +282,17 @@
           <option value="">先に学区を選択してください</option>
         </select>
 
-
+        <div
+          style="
+            margin-top:10px;
+            color:#637083;
+            font-size:17px;
+            line-height:1.6;
+            font-weight:650;
+          "
+        >
+          ※必要がなければ未選択でも構いません。
+        </div>
       </div>
 
       <div class="field">
@@ -308,6 +308,7 @@
           <li>1回につき高校1校までです</li>
           <li>1回につき質問テーマ1つまでです</li>
           <li>各教科の具体的な勉強方法や問題の解き方は対象外です</li>
+          <li>送信前に質問内容を確認し、対象外・不明確・不適切な内容は質問回数を使用せず差し戻します</li>
         </ul>
       </div>
     </section>
@@ -412,6 +413,9 @@
     let lineAccessToken = null;
     let usageData = null;
     let isSending = false;
+    let isValidatingQuestion = false;
+    let validatedQuestionToken = "";
+    let validatedQuestionSignature = "";
     const pendingRequests = {};
 
     const schoolOptions = {
@@ -743,11 +747,11 @@
         document.body.appendChild(form);
         form.submit();
 
-const timeoutMs =
-  data.action === "submit"
-    ? 90000
-    : 30000;
-        
+        const timeoutMs =
+          data.action === "submit"
+            ? 120000
+            : 60000;
+
         setTimeout(function() {
           if (pendingRequests[requestId]) {
             delete pendingRequests[requestId];
@@ -759,15 +763,107 @@ const timeoutMs =
     }
 
     window.addEventListener("message", function(event) {
-      const message = event.data;
-      if (!message || message.source !== "route-qa-gas") return;
-      const data = message.payload;
-      if (!data || !data.requestId) return;
-      const pending = pendingRequests[data.requestId];
-      if (!pending) return;
-      delete pendingRequests[data.requestId];
-      if (data.ok) pending.resolve(data.result);
-      else pending.reject(new Error(data.message || "処理に失敗しました。"));
+
+      let message =
+        event.data;
+
+
+      /*
+       * Apps Script側から
+       * オブジェクト / JSON文字列のどちらで届いても受け取る。
+       */
+      if (
+        typeof message === "string"
+      ) {
+
+        try {
+          message =
+            JSON.parse(
+              message
+            );
+        }
+        catch(error) {
+          return;
+        }
+      }
+
+
+      if (
+        !message ||
+        message.source !== "route-qa-gas"
+      ) {
+        return;
+      }
+
+
+      let data =
+        message.payload;
+
+
+      /*
+       * 念のためpayloadも文字列ならJSON化
+       */
+      if (
+        typeof data === "string"
+      ) {
+
+        try {
+          data =
+            JSON.parse(
+              data
+            );
+        }
+        catch(error) {
+          return;
+        }
+      }
+
+
+      if (
+        !data ||
+        !data.requestId
+      ) {
+        return;
+      }
+
+
+      const pending =
+        pendingRequests[
+          data.requestId
+        ];
+
+
+      /*
+       * Apps Script側は複数回postMessageするので、
+       * 2回目以降はここで無視される。
+       */
+      if (!pending) {
+        return;
+      }
+
+
+      delete pendingRequests[
+        data.requestId
+      ];
+
+
+      if (data.ok) {
+
+        pending.resolve(
+          data.result
+        );
+
+      }
+      else {
+
+        pending.reject(
+          new Error(
+            data.message ||
+            "処理に失敗しました。"
+          )
+        );
+
+      }
     });
 
     function updateUsage(result) {
@@ -780,18 +876,22 @@ const timeoutMs =
       document.getElementById("ticketArea").style.display = remaining <= 0 ? "block" : "none";
     }
 
-function setLoading(show, title, text) {
-  document.getElementById("loadingTitle").textContent =
-    title || "処理しています";
+    function setLoading(show, title, text) {
+      document.getElementById("loadingTitle").textContent =
+        title || "処理しています";
 
-  const loadingText = document.getElementById("loadingText");
-  loadingText.style.whiteSpace = "pre-line";
-  loadingText.textContent =
-    text || "そのまま少々お待ちください。";
+      const loadingText =
+        document.getElementById("loadingText");
 
-  document.getElementById("loadingModal")
-    .classList.toggle("show", !!show);
-}
+      loadingText.style.whiteSpace =
+        "pre-line";
+
+      loadingText.textContent =
+        text || "そのまま少々お待ちください。";
+
+      document.getElementById("loadingModal")
+        .classList.toggle("show", !!show);
+    }
 
     function escapeHtml(text) {
       return String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
@@ -810,74 +910,403 @@ function setLoading(show, title, text) {
       document.getElementById("messageModal").classList.remove("show");
     }
 
-    function openConfirm() {
-      if (!usageData || !usageData.canSubmit) {
-        showMessage("質問回数がありません","回数券をご購入ください。","!");
+    function getCurrentQuestionData() {
+      const category =
+        document.getElementById("category");
+
+      return {
+        category:
+          category.value,
+
+        categoryLabel:
+          category.options[
+            category.selectedIndex
+          ].text,
+
+        theme:
+          document.getElementById("theme").value,
+
+        school:
+          document.getElementById("school").value.trim(),
+
+        question:
+          document.getElementById("question").value.trim()
+      };
+    }
+
+
+    function getQuestionSignature(data) {
+      return JSON.stringify({
+        category:
+          data.category || "",
+
+        categoryLabel:
+          data.categoryLabel || "",
+
+        theme:
+          data.theme || "",
+
+        school:
+          data.school || "",
+
+        question:
+          data.question || ""
+      });
+    }
+
+
+    async function openConfirm() {
+
+      if (
+        !usageData ||
+        !usageData.canSubmit
+      ) {
+        showMessage(
+          "質問回数がありません",
+          "回数券をご購入ください。",
+          "!"
+        );
         return;
       }
 
-      const category = document.getElementById("category");
-      const theme = document.getElementById("theme");
-      const school = document.getElementById("school").value.trim();
-      const question = document.getElementById("question").value.trim();
+      if (isValidatingQuestion) {
+        return;
+      }
 
-      if (!category.value) return showMessage("ご確認ください","相談したい内容を選択してください。","!");
-      if (!theme.value) return showMessage("ご確認ください","質問テーマを選択してください。","!");
-      if (!question) return showMessage("ご確認ください","質問内容を入力してください。","!");
+      const data =
+        getCurrentQuestionData();
 
-      const categoryText = category.options[category.selectedIndex].text;
-      document.getElementById("confirmBox").innerHTML =
-        '<div class="confirm-row"><span class="confirm-label">大項目：</span>' + escapeHtml(categoryText) + '</div>' +
-        '<div class="confirm-row"><span class="confirm-label">質問テーマ：</span>' + escapeHtml(theme.value) + '</div>' +
-        '<div class="confirm-row"><span class="confirm-label">高校：</span>' + escapeHtml(school || "未選択") + '</div>' +
-        '<div class="confirm-row"><span class="confirm-label">質問内容：</span><br>' + escapeHtml(question) + '</div>';
-      document.getElementById("confirmModal").classList.add("show");
+      if (!data.category) {
+        return showMessage(
+          "ご確認ください",
+          "相談したい内容を選択してください。",
+          "!"
+        );
+      }
+
+      if (!data.theme) {
+        return showMessage(
+          "ご確認ください",
+          "質問テーマを選択してください。",
+          "!"
+        );
+      }
+
+      if (!data.question) {
+        return showMessage(
+          "ご確認ください",
+          "質問内容を入力してください。",
+          "!"
+        );
+      }
+
+      if (!lineAccessToken) {
+        return showMessage(
+          "接続をご確認ください",
+          "LINE認証情報を確認できません。LINEから開き直してください。",
+          "!"
+        );
+      }
+
+
+      isValidatingQuestion = true;
+      validatedQuestionToken = "";
+      validatedQuestionSignature = "";
+      document.getElementById("submitBtn").disabled = true;
+
+      setLoading(
+        true,
+        "質問内容を確認しています",
+        "ROUTEでお答えできる内容か、入力内容を確認しています。\nこの確認では質問回数は使用しません。"
+      );
+
+
+      try {
+
+        const result =
+          await postToGas({
+            action:
+              "validateQuestion",
+
+            idToken:
+              lineAccessToken,
+
+            category:
+              data.category,
+
+            categoryLabel:
+              data.categoryLabel,
+
+            theme:
+              data.theme,
+
+            school:
+              data.school,
+
+            question:
+              data.question
+          });
+
+
+        setLoading(false);
+
+
+        if (
+          !result ||
+          result.allowed !== true ||
+          !result.validationToken
+        ) {
+
+          const title =
+            result &&
+            result.title
+              ? result.title
+              : "質問内容をご確認ください";
+
+          let message =
+            result &&
+            result.message
+              ? result.message
+              : "この内容では質問を受け付けできません。内容を修正してください。";
+
+          if (
+            result &&
+            result.suggestion
+          ) {
+            message +=
+              "\n\n修正例：\n" +
+              result.suggestion;
+          }
+
+          showMessage(
+            title,
+            message,
+            "!"
+          );
+
+          return;
+        }
+
+
+        validatedQuestionToken =
+          result.validationToken;
+
+        validatedQuestionSignature =
+          getQuestionSignature(
+            data
+          );
+
+
+        document.getElementById("confirmBox").innerHTML =
+          '<div class="confirm-row"><span class="confirm-label">大項目：</span>' +
+          escapeHtml(
+            data.categoryLabel
+          ) +
+          '</div>' +
+          '<div class="confirm-row"><span class="confirm-label">質問テーマ：</span>' +
+          escapeHtml(
+            data.theme
+          ) +
+          '</div>' +
+          '<div class="confirm-row"><span class="confirm-label">高校：</span>' +
+          escapeHtml(
+            data.school || "未選択"
+          ) +
+          '</div>' +
+          '<div class="confirm-row"><span class="confirm-label">質問内容：</span><br>' +
+          escapeHtml(
+            data.question
+          ) +
+          '</div>';
+
+
+        document
+          .getElementById("confirmModal")
+          .classList
+          .add("show");
+
+      }
+      catch(error) {
+
+        setLoading(false);
+
+        validatedQuestionToken = "";
+        validatedQuestionSignature = "";
+
+        showMessage(
+          "質問内容を確認できませんでした",
+          "確認処理でエラーが発生しました。質問回数は使用されていません。時間をおいてもう一度お試しください。",
+          "!"
+        );
+
+        console.error(
+          error
+        );
+
+      }
+      finally {
+
+        isValidatingQuestion = false;
+
+        document.getElementById("submitBtn").disabled =
+          !usageData ||
+          !usageData.canSubmit;
+      }
     }
+
 
     function closeConfirm() {
       document.getElementById("confirmModal").classList.remove("show");
     }
 
     async function sendQuestion() {
-      if (isSending) return;
-      isSending = true;
-      document.getElementById("confirmSendBtn").disabled = true;
-closeConfirm();
 
-setLoading(
-  true,
-  "質問を受け付けています",
-  "ご質問内容の登録処理を行っています。\n20〜30秒ほどかかる場合があります。そのままお待ちください。"
-);
+      if (isSending) {
+        return;
+      }
+
+
+      const data =
+        getCurrentQuestionData();
+
+      const currentSignature =
+        getQuestionSignature(
+          data
+        );
+
+
+      if (
+        !validatedQuestionToken ||
+        validatedQuestionSignature !==
+          currentSignature
+      ) {
+
+        closeConfirm();
+
+        validatedQuestionToken = "";
+        validatedQuestionSignature = "";
+
+        showMessage(
+          "もう一度内容をご確認ください",
+          "質問内容が変更されたか、事前確認の有効期限が切れています。もう一度「この内容で質問する」を押してください。",
+          "!"
+        );
+
+        return;
+      }
+
+
+      isSending = true;
+
+      document
+        .getElementById("confirmSendBtn")
+        .disabled = true;
+
+      closeConfirm();
+
+
+      setLoading(
+        true,
+        "質問を受け付けています",
+        "ご質問内容の登録処理を行っています。\n20〜30秒ほどかかる場合があります。そのままお待ちください。"
+      );
+
 
       try {
-        if (!lineAccessToken) throw new Error("LINE認証情報を確認できません。LINEから開き直してください。");
-        const category = document.getElementById("category");
-        const result = await postToGas({
-          action:"submit",
-          idToken:lineAccessToken,
-          category:category.value,
-          categoryLabel:category.options[category.selectedIndex].text,
-          theme:document.getElementById("theme").value,
-          school:document.getElementById("school").value.trim(),
-          question:document.getElementById("question").value.trim()
-        });
 
-        updateUsage(result);
-        document.getElementById("category").value = "";
-        changeTheme(true);
-        document.getElementById("district").value = "";
+        if (!lineAccessToken) {
+          throw new Error(
+            "LINE認証情報を確認できません。LINEから開き直してください。"
+          );
+        }
+
+
+        const result =
+          await postToGas({
+            action:
+              "submit",
+
+            idToken:
+              lineAccessToken,
+
+            category:
+              data.category,
+
+            categoryLabel:
+              data.categoryLabel,
+
+            theme:
+              data.theme,
+
+            school:
+              data.school,
+
+            question:
+              data.question,
+
+            validationToken:
+              validatedQuestionToken
+          });
+
+
+        validatedQuestionToken = "";
+        validatedQuestionSignature = "";
+
+
+        updateUsage(
+          result
+        );
+
+        document.getElementById("category").value =
+          "";
+
+        changeTheme(
+          true
+        );
+
+        document.getElementById("district").value =
+          "";
+
         changeDistrict();
-        document.getElementById("question").value = "";
-        showMessage("質問を受け付けました","送信が完了しました。ROUTEで内容を確認後、LINEで回答します。","✓");
-      } catch(error) {
-        showMessage("送信できませんでした",error.message || String(error),"!");
-      } finally {
-        setLoading(false);
+
+        document.getElementById("question").value =
+          "";
+
+
+        showMessage(
+          "質問を受け付けました",
+          "送信が完了しました。ROUTEで内容を確認後、LINEで回答します。",
+          "✓"
+        );
+
+      }
+      catch(error) {
+
+        validatedQuestionToken = "";
+        validatedQuestionSignature = "";
+
+        showMessage(
+          "送信できませんでした",
+          error.message ||
+          String(error),
+          "!"
+        );
+
+      }
+      finally {
+
+        setLoading(
+          false
+        );
+
         isSending = false;
-        document.getElementById("confirmSendBtn").disabled = false;
+
+        document
+          .getElementById("confirmSendBtn")
+          .disabled = false;
       }
     }
+
 
     async function buyTicket(ticketCode) {
       try {
