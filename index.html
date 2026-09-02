@@ -6,6 +6,9 @@
   <title>ROUTE 受験Q&A</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
+    #loadingText {
+  white-space: pre-line;
+}
     :root {
       --blue:#267EE6; --blue-dark:#1768C9; --blue-light:#EDF5FF;
       --blue-pale:#F7FBFF; --bg:#F3F7FC; --text:#172231;
@@ -833,10 +836,11 @@ const timeoutMs =
       isSending = true;
       document.getElementById("confirmSendBtn").disabled = true;
 closeConfirm();
+
 setLoading(
   true,
   "質問を受け付けています",
-  "ご質問内容の登録処理を行っています。<br>20〜30秒ほどかかる場合があります。そのままお待ちください。"
+  "ご質問内容の登録処理を行っています。\n20〜30秒ほどかかる場合があります。そのままお待ちください。"
 );
 
       try {
