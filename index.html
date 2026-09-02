@@ -100,6 +100,34 @@
 .question-option-btn.selected { border-color:#267EE6; background:#EEF5FF; color:#1768C9; }
     .question-option-help,.manual-question-note { margin-top:9px; color:#667085; font-size:14px; line-height:1.55; }
 
+
+    .question-input-mode {
+      display:flex;
+      gap:10px;
+      margin:10px 0 12px;
+      flex-wrap:wrap;
+    }
+    .question-input-mode button {
+      flex:1 1 160px;
+      border:1px solid #CFE1F8;
+      background:#FFFFFF;
+      color:#267EE6;
+      border-radius:12px;
+      padding:11px 12px;
+      font-size:15px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .question-input-mode button.active {
+      background:#267EE6;
+      color:#FFFFFF;
+      border-color:#267EE6;
+    }
+    #questionManual {
+      display:none;
+      margin-top:0;
+    }
+
     .question-guide {
       margin-top:13px;
       padding:16px;
@@ -342,12 +370,23 @@
       <div class="field">
         <div class="field-label"><span class="num">4</span><span class="icon">💬</span><span>質問内容</span></div>
 
+        <div class="question-input-mode">
+          <button type="button" id="questionModeDropdown" class="active" onclick="setQuestionMode('dropdown')">
+            選択肢から選ぶ
+          </button>
+          <button type="button" id="questionModeManual" onclick="setQuestionMode('manual')">
+            手入力する
+          </button>
+        </div>
+
         <select id="question">
           <option value="">質問内容を選択してください</option>
         </select>
 
+        <textarea id="questionManual" placeholder="聞きたいことを1つに絞って入力してください。"></textarea>
+
         <div class="question-option-help">
-          「相談したい内容」と「質問テーマ」を選ぶと、質問内容の選択肢が表示されます。
+          「相談したい内容」と「質問テーマ」を選ぶと、プルダウンの質問内容が表示されます。自由に聞きたい場合は「手入力する」を選んでください。
         </div>
       </div>
       <div class="rule">
@@ -554,6 +593,61 @@
         "志望校変更の時期":["志望校はいつ頃まで変更できますか？"]
       }
     };
+
+
+    let routeQuestionMode =
+      'dropdown';
+
+
+    function setQuestionMode(mode) {
+
+      routeQuestionMode =
+        mode === 'manual'
+          ? 'manual'
+          : 'dropdown';
+
+      const dropdownMode =
+        routeQuestionMode === 'dropdown';
+
+      document.getElementById('questionModeDropdown')
+        .classList.toggle('active', dropdownMode);
+
+      document.getElementById('questionModeManual')
+        .classList.toggle('active', !dropdownMode);
+
+      document.getElementById('question')
+        .style.display =
+          dropdownMode
+            ? 'block'
+            : 'none';
+
+      document.getElementById('questionManual')
+        .style.display =
+          dropdownMode
+            ? 'none'
+            : 'block';
+
+      clearApprovedValidation_();
+
+      if (!dropdownMode) {
+        document.getElementById('questionManual').focus();
+      }
+    }
+
+
+    function getCurrentQuestionText() {
+
+      if (routeQuestionMode === 'manual') {
+        return String(
+          document.getElementById('questionManual').value || ''
+        ).trim();
+      }
+
+      return String(
+        document.getElementById('question').value || ''
+      ).trim();
+    }
+
 
     function getQuestionTemplateContext() {
       const district = document.getElementById('district');
@@ -1240,7 +1334,7 @@
           document.getElementById("school").value.trim(),
 
         question:
-          document.getElementById("question").value.trim()
+          getCurrentQuestionText()
       };
     }
 
@@ -1763,7 +1857,18 @@
       }
 
       if (
-        id === "question"
+        id === "question" ||
+        id === "questionManual"
+      ) {
+        clearApprovedValidation_();
+      }
+    });
+
+    document.addEventListener("input", function(event) {
+      const id = event && event.target && event.target.id;
+
+      if (
+        id === "questionManual"
       ) {
         clearApprovedValidation_();
       }
