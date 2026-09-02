@@ -287,6 +287,18 @@
           <option value="private">私学</option>
         </select>
 
+        <div
+          style="
+            margin-top:9px;
+            color:#267EE6;
+            font-size:16px;
+            line-height:1.55;
+            font-weight:750;
+          "
+        >
+          ※学区を選択した場合、候補校・比較・おすすめ・強豪校など、学校を挙げる回答は原則その学区内を対象にします。
+        </div>
+
         <button
           type="button"
           onclick="openDistrictHelp()"
@@ -966,6 +978,9 @@
       const category =
         document.getElementById("category");
 
+      const district =
+        document.getElementById("district");
+
       return {
         category:
           category.value,
@@ -977,6 +992,16 @@
 
         theme:
           document.getElementById("theme").value,
+
+        district:
+          district.value,
+
+        districtLabel:
+          district.value
+            ? district.options[
+                district.selectedIndex
+              ].text
+            : "",
 
         school:
           document.getElementById("school").value.trim(),
@@ -997,6 +1022,12 @@
 
         theme:
           data.theme || "",
+
+        district:
+          data.district || "",
+
+        districtLabel:
+          data.districtLabel || "",
 
         school:
           data.school || "",
@@ -1092,6 +1123,12 @@
             theme:
               data.theme,
 
+            district:
+              data.district,
+
+            districtLabel:
+              data.districtLabel,
+
             school:
               data.school,
 
@@ -1158,6 +1195,11 @@
           '<div class="confirm-row"><span class="confirm-label">質問テーマ：</span>' +
           escapeHtml(
             data.theme
+          ) +
+          '</div>' +
+          '<div class="confirm-row"><span class="confirm-label">学区：</span>' +
+          escapeHtml(
+            data.districtLabel || "未選択"
           ) +
           '</div>' +
           '<div class="confirm-row"><span class="confirm-label">高校：</span>' +
@@ -1289,6 +1331,12 @@
 
             theme:
               data.theme,
+
+            district:
+              data.district,
+
+            districtLabel:
+              data.districtLabel,
 
             school:
               data.school,
