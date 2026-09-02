@@ -1334,7 +1334,12 @@
           document.getElementById("school").value.trim(),
 
         question:
-          getCurrentQuestionText()
+          getCurrentQuestionText(),
+
+        questionSource:
+          routeQuestionMode === 'manual'
+            ? 'manual'
+            : 'preset'
       };
     }
 
@@ -1360,7 +1365,10 @@
           data.school || "",
 
         question:
-          data.question || ""
+          data.question || "",
+
+        questionSource:
+          data.questionSource || "manual"
       });
     }
 
@@ -1460,7 +1468,10 @@
               data.school,
 
             question:
-              data.question
+              data.question,
+
+            questionSource:
+              data.questionSource
           });
 
 
@@ -1671,6 +1682,9 @@
             question:
               data.question,
 
+            questionSource:
+              data.questionSource,
+
             validationToken:
               validatedQuestionToken
           });
@@ -1697,6 +1711,9 @@
         changeDistrict();
 
         document.getElementById("question").value =
+          "";
+
+        document.getElementById("questionManual").value =
           "";
 
 
