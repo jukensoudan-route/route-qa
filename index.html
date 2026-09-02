@@ -96,6 +96,34 @@
       border-color:var(--blue); box-shadow:0 0 0 4px rgba(38,126,230,.10);
     }
     ::placeholder { color:#A1AAB8; font-size:22px; }
+    .question-guide {
+      margin-top:13px;
+      padding:16px;
+      border:1px solid #D8E7FB;
+      border-radius:15px;
+      background:#F7FBFF;
+      color:#475467;
+      font-size:17px;
+      line-height:1.7;
+      font-weight:650;
+    }
+    .question-guide-title {
+      color:var(--blue);
+      font-size:19px;
+      font-weight:900;
+      margin-bottom:7px;
+    }
+    .question-guide-ok {
+      color:#1768C9;
+      font-weight:900;
+    }
+    .question-guide-ng {
+      color:#B42318;
+      font-weight:900;
+    }
+    .question-guide-example {
+      margin-top:5px;
+    }
     .rule {
       margin-top:26px; padding:17px; border:1px solid #DFEAFA;
       border-radius:16px; background:var(--blue-pale);
@@ -298,6 +326,29 @@
       <div class="field">
         <div class="field-label"><span class="num">4</span><span class="icon">💬</span><span>質問内容</span></div>
         <textarea id="question" placeholder="例：現在の内申点で、合格可能性はどの程度でしょうか？"></textarea>
+
+        <div class="question-guide">
+          <div class="question-guide-title">質問は1回につき1つまでです</div>
+          <div>複数の内容をまとめて質問することはできません。同じテーマについて、理由・内訳・条件などを詳しく聞くことは可能です。</div>
+
+          <div class="question-guide-example">
+            <span class="question-guide-ok">○ 受付できる例</span><br>
+            ・A高校では英検はどのように扱われますか？<br>
+            ・B高校では授業料以外で初年度いくらかかりますか？内訳も教えてください。<br>
+            ・内申160点ですが、C高校の合格可能性はどの程度ですか？
+          </div>
+
+          <div class="question-guide-example">
+            <span class="question-guide-ng">× 複数質問になる例</span><br>
+            ・A高校の英検優遇と必要な内申点を教えてください。<br>
+            ・B高校の学費と大学進学実績を教えてください。<br>
+            ・C高校に届きますか？難しい場合は第2志望校も教えてください。
+          </div>
+
+          <div class="question-guide-example">
+            複数の内容がある場合は、最も知りたいことを1つに絞り、その他は次のQ&Aでご質問ください。
+          </div>
+        </div>
       </div>
 
       <div class="rule">
@@ -307,6 +358,7 @@
           <li>質問1回につき残り回数を1回使用します</li>
           <li>1回につき高校1校までです</li>
           <li>1回につき質問テーマ1つまでです</li>
+          <li>1回につき独立した質問は1つまでです</li>
           <li>各教科の具体的な勉強方法や問題の解き方は対象外です</li>
           <li>送信前に質問内容を確認し、対象外・不明確・不適切な内容は質問回数を使用せず差し戻します</li>
         </ul>
