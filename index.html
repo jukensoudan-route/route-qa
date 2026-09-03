@@ -300,7 +300,7 @@
 
       <div class="field">
         <div class="field-label"><span class="num">2</span><span class="icon">📝</span><span>質問テーマ</span></div>
-        <select id="theme"><option value="">先に大項目を選択してください</option></select>
+        <select id="theme" onchange="renderQuestionOptions()"><option value="">先に大項目を選択してください</option></select>
       </div>
 
       <div class="field">
@@ -310,14 +310,14 @@
           <span>高校を選択（任意）</span>
         </div>
 
-        <select id="district" onchange="changeDistrict()">
+        <select id="district" onchange="changeDistrict(); renderQuestionOptions();">
           <option value="">学区を選択してください</option>
+          <option value="private">私学</option>
           <option value="district1">第1学区</option>
           <option value="district2">第2学区</option>
           <option value="district3">第3学区</option>
           <option value="district4">第4学区</option>
           <option value="district5">第5学区</option>
-          <option value="private">私学</option>
         </select>
 
         <div
@@ -351,7 +351,7 @@
           学区がわからない方はこちら
         </button>
 
-        <select id="school" style="margin-top:14px;" disabled>
+        <select id="school" style="margin-top:14px;" onchange="renderQuestionOptions()" disabled>
           <option value="">先に学区を選択してください</option>
         </select>
 
@@ -1150,6 +1150,7 @@
         theme.appendChild(option);
       });
       if (previousValue && themes[category].includes(previousValue)) theme.value = previousValue;
+      renderQuestionOptions();
     }
 
     function postToGas(data) {
