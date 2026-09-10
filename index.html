@@ -227,6 +227,15 @@
       .rule ul { font-size:17px; }
       .submit { min-height:72px; font-size:23px; }
     }
+
+    /* White/blue section background swap; form controls keep their original colors. */
+    .hero { background:#fff; color:var(--blue-dark); }
+    .brand-logo,.bubble { background:var(--blue); color:#fff; }
+    .card { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .card > .usage-note,.card > .form-desc,
+    .card .question-option-help,.card .manual-question-note { color:#fff; }
+    .card .field > div[style],.card .field > button[style] { color:#fff !important; }
+    .login-status,.usage-box,.ticket-area,.rule { color:var(--text); }
   </style>
 </head>
 <body>
