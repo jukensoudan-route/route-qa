@@ -684,7 +684,7 @@
         </label>
       </div>
       <div class="outside-hours-notice" id="outsideHoursNotice" hidden>
-        営業時間外です。回答は次の営業日の開始時間（12:00）から順次お送りします。
+        営業時間外です。回答は次の営業開始時間から順次お送りします。
       </div>
       <div class="modal-buttons">
         <button class="modal-button secondary" onclick="closeConfirm()">修正する</button>
@@ -1527,25 +1527,53 @@
         isSending;
     }
 
-    function isOutsideBusinessHours() {
-      const parts = new Intl.DateTimeFormat("en-US", {
-        timeZone:"Asia/Tokyo",
-        weekday:"short",
-        hour:"2-digit",
-        hourCycle:"h23"
-      }).formatToParts(new Date());
+    function updateOutsideHoursNotice(status) {
+      const notice =
+        document.getElementById("outsideHoursNotice");
 
-      const weekday = parts.find(part => part.type === "weekday");
-      const hour = parts.find(part => part.type === "hour");
-      const weekdayValue = weekday ? weekday.value : "";
-      const hourValue = hour ? Number(hour.value) : 0;
+      const outside =
+        !!(
+          status &&
+          status.outsideBusinessHours === true
+        );
 
-      return weekdayValue === "Mon" || hourValue < 12;
+      notice.hidden =
+        !outside;
+
+      if (
+        outside &&
+        status.noticeText
+      ) {
+        notice.textContent =
+          status.noticeText;
+      }
     }
 
-    function updateOutsideHoursNotice() {
-      document.getElementById("outsideHoursNotice").hidden =
-        !isOutsideBusinessHours();
+    async function refreshOutsideHoursNotice() {
+      try {
+        const status =
+          await postToGas({
+            action:
+              "businessHoursStatus",
+
+            idToken:
+              lineAccessToken
+          });
+
+        updateOutsideHoursNotice(
+          status
+        );
+      }
+      catch(error) {
+        updateOutsideHoursNotice(
+          null
+        );
+
+        console.error(
+          "営業時間設定を取得できませんでした。",
+          error
+        );
+      }
     }
 
     function updateUsage(result) {
@@ -1854,7 +1882,7 @@
 
         document.getElementById("confirmRulesAgree").checked = false;
         updateConfirmConsent();
-        updateOutsideHoursNotice();
+        await refreshOutsideHoursNotice();
 
         document
           .getElementById("confirmModal")
