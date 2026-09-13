@@ -379,6 +379,18 @@
       accent-color:var(--blue);
     }
     .confirm-consent{margin-top:16px}
+    .outside-hours-notice{
+      margin-top:16px;
+      padding:13px 14px;
+      border:2px solid #e3a008;
+      border-radius:12px;
+      background:#fff8c9;
+      color:#7a4b00;
+      font-size:16px;
+      line-height:1.6;
+      font-weight:700;
+      text-align:center;
+    }
     #confirmSendBtn:disabled{opacity:.42;cursor:not-allowed}
     @media(max-width:600px){
       .agreement-box{padding:14px}
@@ -670,6 +682,9 @@
           <input type="checkbox" id="confirmRulesAgree" onchange="updateConfirmConsent()">
           <span>ご利用ルール・返金条件・免責事項への同意を再確認しました</span>
         </label>
+      </div>
+      <div class="outside-hours-notice" id="outsideHoursNotice" hidden>
+        営業時間外です。回答は次の営業日の開始時間（12:00）から順次お送りします。
       </div>
       <div class="modal-buttons">
         <button class="modal-button secondary" onclick="closeConfirm()">修正する</button>
@@ -1512,6 +1527,27 @@
         isSending;
     }
 
+    function isOutsideBusinessHours() {
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone:"Asia/Tokyo",
+        weekday:"short",
+        hour:"2-digit",
+        hourCycle:"h23"
+      }).formatToParts(new Date());
+
+      const weekday = parts.find(part => part.type === "weekday");
+      const hour = parts.find(part => part.type === "hour");
+      const weekdayValue = weekday ? weekday.value : "";
+      const hourValue = hour ? Number(hour.value) : 0;
+
+      return weekdayValue === "Mon" || hourValue < 12;
+    }
+
+    function updateOutsideHoursNotice() {
+      document.getElementById("outsideHoursNotice").hidden =
+        !isOutsideBusinessHours();
+    }
+
     function updateUsage(result) {
       if (!result) return;
       usageData = result;
@@ -1818,6 +1854,7 @@
 
         document.getElementById("confirmRulesAgree").checked = false;
         updateConfirmConsent();
+        updateOutsideHoursNotice();
 
         document
           .getElementById("confirmModal")
