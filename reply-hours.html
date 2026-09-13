@@ -14,10 +14,14 @@
     h2{margin:26px 0 8px;font-size:21px}
     p,li{font-size:17px}
     ul{padding-left:1.4em}
+    .hours-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:17px}
+    .hours-table th,.hours-table td{border:1px solid var(--border);padding:10px 12px;text-align:left}
+    .hours-table th{background:#EEF5FF;color:#1768C9}
+    .hours-table td:last-child{font-weight:700}
     .notice{margin-top:20px;background:var(--yellow);border:1px solid #E0C84F;border-radius:14px;padding:16px;font-weight:700}
     .sub{color:var(--sub);font-size:14px;margin-top:24px}
     .back{display:inline-block;margin-top:24px;color:var(--blue);font-weight:700;text-decoration:none}
-    @media(max-width:600px){h1{font-size:25px}.card{padding:20px 16px}p,li{font-size:16px}}
+    @media(max-width:600px){h1{font-size:25px}.card{padding:20px 16px}p,li,.hours-table{font-size:16px}.hours-table th,.hours-table td{padding:9px 8px}}
   </style>
 </head>
 <body>
@@ -25,6 +29,22 @@
     <section class="card">
       <h1>回答時間について</h1>
       <p>ROUTE Q&Aでは、ご質問を受け付けたあと、内容を確認のうえLINEで回答します。</p>
+
+      <h2>回答対応時間</h2>
+      <table class="hours-table" aria-label="回答対応時間">
+        <thead>
+          <tr><th>曜日</th><th>回答対応時間</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>月曜日</td><td>9:00〜24:00</td></tr>
+          <tr><td>火曜日</td><td>9:00〜24:00</td></tr>
+          <tr><td>水曜日</td><td>9:00〜24:00</td></tr>
+          <tr><td>木曜日</td><td>9:00〜24:00</td></tr>
+          <tr><td>金曜日</td><td>9:00〜24:00</td></tr>
+          <tr><td>土曜日</td><td>9:00〜24:00</td></tr>
+          <tr><td>日曜日</td><td>9:00〜22:00</td></tr>
+        </tbody>
+      </table>
 
       <h2>回答の目安</h2>
       <ul>
