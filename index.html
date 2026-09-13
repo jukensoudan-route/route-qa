@@ -1993,6 +1993,18 @@
         document.getElementById("questionManual").value =
           "";
 
+        /*
+         * 送信完了後は、ご利用ルールへの同意を毎回リセットする。
+         */
+        document.getElementById("rulesAgree").checked =
+          false;
+
+        document.getElementById("confirmRulesAgree").checked =
+          false;
+
+        updateConfirmConsent();
+        updateSubmitState();
+
 
         showMessage(
           "質問を受け付けました",
