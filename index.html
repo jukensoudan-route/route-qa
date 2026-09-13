@@ -385,6 +385,20 @@
       .consent-check{font-size:15px}
     }
 
+
+    /* Requested display refinements */
+    .usage-card .login-status,
+    .usage-card .usage-box {
+      background:#fff!important;
+    }
+    .hero p,
+    .form-desc {
+      font-weight:400;
+    }
+    select,
+    select option {
+      font-weight:400;
+    }
   </style>
 </head>
 <body><header class="hero">
@@ -466,7 +480,7 @@
 
     <section class="card">
       <h2 class="form-title">質問を入力してください</h2>
-      <p class="form-desc">気になることを、できるだけ具体的にご入力ください。</p>
+      <p class="form-desc">選択項目にない場合は、「直接入力する」を選んでご記入ください。</p>
 
       <div class="field">
         <div class="field-label"><span class="num">1</span><span class="icon">📂</span><span>相談したい内容</span></div>
@@ -561,7 +575,7 @@
             選択肢から選ぶ
           </button>
           <button type="button" id="questionModeManual" onclick="setQuestionMode('manual')">
-            手入力する
+            直接入力する
           </button>
         </div>
 
@@ -572,7 +586,7 @@
         <textarea id="questionManual" placeholder="聞きたいことを1つに絞って入力してください。"></textarea>
 
         <div class="question-option-help">
-          「相談したい内容」と「質問テーマ」を選ぶと、プルダウンの質問内容が表示されます。自由に聞きたい場合は「手入力する」を選んでください。
+          「相談したい内容」と「質問テーマ」を選ぶと、プルダウンの質問内容が表示されます。選択項目にない場合は「直接入力する」を選んでご記入ください。
         </div>
       </div>
 
@@ -2132,7 +2146,7 @@
 
         document.getElementById("loginStatus").innerHTML =
           '<div class="status-icon">✓</div>' +
-          '<div class="status-text">LINE認証済み　' + escapeHtml(lineProfile.displayName || "") + '</div>';
+          '<div class="status-text">LINE認証済み　' + escapeHtml(lineProfile.displayName || "") + '様</div>';
 
         await confirmStripeReturnIfNeeded();
 
