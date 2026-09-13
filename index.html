@@ -1549,33 +1549,6 @@
       }
     }
 
-    async function refreshOutsideHoursNotice() {
-      try {
-        const status =
-          await postToGas({
-            action:
-              "businessHoursStatus",
-
-            idToken:
-              lineAccessToken
-          });
-
-        updateOutsideHoursNotice(
-          status
-        );
-      }
-      catch(error) {
-        updateOutsideHoursNotice(
-          null
-        );
-
-        console.error(
-          "営業時間設定を取得できませんでした。",
-          error
-        );
-      }
-    }
-
     function updateUsage(result) {
       if (!result) return;
       usageData = result;
@@ -1882,7 +1855,9 @@
 
         document.getElementById("confirmRulesAgree").checked = false;
         updateConfirmConsent();
-        await refreshOutsideHoursNotice();
+        updateOutsideHoursNotice(
+          result.businessHoursStatus || null
+        );
 
         document
           .getElementById("confirmModal")
