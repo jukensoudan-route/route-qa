@@ -282,8 +282,16 @@
     #refundPolicy h3{margin:14px 0 4px;font-size:16px}
     #refundPolicy p{margin:0}
     #refundPolicy ul{margin:8px 0 0;padding-left:22px}
+
     #refundPolicy .refund-close{float:right;min-width:44px;min-height:36px;padding:4px 8px;border:1px solid #d7e3f1;border-radius:8px;background:#fff;color:#1768c9;cursor:pointer;font-size:14px}
-      .card.rules-card{background:#f2f2f2;border-color:#ddd}
+   #replyHoursPolicy{width:calc(100% - 24px);max-width:540px;max-height:85vh;margin:auto;padding:20px;border:0;border-radius:16px;background:#fff;color:#172231;overflow-y:auto;font-size:15px;line-height:1.65}
+#replyHoursPolicy::backdrop{background:rgba(15,23,42,.62)}
+#replyHoursPolicy h2{margin:0 0 16px;padding-right:44px;font-size:20px;line-height:1.45}
+#replyHoursPolicy h3{margin:14px 0 4px;font-size:16px}
+#replyHoursPolicy p{margin:0}
+#replyHoursPolicy ul{margin:8px 0 0;padding-left:22px}
+#replyHoursPolicy .refund-close{float:right;min-width:44px;min-height:36px;padding:4px 8px;border:1px solid #d7e3f1;border-radius:8px;background:#fff;color:#1768c9;cursor:pointer;font-size:14px}
+    .card.rules-card{background:#f2f2f2;border-color:#ddd}
     .rules-card > .rule{margin:0;padding:0;border:0}
   
     /* Soft mint panels within the usage card. */
@@ -480,9 +488,14 @@
           <li>通常Q&Aでは、学校・入試・費用・実績などの客観情報をお答えします</li>
           <li>各教科の具体的な勉強方法や問題の解き方は対象外です</li>
           <li>送信前に質問内容を確認し、対象外・不明確・不適切な内容は質問回数を使用せず差し戻します。</li>
-         <li>
-  <a href="./reply-hours.html" target="_blank" rel="noopener">回答時間</a>外に送信されたご質問については、次の回答対応時間の開始以降、順次LINEでお送りします。
-</li>  </ul>
+          <li> 
+            <button type="button"   
+              onclick="document.getElementById('replyHoursPolicy').showModal()"   
+              style="display:inline;margin:0;padding:0;border:0;background:transparent;color:#1768c9;text-decoration:underline;text-underline-offset:3px;font:inherit;font-weight:700;cursor:pointer;">   
+              回答時間
+            </button>外に送信されたご質問については、次の回答対応時間の開始以降、順次LINEでお送りします。
+          </li>
+        </ul>
         <div class="policy-links">
           <button type="button" class="refund-link" onclick="document.getElementById('refundPolicy').showModal()">返金・キャンセルについて</button>
           <button type="button" class="refund-link" onclick="document.getElementById('answerDisclaimer').showModal()">回答内容についての免責</button>
@@ -2247,6 +2260,44 @@
     </ul>
   </dialog>
 
+
+<!-- ↓ここに「回答時間について」を追加 -->
+
+<dialog id="replyHoursPolicy" aria-labelledby="replyHoursPolicyTitle">
+  <form method="dialog">
+    <button class="refund-close" aria-label="回答時間についてを閉じる">閉じる</button>
+  </form>
+
+  <h2 id="replyHoursPolicyTitle">回答時間について</h2>
+
+  <h3>回答対応時間</h3>
+  <ul>
+    <li><strong>月曜日〜土曜日：9:00〜24:00</strong></li>
+    <li><strong>日曜日：9:00〜22:00</strong></li>
+  </ul>
+
+  <h3>回答までのお時間</h3>
+  <p>ご質問への回答には、<strong>原則5〜10分程度のお時間をいただきます。</strong></p>
+
+  <h3>回答対応時間外の場合</h3>
+  <p>
+    回答対応時間外に送信されたご質問については、
+    <strong>次の回答対応時間の開始以降、順次LINEでお送りします。</strong>
+  </p>
+
+  <p>
+    ご質問自体は、回答対応時間外でも送信していただけます。
+  </p>
+
+  <p>
+    回答対応時間外の場合は、質問送信前の確認画面に
+    「次回の回答開始時刻」を表示します。
+  </p>
+</dialog>
+
+<!-- ↑ここまで -->
+
+<dialog id="answerDisclaimer"
   <dialog id="answerDisclaimer" aria-labelledby="answerDisclaimerTitle">
     <form method="dialog"><button class="refund-close" aria-label="回答内容についての免責を閉じる">閉じる</button></form>
     <h2 id="answerDisclaimerTitle">回答内容についての免責</h2>
